@@ -71,3 +71,6 @@ X共有機能:　お気に入りの投稿画像を他のユーザーと共有で
 ・テスト機能(Rspec)<br>
 ・ImageMagick<br>
 ・LINE通知機能<br>
+
+## 画面遷移図
+[画面遷移図](https://www.figma.com/file/0hVSIrNZLaWj0WxgWYw1XZ/KansaiArea?type=design&node-id=0-1&mode=design&t=7XKRz2ioLjAQyCDY-0)
