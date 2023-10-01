@@ -24,4 +24,6 @@ production:
   <<: *default
   adapter: postgresql
   encoding: unicode
-  pool: 5
+  database: good_spot_kansai_app_db
+  username: azuma_yoko_44
+  url: <%= ENV['DATABASE_URL'] %>
