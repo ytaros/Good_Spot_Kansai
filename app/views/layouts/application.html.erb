@@ -11,6 +11,14 @@
   </head>
 
   <body>
-      <%= yield %>
+  <% unless request.path == root_path %>
+      <%= render 'shared/header' %>
+    <% end %>
+    
+    <%= yield %>
+    
+    <% unless request.path == root_path %>
+      <%= render 'shared/footer' %>
+    <% end %>
   </body>
 </html>
