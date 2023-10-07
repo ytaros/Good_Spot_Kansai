@@ -1,0 +1,27 @@
+<header class=" bg-blue-200 p-4">
+  <div class="container mx-auto">
+    <div class="flex justify-between items-center">
+      <!-- 左側のボタン群 -->
+      <div class="flex space-x-4">
+      <%= link_to "投稿", "#", class: "px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-500 hover:text-white" %>
+      <%= link_to "一覧", "#", class: "px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-500 hover:text-white" %>
+      <%= link_to "ランキング", "#", class: "px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-500 hover:text-white" %>
+      <%= link_to "ログイン", "#", class: "px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-500 hover:text-white" %>
+      <%= link_to "新規登録", "#", class: "px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-500 hover:text-white" %>
+      </div>
+
+      <!-- 右側のボタン群 -->
+        <div class="relative group">
+          <img src="#" alt="Profile" class="w-10 h-10 rounded-full"> <!-- プロフィール画像 -->
+
+          <!-- ハンバーガーメニュー -->
+          <div class="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg group-hover:block hidden">
+            <%= link_to "マイページ", "#", class: "block px-4 py-2 hover:bg-gray-200" %>
+            <%= link_to "お気に入り", "#", class: "block px-4 py-2 hover:bg-gray-200" %>
+            <%= link_to "おすすめスポット", "#", class: "block px-4 py-2 hover:bg-gray-200" %>
+            <%= link_to "ログアウト", "#", class: "block px-4 py-2 hover:bg-gray-200" %>
+          </div>
+        </div>
+    </div>
+  </div>
+</header>
