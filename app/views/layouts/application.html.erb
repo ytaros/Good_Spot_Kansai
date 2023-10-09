@@ -14,11 +14,16 @@
   <% unless request.path == root_path %>
       <%= render 'shared/header' %>
     <% end %>
+    <% flash.each do |type, message| %>
+      <div class="<%= flash_class(type) %>">
+        <%= message %>
+      </div>
+    <% end %>
     
     <%= yield %>
     
-    <% unless request.path == root_path %>
-      <%= render 'shared/footer' %>
-    <% end %>
+  <% unless request.path == root_path %>
+    <%= render 'shared/footer' %>
+  <% end %>
   </body>
 </html>
