@@ -1,28 +1,42 @@
-<header class=" bg-blue-200 p-4">
+<header class="bg-blue-200 p-4">
   <div class="container mx-auto">
     <div class="flex justify-between items-center">
       <!-- 左側のボタン群 -->
       <div class="flex space-x-4">
-      <%= link_to "投稿", "#", class: "px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-500 hover:text-white" %>
-      <%= link_to "一覧", "#", class: "px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-500 hover:text-white" %>
-      <%= link_to "ランキング", "#", class: "px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-500 hover:text-white" %>
-      <%= link_to "ログイン", "#", class: "px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-500 hover:text-white" %>
-      <%= link_to "新規登録", "#", class: "px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-500 hover:text-white" %>
+        <% if current_user %> <!-- ログイン後の表示 -->
+          <%= link_to "投稿", "#", class: "px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-500 hover:text-white" %>
+          <%= link_to "一覧", "#", class: "px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-500 hover:text-white" %>
+          <%= link_to "ランキング", "#", class: "px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-500 hover:text-white" %>
+          <%= button_to "Log out", logout_path, method: :delete %>
+        <% else %> <!-- ログイン前の表示 -->
+          <%= link_to "一覧", "#", class: "px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-500 hover:text-white" %>
+          <%= link_to "ランキング", "#", class: "px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-500 hover:text-white" %>
+          <%= link_to "ログイン", login_path, class: "px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-500 hover:text-white" %>
+          <%= link_to "新規登録", new_user_path, class: "px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-500 hover:text-white" %>
+        <% end %>
       </div>
 
       <!-- 右側のボタン群 -->
-
-        <div class="relative group">
-          <img src="#" alt="Profile" class="w-10 h-10 rounded-full"> <!-- プロフィール画像 -->
-
-          <!-- ハンバーガーメニュー -->
-          <div class="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg group-hover:block hidden">
-            <%= link_to "マイページ", "#", class: "block px-4 py-2 hover:bg-gray-250" %>
-            <%= link_to "お気に入り", "#", class: "block px-4 py-2 hover:bg-gray-250" %>
-            <%= link_to "おすすめスポット", "#", class: "block px-4 py-2 hover:bg-gray-250" %>
-            <%= link_to "ログアウト", "#", class: "block px-4 py-2 hover:bg-gray-250" %>
+      <% if current_user %> <!-- ログイン後のみ表示 -->
+        <div class="relative group" data-controller="dropdown">
+          <!-- アバター画像 -->
+          <img 
+            src="<%= current_user.avatar.present? ? current_user.avatar.url : asset_path('sample.jpg') %>" 
+            alt="Profile" 
+            class="w-12 h-12 rounded-full cursor-pointer" 
+            data-action="click->dropdown#toggle">
+          <!-- メニュードロップダウン（最初は非表示） -->
+          <div class="absolute right-0 mt-2 w-56 bg-white border rounded shadow-lg hidden" data-dropdown-target="menu">
+            <ul class="menu bg-base-200 w-56 rounded-box">
+              <li><%= link_to "マイページ", "#", class: "block px-4 py-2 hover:bg-gray-250" %></li>
+              <li><%= link_to "お気に入り", "#", class: "block px-4 py-2 hover:bg-gray-250" %></li>
+              <li><%= link_to "おすすめスポット", "#", class: "block px-4 py-2 hover:bg-gray-250" %></li>
+              <li><%= link_to "ログアウト", "#", class: "block px-4 py-2 hover:bg-gray-250" %></li>
+            </ul>
           </div>
         </div>
+      <% end %>
+      
     </div>
   </div>
 </header>
