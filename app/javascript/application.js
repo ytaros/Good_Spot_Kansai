@@ -1,5 +1,6 @@
 import "@hotwired/turbo-rails";
 import { Application } from "@hotwired/stimulus";
+
 import DropdownController from "controllers/dropdown_controller";
 import ImagePreviewController from "controllers/image_preview_controller";
 
