@@ -14,6 +14,7 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates :email, presence: true
   validates :name, presence: true, length: { maximum: 255 }
+  validates :prefecture, presence: true
 
   mount_uploader :avatar, AvatarUploader
 end

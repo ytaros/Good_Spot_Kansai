@@ -11,3 +11,5 @@ eagerLoadControllersFrom("controllers", application);
 // lazyLoadControllersFrom("controllers", application)
 import DropdownController from "./dropdown_controller";
 application.register("dropdown", DropdownController);
+import ImagePreviewController from "./image_preview_controller";
+application.register("image-preview", ImagePreviewController);
