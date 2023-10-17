@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+svg, path {
+  pointer-events: all;
+}
+
+path1:hover {
+  @apply text-red-500;
+}
 /*
 
 @layer components {
