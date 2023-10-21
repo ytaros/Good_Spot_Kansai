@@ -1,7 +1,7 @@
 <div class="container mx-auto px-4">
   <div class="flex justify-center">
     <div class="w-full md:w-4/5 lg:w-1/2">
-    <h1 class="text-2xl font-bold mt-20 mb-4 text-center"><%= t '.title' %></h1>
+    <h1 class="text-2xl font-bold mt-9 mb-4 text-center"><%= t '.title' %></h1>
       <%= form_with model: @user, local: true, class: "space-y-4" do |f| %>
         <div class="form-group">
           <%= f.label :name, class: 'block text-sm font-medium text-gray-700' %>
@@ -43,7 +43,6 @@
         <% end %>
         <br>
         <br>
-        <%= link_to 'Sign Up', login_path, class: "text-purple-300 hover:underline" %>
       </div>
     </div>
   </div>

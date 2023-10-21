@@ -11,6 +11,8 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+        hannari: ["Hannari", "serif"],
+        nothing: ['"Nothing You Could Do"', "cursive"],
       },
     },
   },

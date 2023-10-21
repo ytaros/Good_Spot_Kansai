@@ -8,6 +8,9 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= stylesheet_link_tag "https://fonts.googleapis.com/earlyaccess/hannari.css", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap", media: "all" %>
+
   </head>
 
   <body>
@@ -19,9 +22,9 @@
         <%= message %>
       </div>
     <% end %>
-    
+    <div class="pt-10">
     <%= yield %>
-    
+    </div>
   <% unless request.path == root_path %>
     <%= render 'shared/footer' %>
   <% end %>

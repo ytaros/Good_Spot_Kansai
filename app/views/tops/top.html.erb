@@ -1,3 +1,21 @@
-<div class="btn">topページ</div>
+<body class="bg-opacity-50 relative background-page" data-controller="background" data-background-images-value='<%= @images.map { |img| asset_path("toppage/#{img}") }.to_json %>'>
 
-<div class="btn"><%= link_to 'main', main_top_path %></div>
+<h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-9xl xl:text-10xl text-glay font-hannari leading-tight mt-20 text-left right-5" ">
+  関西、<br>
+  めっちゃええとこ。
+</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="absolute bottom-15 right-20">
+  <%= link_to 'START', main_top_path, class: "bg-white flex items-center justify-center h-20 font-nothing btn text-center px-10 text-4xl border border-blue-300 rounded text-black hover:bg-blue-100 hover:text-black active:transform active:scale-95 transition-transform duration-150" %>
+</div>
