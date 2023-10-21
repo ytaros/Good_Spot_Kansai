@@ -38,13 +38,16 @@ path1:hover {
 }
 
 @keyframes image-switch-animation {
-  0%, 20% {
-    opacity: 0.5;
+  0%, 100% {
+    opacity: 0;
   }
-  40%, 60% {
-    opacity: 0.2;
+  50% {
+    opacity: 0.6;
   }
-  80%, 100% {
-    opacity: 0.5;
-  }
+}
+
+body::before {
+  /* その他のスタイルはそのまま... */
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation: image-switch-animation 25s infinite;
 }

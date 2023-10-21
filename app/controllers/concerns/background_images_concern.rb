@@ -30,7 +30,9 @@ module BackgroundImagesConcern
       "image23.webp",
       "image24.webp",
       "image25.webp",
-      "image26.webp"
+      "image26.webp",
+      "image27.webp",
+      "image28.webp"
       ]
   end
 
