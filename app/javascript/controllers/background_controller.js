@@ -12,7 +12,6 @@ export default class extends Controller {
   }
 
   disconnect() {
-    console.log("disconnect called"); // デバッグログ
     this.resetBackground();
     if (this.interval) {
       clearInterval(this.interval);
@@ -22,7 +21,7 @@ export default class extends Controller {
   startTransitionInterval() {
     this.interval = setInterval(() => {
       this.loadBackground();
-    }, 25000);
+    }, 5000);
   }
 
   loadBackground() {
@@ -50,7 +49,7 @@ export default class extends Controller {
         background-size: cover;
         background-position: center;
         opacity: 0.5;
-        animation: image-switch-animation 25s infinite;
+        animation: image-switch-animation 5s infinite;
       }
     `;
 
