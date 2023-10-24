@@ -47,7 +47,15 @@ path1:hover {
 }
 
 body::before {
-  /* その他のスタイルはそのまま... */
   animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   animation: image-switch-animation 25s infinite;
+}
+
+.custom-select {
+  border: 2px solid purple;
+}
+
+.custom-select:focus {
+  border-color: darkviolet;
+  outline: none;
 }

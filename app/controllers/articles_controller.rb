@@ -1,21 +1,27 @@
 class ArticlesController < ApplicationController
-  before_action :set_city
+  skip_before_action :require_login, only: %i[index]
+  before_action :set_area, only: %i[index new create]
 
   def index
-    @articles = @city.articles
+    @articles = @area.articles
+
   end
   
   def new
-    @article = @city.articles.new
+    @cities = @area.cities
+    @article = Article.new
   end
   
-  # def create
-  #   @article = @city.articles.new(article_params)
-  #   if @article.save
-  #     redirect_to area_city_articles_path(@city.area, @city)
-  #   else
-  #     render :new
-  #   end
+  def create
+    @city = City.find(params[:city_id])
+    @article = @city.articles.new(article_params.merge(user_id: current_user.id))
+    if @article.save
+      redirect_to area_articles_path(@area)
+    else
+      @cities = @area.cities
+      render :new
+    end
+  end
   
   # def show
   #   @article = Article.find(params[:id])
@@ -42,11 +48,11 @@ class ArticlesController < ApplicationController
   
   private
   
-  def set_city
-    @city = City.find(params[:city_id])
+  def set_area
+    @area = Area.find(params[:area_id])
   end
 
   def article_params
-    params.require(:article).permit(:title, :text, :address)
+    params.require(:article).permit(:title, :text, :address, photos: [])
   end
 end

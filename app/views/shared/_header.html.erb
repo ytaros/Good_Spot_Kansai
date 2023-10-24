@@ -3,7 +3,7 @@
       <!-- 左側のボタン群 -->
       <div class="flex space-x-4">
         <% if current_user %> <!-- ログイン後の表示 -->
-          <%= link_to "投稿", areas_top_path, class: "px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-500 hover:text-white" %>
+          <%= link_to "投稿", top_areas_path, class: "px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-500 hover:text-white" %>
           <%= link_to "一覧", areas_path, class: "px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-500 hover:text-white" %>
           <%= link_to "ランキング", "#", class: "px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-500 hover:text-white" %>
         <% else %> <!-- ログイン前の表示 -->
@@ -21,7 +21,7 @@
             id="profile-image"
             src="<%= current_user.avatar.present? ? current_user.avatar.url : asset_path('sample.jpg') %>" 
             alt="Profile" 
-            class="w-16 h-16 rounded-full cursor-pointer object-cover"
+            class="w-11 h-11 rounded-full cursor-pointer object-cover"
             style="margin-right: 6rem;"
             data-action="click->dropdown#toggle">
           <!-- メニュードロップダウン（最初は非表示） -->
