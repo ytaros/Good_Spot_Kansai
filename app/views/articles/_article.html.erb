@@ -1,0 +1,28 @@
+<div class="col-sm-12 col-lg-4 mb-3">
+  <div id="article-id-<%= article.id %>">
+    <div class="card">
+    <%= image_tag article.article_image.url, class: 'card-img-top', size: '300x200' %>
+      <div class="card-body">
+        <h4 class="card-title">
+        <%= link_to article.title, article_path(article) %>
+        </h4>   
+        <% if current_user.own?(article) %>
+          <%= render 'crud_menus', article: article %>
+        <% else %>
+          <%= render 'bookmark_button', article: article %>
+        <% end %>
+        <ul class="list-inline">
+          <li class="list-inline-item">
+            <%= icon 'far', 'user' %>
+            <%= article.user.decorate.full_name %>
+          </li>
+          <li class="list-inline-item">
+            <%= icon 'far', 'calendar' %>
+            <%= l article.created_at, format: :short %>
+          </li>
+        </ul>
+        <p class="card-text"><%= article.body %></p>
+      </div>
+    </div>
+  </div>
+</div>

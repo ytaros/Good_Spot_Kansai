@@ -1,49 +1,54 @@
-<div class="container mx-auto px-4">
+<div class="container mx-auto px-4 py-6">
   <div class="flex justify-center">
     <div class="w-full md:w-4/5 lg:w-1/2">
-    <h1 class="text-2xl font-bold mt-9 mb-4 text-center"><%= t '.title' %></h1>
+      <h1 class="text-2xl font-bold mt-9 mb-4 text-center"><%= t '.title' %></h1>
       <%= form_with model: @user, local: true, class: "space-y-4" do |f| %>
         <div class="form-group">
           <%= f.label :name, class: 'block text-sm font-medium text-gray-700' %>
-          <%= f.text_field :name, class: 'mt-0 p-2 w-full rounded-md border shadow-sm' %>
+          <%= f.text_field :name, class: 'mt-1 p-2 w-full rounded-md border border-purple-500 shadow-sm' %>
         </div>
-        <div class="form-group">
-          <%= f.label :prefecture_id, "prefecture", class: 'block text-sm font-medium text-gray-700' %>
-          <%= f.collection_select :prefecture_id, @prefectures, :id, :name, { prompt: '出身を選択してください' }, { class: 'mt-1 p-2 w-full bg-purple-100 rounded-md border shadow-sm' } %>
+
+        <div class="flex space-x-4">
+          <div class="form-group w-1/2">
+            <%= f.label :prefecture_id, "prefecture", class: 'block text-sm font-medium text-gray-700' %>
+            <%= f.collection_select :prefecture_id, @prefectures, :id, :name, { prompt: '出身を選択してください' }, { class: 'mt-1 p-2 w-full rounded-md border border-purple-500 shadow-sm' } %>
+          </div>
+
+          <div class="form-group w-1/2">
+            <%= f.label :email, class: 'block text-sm font-medium text-gray-700' %>
+            <%= f.email_field :email, class: 'mt-1 p-2 w-full rounded-md border border-purple-500 shadow-sm' %>
+          </div>
         </div>
-        <div class="form-group">
-          <%= f.label :email, class: 'block text-sm font-medium text-gray-700' %>
-          <%= f.email_field :email, class: 'mt-0 p-2 w-full rounded-md border shadow-sm' %>
-        </div>
+
         <div class="form-group">
           <%= f.label :password, class: 'block text-sm font-medium text-gray-700' %>
-          <%= f.password_field :password, class: 'mt-0 p-2 w-full bg-purple-100 rounded-md border shadow-sm' %>
+          <%= f.password_field :password, class: 'mt-1 p-2 w-full rounded-md border border-purple-500 shadow-sm' %>
         </div>
         <div class="form-group">
           <%= f.label :password_confirmation, class: 'block text-sm font-medium text-gray-700' %>
-          <%= f.password_field :password_confirmation, class: 'mt-0 p-2 w-full rounded-md border shadow-sm' %>
+          <%= f.password_field :password_confirmation, class: 'mt-1 p-2 w-full rounded-md border border-purple-500 shadow-sm' %>
         </div>
-        <div class="form-group" data-controller="image-preview">
+        <div class="form-group" data-controller="avatar-preview">
         <%= f.label :avatar %>
         <%= f.file_field :avatar, 
                           class: "form-control", 
                           accept: 'image/*', 
-                          data: { "action" => "change->image-preview#preview", "image-preview-target" => "input" } %>
+                          data: { "action" => "change->avatar-preview#preview", "avatar-preview-target" => "input" } %>
         <%= f.hidden_field :avatar_cache %>
         <div class='mt-2 mb-3'>
             <%= image_tag @user.avatar.url, 
                           id: 'preview', 
-                          size: '100x100', 
-                          class: 'rounded-circle', 
-                          data: { "image-preview-target" => "preview" } %>
+                          class: 'w-24 h-24 rounded-full object-cover', 
+                          data: { "avatar-preview-target" => "preview" } %>
         </div>
     </div>
-      <div class='text-center mt-4'>
-        <%= f.submit 'Create', class: "mt-0 w-48 mx-auto py-2 px-4 text-white bg-purple-300 rounded hover:bg-purple-400" %>
+      <div class='text-center mt-6'> <!-- mt-6で余白を増やす -->
+          <%= f.submit 'Create', class: "mt-0 w-48 mx-auto py-2 px-4 text-white bg-purple-300 rounded hover:bg-purple-400" %>
+        </div>
         <% end %>
-        <br>
-        <br>
-      </div>
     </div>
   </div>
 </div>
+
+
+
