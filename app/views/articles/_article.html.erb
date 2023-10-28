@@ -1,28 +1,55 @@
-<div class="col-sm-12 col-lg-4 mb-3">
-  <div id="article-id-<%= article.id %>">
-    <div class="card">
-    <%= image_tag article.article_image.url, class: 'card-img-top', size: '300x200' %>
-      <div class="card-body">
-        <h4 class="card-title">
-        <%= link_to article.title, article_path(article) %>
-        </h4>   
-        <% if current_user.own?(article) %>
-          <%= render 'crud_menus', article: article %>
-        <% else %>
-          <%= render 'bookmark_button', article: article %>
-        <% end %>
-        <ul class="list-inline">
-          <li class="list-inline-item">
-            <%= icon 'far', 'user' %>
-            <%= article.user.decorate.full_name %>
-          </li>
-          <li class="list-inline-item">
-            <%= icon 'far', 'calendar' %>
-            <%= l article.created_at, format: :short %>
-          </li>
-        </ul>
-        <p class="card-text"><%= article.body %></p>
+<div class="flex flex-col overflow-hidden rounded-lg border bg-white relative">
+  <!-- 最新の記事であれば "new" バッジを表示 -->
+    <% if article.created_at > 1.days.ago %>
+      <div class="absolute top-1 right-1 z-10">
+        <span class="text-xs bg-indigo-600 text-white rounded-full px-3 py-1 shadow-lg">new</span> 
       </div>
+    <% end %>
+
+    <!-- 画像プレビュー部分をリンクとして表示 -->
+    <a href="#" class="group relative block h-48 overflow-hidden bg-gray-100 md:h-64 z-0">
+      <% if article.photos.attached? %>
+        <img src="<%= url_for(article.photos.first) %>" loading="lazy" alt="Photo from <%= article.title %>" class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+      <% end %>
+    </a>
+
+  <div class="flex flex-1 flex-col p-4 sm:p-6">
+    <!-- タイトルを表示 -->
+    <h2 class="mb-2 text-lg font-semibold text-gray-800">
+      <a href="#" class="transition duration-100 hover:text-indigo-500 active:text-indigo-600"><%= article.title %></a>
+    </h2>
+
+    <!-- 住所を表示 -->
+    <p class="mb-8 text-gray-500"><%= article.address %></p>
+    
+    <!-- カテゴリを表示 -->
+    <div class="flex flex-wrap">
+      <span class="inline-block rounded-full bg-pink-200 text-pink-500 px-2 py-1 text-sm mr-4">  <!-- ここに mr-4 を追加 -->
+        <%= article.category.name %>
+      </span>
+    
+      <!-- タグを表示 -->
+      <% article.tag_names.split(',').each do |tag| %>
+        <span class="inline-block rounded-full bg-indigo-200 text-indigo-500 px-3 py-1 text-sm mr-2">  
+          <%= tag.strip %>
+        </span>
+      <% end %>
+    </div>
+
+    <div class="mt-auto flex items-end justify-between">
+      <!-- ユーザープロフィールを表示 -->
+      <div class="flex items-center gap-2">
+        <div class="h-10 w-10 shrink-0 overflow-hidden rounded-full bg-gray-100">
+          <img src="<%= article.user.avatar.url %>" loading="lazy" alt="Photo by <%= article.user.name %>" class="h-full w-full object-cover object-center" />
+        </div>
+
+        <div>
+          <span class="block text-indigo-500"><%= article.user.name %></span>
+          <span class="block text-sm text-gray-400"><%= article.created_at.strftime("%Y-%m-%d") %></span>
+        </div>
+      </div>
+
+      <span class="rounded border px-2 py-1 text-sm text-gray-500">Article</span>
     </div>
   </div>
 </div>

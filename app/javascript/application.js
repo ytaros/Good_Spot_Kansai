@@ -6,6 +6,7 @@ import AvatarPreviewController from "controllers/avatar_preview_controller";
 import SvgController from "controllers/svg_controller";
 import BackgroundController from "controllers/background_controller";
 import PhotoPreviewController from "controllers/photo_preview_controller";
+import AddressController from "controllers/address_controller";
 
 const application = Application.start();
 
@@ -14,6 +15,7 @@ application.register("avatar-preview", AvatarPreviewController);
 application.register("photo-preview", PhotoPreviewController);
 application.register("svg", SvgController);
 application.register("background", BackgroundController);
+application.register("address", AddressController);
 
 application.debug = false;
 window.Stimulus = application;

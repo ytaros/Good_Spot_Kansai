@@ -1,5 +1,6 @@
 class AreasController < ApplicationController
   skip_before_action :require_login, only: %i[index]
+  before_action :area_city_choice, only: [:new]
 
   def top
   end

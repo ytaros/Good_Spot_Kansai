@@ -1,10 +1,8 @@
-<div class="flex justify-center mt-4 bg-gray-50">
-  <%= image_tag "#{area_image_name(@area.name)}.webp", alt: @area.name, class: "object-contain h-48 w-48 mx-auto" %>
-</div>
-<div class="relative -mt-12 z-12">
-  <%= render 'form' %>
-  <br>
-  <br>
-  <br>
-  <br>
+<div class="bg-gray-50 min-h-screen">
+  <div class="flex justify-center mt-4">
+    <%= image_tag "#{area_image_name(@area.name)}.webp", alt: @area.name, class: "object-contain h-48 w-48 mx-auto" %>
+  </div>
+  <div class="relative -mt-8">
+    <%= render 'form', area: @area %>
+  </div>
 </div>

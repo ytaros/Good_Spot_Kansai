@@ -1,58 +1,72 @@
 <div class="flex justify-center bg-gray-50 p-4">
   <div class="flex bg-white p-8 rounded-lg shadow-md w-full md:w-2/3 lg:w-1/2">
-
-    <%= form_with(model: @article, url: [ @area, @article ], local: true) do |f| %>
-
+  <%= form_with(model: @article, url: area_articles_path(@area), local: true, data: { controller: "address" }, method: :post) do |f| %>
+      
+      <%= f.hidden_field :area_id, value: @area.id %>
+      <%= hidden_field_tag :area_name, @area.name, id: "area_name", data: { address_target: "areaName" } %>
+      
       <div class="flex w-full">
-
+        
         <!-- 左のコンテンツ部分 -->
         <div class="w-1/2 pr-4">
-          <div class="mb-2">
-            <%= f.label :city_id, "Area", class: "block text-sm font-medium text-gray-600" %>
-            <%= f.collection_select(:city_id, @cities, :id, :name, { prompt: "エリアを選択してください" }, { class: 'bg-purple-50 border border-purple-500 focus:border-purple-700 mt-1 p-2 w-full rounded-md', id: "city_select" }) %>
+          <div class="mb-5">
+            <%= f.label :city_id, "Area", class: "block text-sm font-medium text-gray-600", for: "city_select" %>
+            <%= f.collection_select(:city_id, @cities, :id, :name, { prompt: "エリアを選択してください" }, 
+                                    { class: 'bg-purple-50 border border-purple-500 focus:border-purple-700 mt-1 p-2 w-full rounded-md', 
+                                      id: "city_select", 
+                                      data: { action: "change->address#updateAddress", address_target: "citySelect" } }) %>
+          </div>
+      
+          <div class="mb-5">
+            <%= f.label :address, "Address", class: "block text-sm font-medium text-gray-600", for: "address_input" %>
+            <%= f.text_field :address, 
+                              class: 'mt-1 p-2 w-full border border-purple-500 hover:border-purple-700 rounded-md', 
+                              id: "address_input", 
+                              data: { address_target: "addressInput" } %>
           </div>
 
-          <div class="mb-2">
-            <%= f.label :address, "address", class: "block text-sm font-medium text-gray-600" %>
-            <%= f.text_field :address, class: 'mt-1 p-2 w-full border border-purple-500 hover:border-purple-700 rounded-md', id: "address_input" %>
-          </div>
-
-          <div class="mb-2">
-            <%= f.label :title, "title", class: "block text-sm font-medium text-gray-600" %>
+          <div class="mb-5">
+            <%= f.label :title, "Title", class: "block text-sm font-medium text-gray-600" %>
             <%= f.text_field :title, class: 'mt-1 p-2 w-full border border-purple-500 rounded-md' %>
           </div>
 
-          <div class="mb-2">
-            <%= f.label :text, "text", class: "block text-sm font-medium text-gray-600" %>
-            <%= f.text_area :text, class: 'mt-1 p-2 w-full border border-purple-500 rounded-md' %>
+          <div class="mb-5">
+            <%= f.label :category_id, "Category", class: "block text-sm font-medium text-gray-600" %>
+            <%= f.collection_select(:category_id, @categories, :id, :name, { prompt: "カテゴリを選択してください" }, 
+                                    { class: 'bg-purple-50 border border-purple-500 focus:border-purple-700 mt-1 p-2 w-full rounded-md' }) %>
           </div>
         </div>
 
         <!-- 右の画像プレビュー部分 -->
         <div class="w-1/2 pl-4" data-controller="photo-preview">
-        <div class="mb-2">
-            <%= f.label :photos, "photo", class: "block text-sm font-medium text-gray-600" %>
+          <div class="mb-2">
+            <%= f.label :photos, "Photo", class: "block text-sm font-medium text-gray-600" %>
             <%= f.file_field :photos, 
                               multiple: true, 
                               class: 'mt-1 p-2 w-full border border-purple-500 hover:border-purple-700 rounded-md',
                               data: { "photo-preview-target" => "input", action: "change->photo-preview#preview" } %>
-    
-            <!-- 画像のプレビューコンテナ: 幅と高さを固定 -->
-            <div class="mt-3 slider relative w-full h-64 overflow-hidden" data-photo-preview-target="previewContainer">
-                <div class="slides flex transition-transform" data-photo-preview-target="slides">
-                    <!-- ここにプレビュー画像が動的に追加される -->
-                </div>
-                <button type="button" class="hidden absolute top-1/2 left-0 transform -translate-y-1/2 bg-pink-500 text-white p-2 rounded" data-action="click->photo-preview#previousSlide">≪</button>
-                <button type="button" class="hidden absolute top-1/2 right-0 transform -translate-y-1/2 bg-pink-500 text-white p-2 rounded" data-action="click->photo-preview#nextSlide">≫</button>
+            <div class="mt-1 slider relative w-full h-48 overflow-hidden" data-photo-preview-target="previewContainer">
+              <div class="slides flex transition-transform" data-photo-preview-target="slides"></div>
+              <button type="button" class="hidden absolute top-1/2 left-0 transform -translate-y-1/2 bg-pink-500 text-white p-2 rounded" data-action="click->photo-preview#previousSlide">≪</button>
+              <button type="button" class="hidden absolute top-1/2 right-0 transform -translate-y-1/2 bg-pink-500 text-white p-2 rounded" data-action="click->photo-preview#nextSlide">≫</button>
             </div>
+
+            <div class="mb-0">
+              <%= f.label :tag_names, "Tags", class: "block text-sm font-medium text-gray-600" %>
+              <%= f.text_field :tag_names, class: 'mt-0 p-2 w-full border border-purple-500 hover:border-purple-700 rounded-md', placeholder: 'タグを,で区切って入力' %>        
+            </div>
+          </div>
         </div>
-        </div>
+      </div> <!-- End of flex w-full -->
+      <div class="mb-5">
+      <%= f.label :text, "Content", class: "block text-sm font-medium text-gray-600" %>
+      <%= f.text_field :text, class: 'mt-1 p-2 w-full border border-purple-500 rounded-md' %>
       </div>
-      <!-- flex w-full 終了 -->
-      <!-- 投稿ボタンを2分割の外に移動して中央寄せのスタイリングを適用 -->
+
       <div class="w-full flex justify-center mt-4">
-        <%= f.submit '記事を投稿', class: 'bg-purple-300 hover:bg-purple-400 text-white font-medium py-2 px-4 rounded mb-2' %>
+        <%= f.submit '投稿', class: 'bg-purple-300 hover:bg-purple-400 text-white font-medium py-2 px-4 rounded mb-2' %>
       </div>
+
     <% end %>
   </div>
 </div>
