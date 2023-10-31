@@ -15,8 +15,6 @@ class ArticlesController < ApplicationController
   end
   
   def create
-    logger.debug "Parameters: #{params.inspect}"
-  
     @article = @city.articles.new(article_params.merge(user_id: current_user.id))
     tags = params[:article][:tag_names].split(",").map(&:strip)
     
@@ -32,11 +30,18 @@ class ArticlesController < ApplicationController
   
   def update
     @article = Article.find(params[:id])
+    if params[:article][:photos].blank? || params[:article][:photos].all?(&:blank?)
+      params[:article].delete(:photos)
+    end
+  
     if @article.update(article_params)
-      tags = params[:article][:tags].split(",").map(&:strip)
-      @article.update_tags(tags)
-      redirect_to @article
+      @article.tag_names = params[:article][:tag_names]
+      redirect_to area_articles_path(@article.area_id)
     else
+      @area = @article.area
+      @cities = @area.cities
+      @categories = Category.all
+      @tags = @article.tags.pluck(:name).join(',')
       render 'edit'
     end
   end
@@ -46,17 +51,21 @@ class ArticlesController < ApplicationController
   #   @tags = @post.tags.pluck(:name).join(',')
   # end
   
-  # def edit
-  #   @article = Article.find(params[:id])
-  #@tags = @article.tags.pluck(:name).join(',')
-  # end
+  def edit
+    @article = Article.find(params[:id])
+    @area = @article.area
+    @cities = @area.cities
+    @categories = Category.all
+    @tags = @article.tags.pluck(:name).join(',')
+  end
   
   
-  # def destroy
-  #   @article = Article.find(params[:id])
-  #   @article.destroy
-  #   redirect_to articles_path
-  # end
+  def destroy
+    @article = Article.find(params[:id])
+    @area = @article.area
+    @article.destroy!
+    redirect_to area_articles_path(@area.id),  status: :see_other
+  end
   
   private
   

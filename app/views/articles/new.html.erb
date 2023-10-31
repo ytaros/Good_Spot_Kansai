@@ -1,8 +1,8 @@
 <div class="bg-gray-50 min-h-screen">
-  <div class="flex justify-center mt-4">
+  <div class="flex justify-center mt-12">
     <%= image_tag "#{area_image_name(@area.name)}.webp", alt: @area.name, class: "object-contain h-48 w-48 mx-auto" %>
   </div>
   <div class="relative -mt-8">
-    <%= render 'form', area: @area %>
+    <%= render "form", article: @article, area: @area %>
   </div>
 </div>

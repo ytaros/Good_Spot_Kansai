@@ -4,7 +4,6 @@ export default class extends Controller {
   static targets = ["citySelect", "addressInput", "areaName"];
 
   connect() {
-    // コントローラーが接続されたときに実行されるコード
     console.log("Connected!");
   }
 

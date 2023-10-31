@@ -5,7 +5,6 @@ export default class extends Controller {
   currentIndex = 0;
 
   preview() {
-    // 既存のプレビュー画像をクリア
     this.slidesTarget.innerHTML = "";
 
     const files = this.inputTarget.files;
@@ -58,6 +57,45 @@ export default class extends Controller {
     if (this.currentIndex < this.slidesTarget.children.length - 1) {
       this.currentIndex++;
       this.updateSlidePosition();
+    }
+  }
+
+  connect() {
+    const photoUrls = this.previewContainerTarget.dataset.photos.split(",");
+
+    if (photoUrls[0] === "") {
+      this.hideSliderButtons();
+    } else {
+      this.loadExistingPhotos();
+    }
+  }
+
+  hideSliderButtons() {
+    document
+      .querySelector('[data-action="click->photo-preview#previousSlide"]')
+      .classList.add("hidden");
+    document
+      .querySelector('[data-action="click->photo-preview#nextSlide"]')
+      .classList.add("hidden");
+  }
+  loadExistingPhotos() {
+    const photoUrls = this.previewContainerTarget.dataset.photos.split(",");
+    if (photoUrls.length === 0) return; // 追加: photoUrlsが空の場合は処理を終了
+
+    photoUrls.forEach((url) => {
+      const img = document.createElement("img");
+      img.src = url;
+      img.classList.add("w-full", "h-full");
+      this.slidesTarget.appendChild(img);
+    });
+
+    if (photoUrls.length > 0) {
+      document
+        .querySelector('[data-action="click->photo-preview#previousSlide"]')
+        .classList.remove("hidden");
+      document
+        .querySelector('[data-action="click->photo-preview#nextSlide"]')
+        .classList.remove("hidden");
     }
   }
 }

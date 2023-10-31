@@ -1,4 +1,4 @@
 class Area < ApplicationRecord
-    has_many :cities
-    has_many :articles
+    has_many :cities, dependent: :destroy
+    has_many :articles, dependent: :destroy
 end
