@@ -1,6 +1,11 @@
 <div class="flex justify-center bg-gray-50 p-4">
   <div class="flex bg-white p-8 rounded-lg shadow-md w-full md:w-2/3 lg:w-1/2">
-  <%= form_with(model: @article, url: area_articles_path(@area), local: true, data: { controller: "address" }, method: :post) do |f| %>
+    <%= form_with model: article,
+                  url: article.new_record? ? area_articles_path(area) : article_path(article),  
+                  local: true,
+                  data: { controller: "address" },
+                  method: article.new_record? ? :post : :put do |f| %>
+
       
       <%= f.hidden_field :area_id, value: @area.id %>
       <%= hidden_field_tag :area_name, @area.name, id: "area_name", data: { address_target: "areaName" } %>
@@ -45,10 +50,13 @@
                               multiple: true, 
                               class: 'mt-1 p-2 w-full border border-purple-500 hover:border-purple-700 rounded-md',
                               data: { "photo-preview-target" => "input", action: "change->photo-preview#preview" } %>
-            <div class="mt-1 slider relative w-full h-48 overflow-hidden" data-photo-preview-target="previewContainer">
+                              <div class="mt-1 slider relative w-full h-48 overflow-hidden" 
+                              data-photo-preview-target="previewContainer"
+                              data-photos="<%= @article.photos.map { |photo| url_for(photo) }.join(",") %>">                         
               <div class="slides flex transition-transform" data-photo-preview-target="slides"></div>
               <button type="button" class="hidden absolute top-1/2 left-0 transform -translate-y-1/2 bg-pink-500 text-white p-2 rounded" data-action="click->photo-preview#previousSlide">≪</button>
               <button type="button" class="hidden absolute top-1/2 right-0 transform -translate-y-1/2 bg-pink-500 text-white p-2 rounded" data-action="click->photo-preview#nextSlide">≫</button>
+              
             </div>
 
             <div class="mb-0">
@@ -61,7 +69,7 @@
       <div class="mb-5">
       <%= f.label :text, "Content", class: "block text-sm font-medium text-gray-600" %>
       <%= f.text_field :text, class: 'mt-1 p-2 w-full border border-purple-500 rounded-md' %>
-      </div>
+       </div>
 
       <div class="w-full flex justify-center mt-4">
         <%= f.submit '投稿', class: 'bg-purple-300 hover:bg-purple-400 text-white font-medium py-2 px-4 rounded mb-2' %>
