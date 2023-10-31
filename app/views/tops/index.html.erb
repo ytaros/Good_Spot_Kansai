@@ -1,4 +1,50 @@
-<div class="mt-50 mb-30 pt-20">
-  <h1 class="mt-10">ラッセーラッセー</h1>
-  
+<div class="top_image items-center text-center justify-center">
+  <div class="pb-16">
+    <%= image_tag 'sample.jpg', alt: "ecommerce", class: "w-full" %>
+  </div>
+  <i class="fa-solid fa-arrow-down fa-bounce fa-2xl" style="font-size: 400%; color: #412e1d;"></i>
+  <section class="overflow-hidden justify-center">
+    <div class="container px-5 py-16 mx-auto">
+      <div class="lg:w-4/5 mx-auto flex flex-wrap justify-center">
+        <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 order-last lg:order-first flex flex-col justify-center">
+          <h2 class="text-sm tracking-widest"></h2>
+          <h1 class="text-2xl lg:text-4xl mt-5 mb-10">まずはここから！</h1>
+          <p class="leading-relaxed text-2xl lg:text-4xl link link-primary mb-10"><%= link_to (t 'posts.index.title'), "#" %></p>
+          <p class="leading-relaxed text-lg lg:text-2xl">関西の美味しいご飯、自慢したいスポットを共有しよう</p>
+          <p class="leading-relaxed text-lg lg:text-2xl">各県のめっちゃいいとこ、共有しあおう</p>
+        </div>
+        <%= image_tag 'sample.jpg', alt: "ecommerce", class: "lg:w-1/2 w-full lg:h-full object-cover object-center rounded order-first lg:order-last" %>
+      </div>
+    </div>
+  </section>
+  <i class="fa-solid fa-arrow-down fa-bounce fa-2xl" style="font-size: 400%; color: #412e1d;"></i>
+  <section class="overflow-hidden justify-center">
+    <div class="container px-5 py-16 mx-auto">
+      <div class="lg:w-4/5 mx-auto flex flex-wrap justify-center">
+        <%= image_tag 'sample.jpg', alt: "ecommerce", class: "lg:w-1/2 w-full lg:h-full object-cover object-center rounded" %>
+        <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 flex flex-col justify-center">
+          <h2 class="text-sm tracking-widest"></h2>
+          <h1 class="text-2xl lg:text-4xl mt-5 mb-10">次はここ！</h1>
+          <p class="leading-relaxed text-2xl lg:text-4xl link link-primary mb-10"><%= link_to (t 'zoos.recommend.title'), "#" %></p>
+          <p class="leading-relaxed text-lg lg:text-2xl">現在地から行ける名スポットを探そう！</p>
+          <p class="leading-relaxed text-lg lg:text-2xl">意外と近くに名店や名景色はあるかも？</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <i class="fa-solid fa-arrow-down fa-bounce fa-2xl" style="font-size: 400%; color: #412e1d;"></i>
+  <section class="overflow-hidden">
+    <div class="container px-5 pt-16 pb-20 mx-auto">
+      <div class="lg:w-4/5 mx-auto flex flex-wrap">
+        <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 order-last lg:order-first flex flex-col justify-center">
+          <h2 class="text-sm tracking-widest"></h2>
+          <h1 class="text-2xl lg:text-4xl mt-5 mb-10">実際に行ってみよう！</h1>
+          <p class="leading-relaxed text-lg lg:text-2xl">投稿されたお店から、おすすめ度をグーグルで確認！</p>
+          <p class="leading-relaxed text-lg lg:text-2xl">そしてベストショットを投稿してね！</p>
+        </div>
+        <%= image_tag 'sample.jpg', alt: "ecommerce", class: "lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded order-first lg:order-last" %>
+      </div>
+    </div>
+  </section>
+  <h1 class="text-2xl lg:text-4xl pb-20">関西で素敵なひと時を！</h1>
 </div>
