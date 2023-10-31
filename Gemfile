@@ -21,6 +21,7 @@ gem 'sorcery'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'font-awesome-rails'
+gem 'aws-sdk-s3'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
