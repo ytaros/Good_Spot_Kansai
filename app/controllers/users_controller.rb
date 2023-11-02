@@ -13,6 +13,7 @@ class UsersController < ApplicationController
       flash[:success] = "新規登録が成功しました"
       redirect_to login_path
     else
+      logger.error @user.errors.full_messages.join(', ')
       flash.now[:danger] = @user.errors.full_messages.join(', ')
       render :new
     end

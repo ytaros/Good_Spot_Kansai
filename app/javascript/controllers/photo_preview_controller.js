@@ -61,6 +61,10 @@ export default class extends Controller {
   }
 
   connect() {
+    if (!this.previewContainerTarget.dataset.photos) {
+      return;
+    }
+
     const photoUrls = this.previewContainerTarget.dataset.photos.split(",");
 
     if (photoUrls[0] === "") {

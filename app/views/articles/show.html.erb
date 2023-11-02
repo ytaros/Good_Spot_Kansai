@@ -1,26 +1,89 @@
-<div class="bg-white py-6 sm:py-8 lg:py-12 mt-50">
+<div class="bg-white py-6 sm:py-8 lg:py-12 mt-20">
   <div class="mx-auto max-w-screen-xl px-4 md:px-8">
     <div class="grid gap-8 md:grid-cols-2 lg:gap-12">
-      <div>
-        <div class="h-56 overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-auto">
-          <img src="https://images.unsplash.com/photo-1610465299996-30f240ac2b1c?auto=format&q=75&fit=crop&w=600&h=750" loading="lazy" alt="Photo by Martin Sanchez" class="h-full w-full object-cover object-center" />
+
+      <!-- 画像表示部分 -->
+      <div data-controller="photo-preview">
+        <div class="h-64 overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-auto mt-20">
+          <div data-target="photo-preview.slides photo-preview.previewContainer" class="flex">
+            <% if @article.photos.attached? %>
+              <% @article.photos.each do |photo| %>
+                <%= image_tag photo, alt: "Article Image", class: "h-full w-full object-cover object-center flex-none" %>
+              <% end %>
+            <% else %>
+              <img src="https://via.placeholder.com/600x750" alt="Placeholder Image" class="h-full w-full object-cover object-center flex-none" />
+            <% end %>
+          </div>
         </div>
+    
+        <% if @article.photos.count > 1 %>
+          <div class="mt-4 flex justify-between">
+            <button data-action="click->photo-preview#previousSlide" class="join-item btn btn-outline">prev</button>
+            <button data-action="click->photo-preview#nextSlide" class="join-item btn btn-outline">next</button>
+          </div>
+        <% end %>
       </div>
 
-      <div class="md:pt-8">
-        <p class="text-center font-bold text-indigo-500 md:text-left">Who we are</p>
-
-        <h1 class="mb-4 text-center text-2xl font-bold text-gray-800 sm:text-3xl md:mb-6 md:text-left">Our competitive advantage</h1>
-
-        <p class="mb-6 text-gray-500 sm:text-lg md:mb-8">
-          This is a section of some simple filler text, also known as placeholder text. It shares some characteristics of a real written text but is random or otherwise generated. It may be used to display a sample of fonts or generate text for testing. Filler text is dummy text which has no meaning however looks very similar to real text.<br /><br />
-
-          This is a section of some simple filler text, also known as placeholder text. It shares some characteristics of a real written text but is <a href="#" class="text-indigo-500 underline transition duration-100 hover:text-indigo-600 active:text-indigo-700">random</a> or otherwise generated. It may be used to display a sample of fonts or generate text for testing. Filler text is dummy text which has no meaning however looks very similar to real text.
-        </p>
-
-        <h2 class="mb-2 text-center text-xl font-semibold text-gray-800 sm:text-2xl md:mb-4 md:text-left">About us</h2>
-
-        <p class="mb-6 text-gray-500 sm:text-lg md:mb-8">This is a section of some simple filler text, also known as placeholder text. It shares some characteristics of a real written text but is random or otherwise generated. It may be used to display a sample of fonts or generate text for testing. Filler text is dummy text which has no meaning however looks very similar to real text.</p>
+      <!-- 記事の詳細情報表示部分 -->
+      <div class="text-gray-600 body-font overflow-hidden">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="w-full lg:w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
+              <h2 class="text-sm title-font text-gray-500 tracking-widest"><%= @article.city.name %></h2>
+              <h1 class="text-gray-900 text-3xl title-font font-medium mb-4"><%= @article.title %></h1>
+              <div class="flex mb-4">
+                <a class="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1">Good point</a>
+              </div>
+                <p class="leading-relaxed mb-4"> <%= @article.text %></p>
+              <div class="flex border-t border-gray-200 py-2">
+                <span class="text-gray-500">Address</span>
+                <span class="ml-auto text-gray-900"><%= @article.address %></span>
+              </div>
+              <div class="flex justify-between border-t border-b border-gray-200 py-2">
+                <span class="text-gray-500">Category</span>
+                  <div class="flex">
+                  <span class="<%= 'inline-block rounded-full px-2 py-1 text-sm mr-4 ' + (@article.category.name == 'Food' ? 'bg-orange-200 text-orange-500' : 'bg-pink-200 text-pink-500') %>">
+                      <%= @article.category.name %>
+                    </span>
+                  </div>
+              </div>
+              <div class="flex justify-between border-b border-gray-200 py-2">
+                <span class="text-gray-500">Tags</span>
+              <div class="flex">
+                  <% @article.tag_names.split(',').each do |tag| %>
+                    <span class="inline-block rounded-full bg-indigo-200 text-indigo-500 px-3 py-1 text-sm ml-2">  
+                      <%= tag.strip %>
+                    </span>
+                  <% end %>
+              </div>
+              </div>
+              <div class="flex">
+                <div class="h-10 w-10 shrink-0 overflow-hidden rounded-full bg-gray-100">
+                  <img src="<%= @article.user.avatar.url %>" loading="lazy" alt="Photo by <%= @article.user.name %>" class="h-full w-full object-cover object-center" />
+                </div>
+                  <span class="title-font font-medium mt-3 text-gray-900"><%= @article.user.name %> from:<%= @article.user.prefecture.name %></span>
+                  <ul class="menu menu-horizontal flex ml-auto bg-base-200 rounded-box mt-4">
+                    <% if @article.user == current_user %>
+                      <li>
+                        <%= link_to edit_article_path(@article), class: "tooltip", data: {tip: "Edit"} do %>
+                          <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"/></svg>
+                        <% end %>
+                      </li>
+                      <li>
+                        <%= link_to article_path(@article), data: {turbo_method: 'delete', turbo_confirm: t('defaults.confirm') , tip: "Delete"}, class: "tooltip" do %>
+                          <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
+                        <% end %>
+                      </li>
+                    <% else %>
+                      <li>
+                        <%= link_to "#", class: "tooltip", data: {tip: "Favorite!"} do %>
+                          <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z"/></svg>
+                        <% end %>
+                      </li>
+                    <% end %>
+                  </ul>
+              </div>
+            </div>
+          </div>
       </div>
     </div>
   </div>
