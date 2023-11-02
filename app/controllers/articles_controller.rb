@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  skip_before_action :require_login, only: %i[index]
+  skip_before_action :require_login, only: %i[index show]
   before_action :set_area, only: %i[index new create]
   before_action :set_city, only: [:create]
 
@@ -46,10 +46,13 @@ class ArticlesController < ApplicationController
     end
   end
   
-  # def show
-  #   @article = Article.find(params[:id])
-  #   @tags = @post.tags.pluck(:name).join(',')
-  # end
+  def show
+    @article = Article.find(params[:id])
+    @area = @article.area
+    @cities = @area.cities
+    @categories = Category.all
+    @tags = @article.tags.pluck(:name).join(',')
+  end
   
   def edit
     @article = Article.find(params[:id])

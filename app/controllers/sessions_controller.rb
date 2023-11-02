@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
 		if @user
 			redirect_to main_top_path, success:  t('.success')
 		else
+			logger.error @user.errors.full_messages.join(', ')
 			flash.now[:danger] = t('.fail')
 			render :new
 		end
