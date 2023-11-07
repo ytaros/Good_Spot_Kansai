@@ -5,14 +5,7 @@ test:
 local:
   service: Disk
   root: <%= Rails.root.join("storage") %>
-
 #Use bin/rails credentials: edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
-amazon:
-  service: S3
-  access_key_id: AKIA6J2E5MZJNMFLMJK5
-  secret_access_key: FMQSsZN8Mk7iE1Whh/+/i/HOhIsMlgXOO7L38UDe
-  region: "ap-northeast-3"
-  bucket: "kansaigoodspots"
 # Remember not to checkin your GCS keyfile to a repository
 # google:
 #   service: GCS
