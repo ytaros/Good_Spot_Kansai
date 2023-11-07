@@ -26,11 +26,29 @@ class Article < ApplicationRecord
     errors.add(:tag_names, "を入力してください") if tags.blank?
   end
 
+  def related_data
+    {
+      area: area,
+      cities: area.cities, 
+      categories: Category.all,
+      tags: tags.pluck(:name) 
+    }
+  end 
+
   private
 
   def set_tags_by_names(tag_names)
     self.tags = tag_names.split(",").map(&:strip).uniq.map do |tag_name|
       Tag.find_or_create_by(name: tag_name)
     end
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["address", "area_id", "category_id", "city_id", "created_at", "id", "text", "title", "updated_at", "user_id"]
+  end
+
+
+  def self.ransackable_associations(auth_object = nil)
+    %w[area city tags category]
   end
 end
