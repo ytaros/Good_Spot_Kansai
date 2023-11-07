@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   include Sorcery::Controller
   before_action :set_locale
   before_action :require_login
-		
+  before_action :set_search
 
   private
 
@@ -15,4 +15,9 @@ class ApplicationController < ActionController::Base
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
   end
+
+  def set_search
+    @q = Article.ransack(params[:q])
+  end
+
 end
