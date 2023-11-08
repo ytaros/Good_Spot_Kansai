@@ -23,6 +23,7 @@ gem 'mini_magick'
 gem 'font-awesome-rails'
 gem 'aws-sdk-s3'
 gem 'ransack'
+gem 'dotenv-rails'
 
 
 group :development, :test do
