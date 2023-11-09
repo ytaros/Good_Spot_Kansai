@@ -21,10 +21,10 @@ gem 'sorcery'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'font-awesome-rails'
-gem 'aws-sdk-s3'
+gem 'aws-sdk-s3', require: false
 gem 'ransack'
 gem 'dotenv-rails'
-
+gem 'fog-aws'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]

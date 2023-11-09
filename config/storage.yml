@@ -11,8 +11,8 @@ amazon:
   service: S3
   access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
   secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
-  region: ap-northeast-3
-  bucket: kansaigoodspots
+  region: ap-northeast-1
+  bucket: goodspotskansai
 # Remember not to checkin your GCS keyfile to a repository
 # google:
 #   service: GCS
