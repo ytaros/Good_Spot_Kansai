@@ -1,43 +1,46 @@
 ja:
   defaults:
-    login: 'ログイン'
-    register: '登録'
-    logout: 'ログアウト'
-    post: '投稿'
-    search_word: '検索ワード'
-    edit: '編集'
-    show: '詳細'
-    password_reset: 'パスワードリセット'
-    delete: '削除'
-    unspecified: '指定なし'
+    index: "一覧"
+    ranking: "ランキング"
+    sign_up: 新規登録""
+    login: "ログイン"
+    register: "登録"
+    logout: "ログアウト"
+    pots: "投稿"
+    create: "えぇとこ〜！"
+    password_reset: "パスワードリセット"
+    delete: "削除"
     message:
-      require_login: 'ログインしてください'
+      require_login: "ログインしてください"
       created: "%{item}を作成しました"
       not_created: "%{item}を作成できませんでした"
       updated: "%{item}を更新しました"
       not_updated: "%{item}を更新できませんでした"
       deleted: "%{item}を削除しました"
-      delete_confirm: '削除しますか？'
-      bookmark: 'ブックマークしました'
-      unbookmark: 'ブックマークを外しました'
-      delete_confirm: "コメントを削除しますか？"
+      delete_confirm: "削除しますか？"
+      bookmark: "お気に入りしました"
+      unbookmark: "お気に入りをを外しました"
       profile_edited: "ユーザーを更新しました"
       profile_not_edited: "ユーザを更新できませんでした"
-      not_authorized: '権限がありません'
+      not_authorized: "権限がありません"
   users:
     new:
-      title: 'User Create'
-      to_login_page: 'ログインページへ'
+      title: "User Create"
+      to_login_page: "ログインページへ"
     create:
-      success: 'User registration completed!'
-      fail: 'User registration failed'
+      success: "User registration completed!"
+      fail: "User registration failed"
   sessions:
     new:
-      title: 'Login'
-      to_register_page: 'Sign up'
-      password_forget: 'Click here if you have forgotten your password'
+      title: "Login"
+      to_register_page: "Sign up"
+      password_forget: "Click here if you have forgotten your password"
     create:
-      success: 'ログインしました'
-      fail: 'ログインに失敗しました'
+      success: "ログインしました"
+      fail: "ログインに失敗しました"
     destroy:
-      success: 'ログアウトしました'
+      success: "ログアウトしました"
+  articles:
+    create: "Good Spot!"
+    edit:
+      title: "EDIT"

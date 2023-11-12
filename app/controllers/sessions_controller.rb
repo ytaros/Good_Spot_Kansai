@@ -8,14 +8,13 @@ class SessionsController < ApplicationController
 		if @user
 			redirect_to main_top_path, success:  t('.success')
 		else
-			logger.error @user.errors.full_messages.join(', ')
-			flash.now[:danger] = t('.fail')
-			render :new
+			flash.now[:error] = t('.fail')
+			render 'new', status: :unprocessable_entity
 		end
 	end
 	
 	def destroy
 		logout
-		redirect_to root_path,  success: t('.success')
+		redirect_to root_path
 	end
 end

@@ -14,6 +14,15 @@ module.exports = {
         hannari: ["Hannari", "serif"],
         nothing: ['"Nothing You Could Do"', "cursive"],
       },
+      keyframes: {
+        fadeInOut: {
+          "0%, 100%": { opacity: "0" },
+          "10%, 90%": { opacity: "1" },
+        },
+      },
+      animation: {
+        fadeInOut: "fadeInOut 3s ease-in-out",
+      },
     },
   },
   plugins: [
