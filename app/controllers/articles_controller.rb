@@ -1,13 +1,14 @@
 class ArticlesController < ApplicationController
-  skip_before_action :require_login, only: %i[index show]
+  skip_before_action :require_login, only: %i[index show search autocomplete]
   before_action :set_area, only: %i[index new create]
   before_action :set_city, only: [:create]
   before_action :article_find, only: %i[edit update show destroy]
   before_action :set_article, only: %i[edit show]
 
   def index
-    @articles = @area.articles.order(created_at: :desc)
+    @articles = @area.articles.includes(:user, :category, :tags, :favorites).order(created_at: :desc)
   end
+  
   
   def new
     @cities = @area.cities
@@ -21,10 +22,12 @@ class ArticlesController < ApplicationController
     tags = params[:article][:tag_names].split(",").map(&:strip)
     
     if @article.save
+      flash[:success] = t('.create')
       redirect_to area_articles_path(@article.area_id)
     else
       @categories = Category.all
       @cities = City.where(area_id: params[:article][:area_id])
+      flash.now[:error] = @article.errors.full_messages.join(', ')
       render :new, status: :unprocessable_entity
     end
   end
@@ -36,13 +39,15 @@ class ArticlesController < ApplicationController
   
     if @article.update(article_params)
       @article.tag_names = params[:article][:tag_names]
+      flash[:success] = I18n.t("defaults.message.updated", item: "記事")
       redirect_to area_articles_path(@article.area_id)
     else
       @area = @article.area
       @cities = @area.cities
       @categories = Category.all
       @tags = @article.tags.pluck(:name).join(',')
-      render 'edit'
+      flash.now[:error] = @article.errors.full_messages.join(', ')
+      render 'edit', status: :unprocessable_entity
     end
   end
   
@@ -54,7 +59,8 @@ class ArticlesController < ApplicationController
   def destroy
     @area = @article.area
     @article.destroy!
-    redirect_to area_articles_path(@area.id),  status: :see_other
+    flash[:success] = I18n.t("defaults.message.deleted", item: "投稿")
+    redirect_to area_articles_path(@area.id), status: :see_other
   end
 
   def search

@@ -10,12 +10,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:success] = "新規登録が成功しました"
+      flash[:success] =  I18n.t("defaults.message.created", item: "User")
       redirect_to login_path
     else
-      logger.error @user.errors.full_messages.join(', ')
-      flash.now[:danger] = @user.errors.full_messages.join(', ')
-      render :new
+      flash.now[:error] = @user.errors.full_messages.join(', ')
+      render 'new', status: :unprocessable_entity
     end
   end
 
