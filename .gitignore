@@ -35,6 +35,7 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 /.env
+/.env.production
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
