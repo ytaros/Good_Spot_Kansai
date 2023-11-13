@@ -21,10 +21,9 @@ test:
   database: db/test.sqlite3
 
 production:
+<<: *default
   adapter: postgresql
   encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   database: good_spot_kansai_app_db
   username: azuma_yoko_44
-  password: <%= ENV['YOUR_DATABASE_PASSWORD'] %>
-  host: dpg-ckcjubuct0pc73cg50l0-a
+  url: <%= ENV['DATABASE_URL'] %>
