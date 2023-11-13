@@ -5,7 +5,6 @@ ruby "3.1.4"
 gem 'acts-as-taggable-on', '~> 9.0'
 gem "rails", "~> 7.0.7", ">= 7.0.7.2"
 gem "sprockets-rails"
-gem "sqlite3", "~> 1.4"
 gem "puma", "~> 5.0"
 gem 'image_processing', '~> 1.12', require: 'image_processing/mini_magick'
 gem "importmap-rails"
@@ -27,7 +26,9 @@ gem 'dotenv-rails'
 gem 'fog-aws'
 
 group :development, :test do
+  gem "sqlite3", "~> 1.4"
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+
 end
 
 group :development do
