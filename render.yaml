@@ -1,5 +1,5 @@
 databases:
-  - name: good_spot_kansai_app_db
+  - name: good_spot_kansai
     databaseName: good_spot_kansai_app_db
     user: azuma_yoko_44
     region: singapore
