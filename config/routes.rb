@@ -10,7 +10,9 @@ Rails.application.routes.draw do
     collection do
       get 'search'
       get 'autocomplete'
+      get 'favorites'
     end
+    resources :favorites, only: [:create, :destroy]
   end
 
   get '/main', to: 'tops#index', as: 'main_top'

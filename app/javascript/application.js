@@ -8,6 +8,7 @@ import BackgroundController from "controllers/background_controller";
 import PhotoPreviewController from "controllers/photo_preview_controller";
 import AddressController from "controllers/address_controller";
 import FlashController from "controllers/flash_controller";
+import FavoriteController from "controllers/favorite_controller";
 import { Autocomplete } from "stimulus-autocomplete";
 
 const application = Application.start();
@@ -19,6 +20,7 @@ application.register("svg", SvgController);
 application.register("background", BackgroundController);
 application.register("address", AddressController);
 application.register("flash", FlashController);
+application.register("favorite", FavoriteController);
 application.register("autocomplete", Autocomplete);
 
 application.debug = false;
