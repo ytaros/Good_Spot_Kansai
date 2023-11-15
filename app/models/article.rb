@@ -35,6 +35,10 @@ class Article < ApplicationRecord
     }
   end 
 
+  def favorited?(user)
+    favorites.where(user_id: user.id).exists?
+  end
+
   private
 
   def set_tags_by_names(tag_names)

@@ -87,6 +87,10 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def favorites
+    @favorite_articles = current_user.favorited_articles.includes(:user).order(created_at: :desc)
+  end
+
   private
   
   def set_area
