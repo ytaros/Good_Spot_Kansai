@@ -1,5 +1,4 @@
 import { Controller } from "@hotwired/stimulus";
-import { post } from "@rails/request.js";
 
 export default class extends Controller {
   static targets = ["heart", "tooltip"];
@@ -15,19 +14,21 @@ export default class extends Controller {
     } else {
       this.favorite(articleId);
     }
-    this.updateTooltipText(!isFavorited);
   }
 
   async favorite(articleId) {
-    const response = await post(`/articles/${articleId}/favorites`, {
-      body: JSON.stringify({ article_id: articleId }),
+    const response = await fetch(`/articles/${articleId}/favorites`, {
+      method: "post",
       headers: {
-        "Content-Type": "application/json",
         "X-CSRF-Token": document.querySelector("[name='csrf-token']").content,
       },
     });
+
     if (response.ok) {
       this.heartTarget.classList.add("text-red-500");
+      this.updateTooltipText(true);
+    } else {
+      console.error("Error adding favorite");
     }
   }
 
@@ -37,13 +38,16 @@ export default class extends Controller {
       {
         method: "delete",
         headers: {
-          "Content-Type": "application/json",
           "X-CSRF-Token": document.querySelector("[name='csrf-token']").content,
         },
       }
     );
+
     if (response.ok) {
       this.heartTarget.classList.remove("text-red-500");
+      this.updateTooltipText(false);
+    } else {
+      console.error("Error removing favorite");
     }
   }
 
