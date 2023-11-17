@@ -16,7 +16,7 @@
   <div class="flex flex-1 flex-col p-4 sm:p-6">
     <!-- タイトルを表示 -->
     <h2 class="mb-2 text-lg font-semibold text-gray-800">
-      <a href="#" class="transition duration-100 hover:text-indigo-500 active:text-indigo-600"><%= article.title %></a>
+    <%= link_to article.title, article_path(article), class: "transition duration-100 hover:text-indigo-500 active:text-indigo-600" %>
     </h2>
 
     <!-- 住所を表示 -->

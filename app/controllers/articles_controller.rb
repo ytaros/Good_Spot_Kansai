@@ -6,9 +6,16 @@ class ArticlesController < ApplicationController
   before_action :set_article, only: %i[edit show]
 
   def index
-    @articles = @area.articles.includes(:user, :category, :tags, :favorites).order(created_at: :desc)
+    @articles = @area.articles.includes(:user, :category, :tags, :favorites, :photos_attachments, :photos_blobs).order(created_at: :desc)
   end
-  
+
+  def user_articles
+    @articles = current_user.articles.includes(:category, :tags, :favorites).order(created_at: :desc)
+
+    respond_to do |format|
+      format.json { render json: @articles }
+    end
+  end
   
   def new
     @cities = @area.cities
@@ -64,7 +71,7 @@ class ArticlesController < ApplicationController
   end
 
   def search
-    @articles = @q.result(distinct: true).includes(:area, :city, :tags, :category).order(created_at: :desc)
+    @articles = @q.result(distinct: true).includes(:user, :area, :city, :tags, :category, photos_attachments: :blob).order(created_at: :desc)
   end
 
   def autocomplete
@@ -72,24 +79,25 @@ class ArticlesController < ApplicationController
     results = []
   
     case params[:type]
-    when "area_or_city"
-      areas = Area.order(:name).where("name LIKE ?", "%#{term}%").limit(5)
-      cities = City.order(:name).where("name LIKE ?", "%#{term}%").limit(5)
-      render partial: 'autocomplete/area_and_city', locals: { areas: areas, cities: cities }
-    when "category"
-      categories = Category.order(:name).where("name LIKE ?", "%#{term}%").limit(5)
-      render partial: 'autocomplete/categories', locals: { categories: categories }
-    when "tag"
-      tags = Tag.order(:name).where("name LIKE ?", "%#{term}%").limit(5)
-      render partial: 'autocomplete/tags', locals: { tags: tags }
+      when "area_or_city"
+        areas = Area.order(:name).where("name LIKE ?", "%#{term}%").limit(5)
+        cities = City.order(:name).where("name LIKE ?", "%#{term}%").limit(5)
+        render partial: 'autocomplete/area_and_city', locals: { areas: areas, cities: cities }
+      when "category"
+        categories = Category.order(:name).where("name LIKE ?", "%#{term}%").limit(5)
+        render partial: 'autocomplete/categories', locals: { categories: categories }
+      when "tag"
+        tags = Tag.order(:name).where("name LIKE ?", "%#{term}%").limit(5)
+        render partial: 'autocomplete/tags', locals: { tags: tags }
     else
       render json: { error: 'Invalid type' }
     end
   end
 
   def favorites
-    @favorite_articles = current_user.favorited_articles.includes(:user).order(created_at: :desc)
+    @favorite_articles = current_user.favorited_articles.includes(:user, :category, :tags, photos_attachments: :blob).order(created_at: :desc)
   end
+  
 
   private
   

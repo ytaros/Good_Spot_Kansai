@@ -45,7 +45,7 @@
             <!-- メニュードロップダウン（最初は非表示） -->
             <div class="absolute right-0 mt-2 w-56 bg-white border rounded-lg shadow-lg hidden" data-dropdown-target="menu">
             <ul class="menu bg-stone-50 text-gray-400 w-56 rounded-lg">
-                <li><%= link_to "マイページ", "#", class: "block px-4 py-2 hover:bg-sky-100" %></li>
+                <li><%= link_to "マイページ", profile_path , class: "block px-4 py-2 hover:bg-sky-100" %></li>
                 <li><%= link_to "お気に入り",  favorites_articles_path , class: "block px-4 py-2 hover:bg-sky-100" %></li>
                 <li><%= link_to "おすすめスポット", "#", class: "block px-4 py-2 hover:bg-sky-100" %></li>
                 <li><%= link_to "Logout", logout_path, data: { turbo_method: :delete }, class: "block px-4 py-2 hover:bg-sky-100" %></li>

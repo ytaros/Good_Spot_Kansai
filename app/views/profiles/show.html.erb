@@ -1,0 +1,53 @@
+<div data-controller="articlebutton">
+<div class="container mx-auto p-4 flex flex-col items-center font-nunito">
+  <div class="w-full lg:w-1/3 px-4 mb-4 pt-10">
+    <div class="bg-white p-6 rounded-xl shadow-lg border border-purple-200 text-center">
+      <h3 data-profile-target="text" class="text-2xl font-nunito font-semibold text-gray-800 mb-3">Profile</h3>
+      <div class="flex flex-col lg:flex-row items-center justify-center gap-1">
+        <div class="shadow-lg border border-purple-200 rounded-full">
+          <%= image_tag current_user.avatar.url, alt: "Profile picture", class: "object-cover rounded-full h-24 w-24" %>
+        </div>
+        <div class="text-center lg:w-1/2">
+          <h2 data-profile-target="text" class="text-2xl font-nunito text-gray-800 mb-3"><%= current_user.name %></h2>
+          <p class="text-gray-600"><%= current_user.email %></p>
+          <p class="text-gray-600">from: <%= current_user.prefecture.name %></p>
+        </div>
+      </div>
+        <div class="flex justify-center gap-4 mt-4">
+          <button class="bg-purple-200 text-white py-2 px-4 rounded hover:bg-purple-500">
+            <%= link_to 'Edit Profile',  edit_profile_path %>
+          </button>
+          <button type="button" data-action="articlebutton#loadArticles" class="bg-blue-200 text-white py-2 px-4 rounded hover:bg-blue-500">My Articles</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="articles-container" class="hidden grid gap-x-4 gap-y-6 sm:grid-cols-2 md:gap-x-6 lg:grid-cols-3 xl:grid-cols-4 overflow-y-auto px-4 md:px-6 lg:px-8 xl:px-10" style="max-height: 80vh;">
+<% current_user.articles.each do |article| %>
+  <div class="flex flex-col items-center overflow-hidden rounded-lg border md:flex-row">
+    <%= link_to(article, class: "group relative block h-48 w-full shrink-0 self-start overflow-hidden bg-gray-100 md:h-full md:w-32 lg:w-48") do %>
+      <% if article.photos.attached? %>
+        <%= image_tag(article.photos.first, class: 'absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110', alt: "Photo from #{article.title}") %>
+      <% end %>
+    <% end %>
+
+    <div class="flex flex-col gap-2 p-4 lg:p-6">
+    <span class="block text-sm text-gray-400"><%= article.created_at.strftime("%Y-%m-%d") %></span>
+
+      <h2 class="text-xl font-bold text-gray-800">
+        <%= link_to article.title, article, class: "transition duration-100 hover:text-indigo-500 active:text-indigo-600" %>
+      </h2>
+
+      <p class="text-gray-500"><%= article.category.name %></p>
+
+      <div>
+      <span class="text-sm text-gray-400"><%= article.city.name %></span>
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>
+
+</div>

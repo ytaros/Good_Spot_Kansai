@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   static targets = ["heart", "tooltip"];
 
-  toggleFavorite() {
+  toggleFavorite(event) {
     event.preventDefault();
     const articleId = this.element.dataset.articleIdValue;
     const favoriteId = this.element.dataset.favoriteIdValue;
@@ -25,10 +25,13 @@ export default class extends Controller {
     });
 
     if (response.ok) {
+      const newFavoriteId = await response.text();
+      this.element.dataset.favoriteIdValue = newFavoriteId;
       this.heartTarget.classList.add("text-red-500");
       this.updateTooltipText(true);
     } else {
-      console.error("Error adding favorite");
+      const errorText = await response.text();
+      console.error("Error adding favorite: ", errorText);
     }
   }
 

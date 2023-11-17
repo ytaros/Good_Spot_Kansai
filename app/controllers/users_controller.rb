@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_prefectures, only: [:new, :create]
+  before_action :set_prefectures, only: [:new, :create, :edit]
   skip_before_action :require_login, only: %i[new create]
 
   def new
@@ -16,15 +16,6 @@ class UsersController < ApplicationController
       flash.now[:error] = @user.errors.full_messages.join(', ')
       render 'new', status: :unprocessable_entity
     end
-  end
-
-  def show
-  end
-
-  def edit
-  end
-
-  def update
   end
 
   def destroy
