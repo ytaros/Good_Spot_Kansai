@@ -13,7 +13,7 @@ class User < ApplicationRecord
   validates :reset_password_token, uniqueness: true, allow_nil: true
   validates :email, uniqueness: true
   validates :email, presence: true
-  validates :name, presence: true, length: { maximum: 255 }
+  validates :name, presence: true, length: { maximum: 10 }
   validates :prefecture, presence: true
 
   mount_uploader :avatar, AvatarUploader

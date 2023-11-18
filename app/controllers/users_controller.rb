@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_prefectures, only: [:new, :create, :edit]
+  before_action :set_prefectures, only: %i[new create]
   skip_before_action :require_login, only: %i[new create]
 
   def new

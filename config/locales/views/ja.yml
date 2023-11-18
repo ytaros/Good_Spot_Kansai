@@ -18,8 +18,6 @@ ja:
       not_updated: "%{item}を更新できませんでした"
       deleted: "%{item}を削除しました"
       delete_confirm: "削除しますか？"
-      bookmark: "お気に入りしました"
-      unbookmark: "お気に入りをを外しました"
       profile_edited: "ユーザーを更新しました"
       profile_not_edited: "ユーザを更新できませんでした"
       not_authorized: "権限がありません"
@@ -44,3 +42,8 @@ ja:
     create: "Good Spot!"
     edit:
       title: "EDIT"
+  profiles:
+    show:
+      title: "Profile"
+    edit:
+      title: "Setting"

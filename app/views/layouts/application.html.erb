@@ -18,14 +18,10 @@
 
   <body>
   <% unless request.path == root_path %>
-      <%= render 'shared/header' %>
+    <%= render 'shared/header' %>
   <% end %>
   <div class="main-content mt-15 md:mt-20 lg:mt-12">
-  <% flash.each do |type, message| %>
-    <div data-controller="flash" class="<%= flash_class(type) %> animate-fadeInOut fixed top-15 w-full">
-      <%= message %>
-    </div>
-  <% end %>
+    <%= render 'shared/flash_message' %>
     <%= yield %>
   </div>
   <% unless request.path == root_path %>

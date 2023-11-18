@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  add_flash_types :success, :info, :warning, :error
   protect_from_forgery with: :exception
   include Sorcery::Controller
   before_action :set_locale

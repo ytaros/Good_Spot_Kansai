@@ -8,11 +8,13 @@ class Article < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many_attached :photos, dependent: :destroy
 
-  validates :title, presence: true
+  validates :title, presence: true, length: { maximum: 10 }
   validates :address, presence: true
   validates :text, presence: true
   validate :has_tags
   validates :category_id, presence: true
+  validates :photos, presence: true
+  validates :text, presence: true,  length: { maximum: 140 }
   
   def tag_names
     tags.pluck(:name).join(',')

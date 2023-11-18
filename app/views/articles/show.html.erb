@@ -1,28 +1,24 @@
-<div class="bg-white py-6 sm:py-8 lg:py-12 mt-20">
+<div class="bg-white py-6 sm:py-8 lg:py-12 ">
   <div class="mx-auto max-w-screen-xl px-4 md:px-8">
     <div class="grid gap-8 md:grid-cols-2 lg:gap-12">
 
       <!-- 画像表示部分 -->
-      <div data-controller="photo-preview">
-        <div class="h-64 overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-auto mt-20">
-          <div data-target="photo-preview.slides photo-preview.previewContainer" class="flex">
-            <% if @article.photos.attached? %>
-              <% @article.photos.each do |photo| %>
-                <%= image_tag photo, alt: "Article Image", class: "h-full w-full object-cover object-center flex-none" %>
-              <% end %>
-            <% else %>
-              <img src="https://via.placeholder.com/600x750" alt="Placeholder Image" class="h-full w-full object-cover object-center flex-none" />
-            <% end %>
-          </div>
-        </div>
-    
-        <% if @article.photos.count > 1 %>
-          <div class="mt-4 flex justify-between">
-            <button data-action="click->photo-preview#previousSlide" class="join-item btn btn-outline">prev</button>
-            <button data-action="click->photo-preview#nextSlide" class="join-item btn btn-outline">next</button>
-          </div>
+<div data-controller="photo-preview">
+  <div class="h-48 w-48 overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-auto md:w-auto mt-20">
+    <div data-target="photo-preview.slides photo-preview.previewContainer" class="flex">
+        <% @article.photos.each do |photo| %>
+          <%= image_tag photo, alt: "Article Image", class: "h-full w-full object-cover object-center flex-none" %>
         <% end %>
-      </div>
+    </div>
+  </div>
+
+  <% if @article.photos.count > 1 %>
+    <div class="mt-4 flex justify-between">
+      <button data-action="click->photo-preview#previousSlide" class="join-item btn btn-outline">prev</button>
+      <button data-action="click->photo-preview#nextSlide" class="join-item btn btn-outline">next</button>
+    </div>
+  <% end %>
+</div>
 
       <!-- 記事の詳細情報表示部分 -->
       <div class="text-gray-600 body-font overflow-hidden">
