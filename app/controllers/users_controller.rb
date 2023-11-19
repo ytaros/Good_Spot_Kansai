@@ -17,10 +17,7 @@ class UsersController < ApplicationController
       render 'new', status: :unprocessable_entity
     end
   end
-
-  def destroy
-  end
-
+  
   private
   
   def user_params

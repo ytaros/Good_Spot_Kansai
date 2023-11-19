@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  before_action :set_user, only: %i[edit update show]
+  before_action :set_user, only: %i[edit update show destroy]
   before_action :set_prefectures, only: %i[edit update show]
   
     def show
@@ -15,6 +15,16 @@ class ProfilesController < ApplicationController
       else
         flash.now[:error] = @user.errors.full_messages.join(', ')
         render :edit, status: :unprocessable_entity
+      end
+    end
+
+    def destroy
+      if @user.destroy
+        reset_session
+        redirect_to root_path, status: :see_other
+      else
+        flash[:error] =  I18n.t("defaults.message.not_deleted", item: "User")
+        redirect_to profile_path
       end
     end
   
