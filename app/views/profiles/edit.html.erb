@@ -37,14 +37,13 @@
 
         <div class='text-center mt-6'>
           <%= f.submit 'Profile Update', class: "mt-0 w-48 mx-auto py-2 px-4 text-white bg-purple-300 rounded hover:bg-purple-400" %>
+          <% end %>
         </div>
-      <% end %>
-
-      <%= form_with model: @user, url: profile_path, class: "space-y-4" do |f| %>
-        <div class='text-center mt-6 pt-10'>
-          <%= f.submit 'Acount Delete', class: "mt-0 w-48 mx-auto py-2 px-4 text-white bg-red-300 rounded hover:bg-red-500" %>
+        <div class="text-center mt-6 pt-10">
+          <%= link_to 'Delete My Account', profile_path, 
+            data: { turbo_method: :delete, turbo_confirm: t('defaults.message.delete_confirm') }, 
+            class: "mt-0 w-48 mx-auto py-2 px-6 text-white bg-red-300 rounded hover:bg-red-400" %>
         </div>
-      <% end %>
     </div>
   </div>
 </div>

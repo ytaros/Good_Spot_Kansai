@@ -17,6 +17,7 @@ ja:
       updated: "%{item}を更新しました"
       not_updated: "%{item}を更新できませんでした"
       deleted: "%{item}を削除しました"
+      not_deleted: "%{item}を削除できませんでした"
       delete_confirm: "削除しますか？"
       profile_edited: "ユーザーを更新しました"
       profile_not_edited: "ユーザを更新できませんでした"
