@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
+  get 'privacy_policy', to: 'tops#privacy_policy'
+  get 'terms_of_service', to: 'tops#terms_of_service'
+
   resources :users, only: %i[new create]
   get 'user_articles', to: 'articles#user_articles'
   resources :areas, only: [:index] do
