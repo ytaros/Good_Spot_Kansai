@@ -102,15 +102,15 @@ class ArticlesController < ApplicationController
   private
   
   def set_area
-    @area = Area.find(params[:area_id])
+    @area = Area.find_by(id: params[:area_id])
   end
 
   def set_city
-    @city = City.find(params[:article][:city_id])
+    @city = City.find_by(id: params[:article][:city_id])
   end
 
   def article_find
-    @article = Article.find(params[:id])
+    @article = Article.find_by(id: params[:id])
   end
 
   def set_article

@@ -21,6 +21,11 @@ ja:
       profile_edited: "ユーザーを更新しました"
       not_authorized: "権限がありません"
       not_page: "お探しのページは存在しないか、表示する権限がありません。"
+  tops:
+    privacy_policy:
+      title: "プライバシーポリシー"
+    terms_of_service:
+      title: "利用規約"
   users:
     new:
       title: "User Create"
