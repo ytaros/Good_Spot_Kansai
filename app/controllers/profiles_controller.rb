@@ -11,7 +11,8 @@ class ProfilesController < ApplicationController
     
     def update
       if @user.update(user_params)
-        redirect_to profile_path, success: t('defaults.message.profile_edited', item: User.model_name.human)
+        flash[:success] = t('defaults.message.profile_edited')
+        redirect_to profile_path
       else
         flash.now[:error] = @user.errors.full_messages.join(', ')
         render :edit, status: :unprocessable_entity

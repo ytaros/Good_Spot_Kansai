@@ -2,14 +2,13 @@ ja:
   defaults:
     index: "一覧"
     ranking: "ランキング"
-    sign_up: 新規登録""
+    sign_up: "新規登録"
     login: "ログイン"
     register: "登録"
     logout: "ログアウト"
-    pots: "投稿"
+    posts: "投稿"
     create: "えぇとこ〜！"
     password_reset: "パスワードリセット"
-    delete: "削除"
     message:
       require_login: "ログインしてください"
       created: "%{item}を作成しました"
@@ -20,12 +19,12 @@ ja:
       not_deleted: "%{item}を削除できませんでした"
       delete_confirm: "削除しますか？"
       profile_edited: "ユーザーを更新しました"
-      profile_not_edited: "ユーザを更新できませんでした"
       not_authorized: "権限がありません"
+      not_page: "お探しのページは存在しないか、表示する権限がありません。"
   users:
     new:
       title: "User Create"
-      to_login_page: "ログインページへ"
+      to_login_page: "To Login"
     create:
       success: "User registration completed!"
       fail: "User registration failed"

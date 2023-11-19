@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   before_action :require_login
   before_action :set_search
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   private
 
@@ -18,6 +19,15 @@ class ApplicationController < ActionController::Base
 
   def set_search
     @q = Article.ransack(params[:q])
+  end
+
+  def record_not_found
+    if Rails.env.production?
+      flash[:warning] = t('defaults.message.not_page')
+      redirect_to main_top_path
+    else
+      raise
+    end
   end
 
 end
