@@ -4,10 +4,10 @@
 
       <!-- 画像表示部分 -->
 <div data-controller="photo-preview">
-  <div class="h-48 w-48 overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-auto md:w-auto mt-20">
+  <div class="overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-auto md:w-auto">
     <div data-target="photo-preview.slides photo-preview.previewContainer" class="flex">
         <% @article.photos.each do |photo| %>
-          <%= image_tag photo, alt: "Article Image", class: "h-full w-full object-cover object-center flex-none" %>
+            <%= image_tag photo, class: "w-full h-auto", style: "object-fit: contain;" %>
         <% end %>
     </div>
   </div>

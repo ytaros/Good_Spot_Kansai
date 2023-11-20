@@ -7,7 +7,7 @@ class Article < ApplicationRecord
   has_many :tags, through: :article_tags, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many_attached :photos, dependent: :destroy
-
+  
   validates :title, presence: true, length: { maximum: 10 }
   validates :address, presence: true
   validates :text, presence: true

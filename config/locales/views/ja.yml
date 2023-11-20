@@ -44,6 +44,10 @@ ja:
     destroy:
       success: "ログアウトしました"
   articles:
+    new:
+      area_prompt: "エリアを選択"
+      category_prompt: "カテゴリーを選択"
+      placeholder: "タグを,区切って入力"
     create: "Good Spot!"
     edit:
       title: "EDIT"
