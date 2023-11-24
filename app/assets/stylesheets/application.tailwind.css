@@ -7,33 +7,6 @@ svg, path {
 }
 
 
-.modal-toggle:checked + .modal {
-  display: block;
-}
-
-.modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.6);
-  z-index: 1000;
-}
-
-.modal-box {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  padding: 2rem;
-  width: 80%;
-  max-width: 500px;
-  border-radius: 5px;
-}
-
 @keyframes image-switch-animation {
   0%, 100% {
     opacity: 0;
@@ -43,36 +16,3 @@ svg, path {
   }
 }
 
-body::before {
-  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  animation: image-switch-animation 25s infinite;
-}
-
-.custom-select {
-  border: 2px solid purple;
-}
-
-.custom-select:focus {
-  border-color: darkviolet;
-  outline: none;
-}
-
-.slide-in {
-  animation: slideIn 0.5s ease;
-}
-
-.flash-success {
-  @apply bg-green-100 text-green-300 p-2 rounded-md shadow-md;
-}
-
-.flash-warning {
-  @apply bg-yellow-100 text-yellow-500 p-2 rounded-md shadow-md;
-}
-
-.flash-error {
-  @apply bg-red-100 text-red-500 p-2 rounded-md shadow-md;
-}
-
-.flash-info {
-  @apply bg-blue-100 text-blue-500 p-2 rounded-md shadow-md;
-}
