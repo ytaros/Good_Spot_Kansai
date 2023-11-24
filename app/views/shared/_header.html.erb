@@ -1,34 +1,60 @@
-<header class="bg-blue-100 p-2 fixed top-0 left-0 w-full z-20 font-nunito">
-  <div class="container mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-8">
-      <!-- 左側のボタン群 -->
-    <div class="flex-1 flex items-center space-x-5">
-      <% if current_user %> <!-- ログイン後の表示 -->
-          <%= link_to top_areas_path, class: "relative px-4 py-2 overflow-hidden font-medium text-zinc-400 bg-sky-100 border border-sky-100 rounded-lg shadow-inner group hover:bg-white hover:text-sky-100" do %>
-              <%= render 'shared/button_content', text: t("defaults.posts") %>
+<!-- ヘッダー部分 -->
+<header class="bg-blue-100 p-2 fixed top-0 left-0 w-full z-20">
+  <div class="container mx-auto flex justify-between items-center px-4">
+    <!-- ハンバーガーメニュー（小画面でのみ表示） -->
+    <div class="relative group md:flex lg:hidden items-center justify-start" data-controller="dropdown">
+      <button class="hamburger" data-action="click->dropdown#toggle">
+      <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#a482f2}</style><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
+      </button>
+      <!-- メニュードロップダウン（最初は非表示） -->
+      <div class="absolute left-0 top-full mt-2 w-40 bg-white border rounded-lg shadow-lg hidden" data-dropdown-target="menu">
+      <!-- メニューの中身 -->
+        <ul class="menu bg-stone-50 text-gray-400 w-40 rounded-lg">
+          <% if current_user %> <!-- ログイン後の表示 -->
+            <li><%= link_to t("defaults.posts"), top_areas_path, class: "block px-4 py-2 hover:bg-pink-100" %></li>
+            <li><%= link_to t("defaults.index"), areas_path, class: "block px-4 py-2 hover:bg-pink-100" %></li>
+            <li><%= link_to t("defaults.ranking"), "#", class: "block px-4 py-2 hover:bg-pink-100" %></li>
+          <% else %> <!-- ログイン前の表示 -->
+            <li><%= link_to t("defaults.index"), areas_path, class: "block px-4 py-2 hover:bg-pink-100" %></li>
+            <li><%= link_to t("defaults.ranking"), "#", class: "block px-4 py-2 hover:bg-pink-100" %></li>
+            <li><%= link_to t("defaults.login"), login_path, class: "block px-4 py-2 hover:bg-pink-100" %></li>
+            <li><%= link_to t("defaults.sign_up"), new_user_path, class: "block px-4 py-2 hover:bg-pink-100" %></li>
           <% end %>
-          <%= link_to areas_path, class: "relative px-4 py-2 overflow-hidden font-medium text-zinc-400 bg-sky-100 border border-sky-100 rounded-lg shadow-inner group hover:bg-white hover:text-sky-100" do %>
-              <%= render 'shared/button_content', text: t("defaults.index") %>
-          <% end %>
-          <%= link_to "#", class: "relative px-4 py-2 overflow-hidden font-medium text-zinc-400 bg-sky-100 border border-sky-100 rounded-lg shadow-inner group hover:bg-white hover:text-sky-100" do %>
-              <%= render 'shared/button_content', text: t("defaults.ranking") %>
-          <% end %>
-      <% else %> <!-- ログイン前の表示 -->
-          <%= link_to areas_path, class: "relative px-4 py-2 overflow-hidden font-medium text-zinc-400 bg-sky-100 border border-sky-100 rounded-lg shadow-inner group hover:bg-white hover:text-sky-100" do %>
-              <%= render 'shared/button_content', text: t("defaults.index") %>
-          <% end %>
-          <%= link_to "#", class: "relative px-4 py-2 overflow-hidden font-medium text-zinc-400 bg-sky-100 border border-sky-100 rounded-lg shadow-inner group hover:bg-white hover:text-sky-100" do %>
-              <%= render 'shared/button_content', text: t("defaults.ranking") %>
-          <% end %>
-          <%= link_to login_path, class: "relative px-4 py-2 overflow-hidden font-medium text-zinc-400 bg-sky-100 border border-sky-100 rounded-lg shadow-inner group hover:bg-white hover:text-sky-100" do %>
-              <%= render 'shared/button_content', text: t("defaults.login") %>
-          <% end %>
-          <%= link_to new_user_path, class: "relative px-4 py-2 overflow-hidden font-medium text-zinc-400 bg-sky-100 border border-sky-100 rounded-lg shadow-inner group hover:bg-white hover:text-sky-100" do %>
-              <%= render 'shared/button_content', text: t("defaults.sign_up") %>
-          <% end %>
-      <% end %>
+        </ul>
+      </div>
     </div>
+      <!-- 左側のボタン群 -->
+      <nav class="hidden lg:flex flex-1 items-center space-x-5">
+        <% if current_user %> <!-- ログイン後の表示 -->
+          <%= link_to top_areas_path, class: "relative px-4 py-2 overflow-hidden font-medium text-zinc-400 bg-sky-100 border border-sky-100 rounded-lg shadow-inner group hover:bg-white hover:text-sky-100 whitespace-nowrap" do %>
+            <%= render 'shared/button_content', text: t("defaults.posts") %>
+          <% end %>
+          <%= link_to areas_path, class: "relative px-4 py-2 overflow-hidden font-medium text-zinc-400 bg-sky-100 border border-sky-100 rounded-lg shadow-inner group hover:bg-white hover:text-sky-100 whitespace-nowrap" do %>
+            <%= render 'shared/button_content', text: t("defaults.index") %>
+          <% end %>
+          <%= link_to "#", class: "relative px-4 py-2 overflow-hidden font-medium text-zinc-400 bg-sky-100 border border-sky-100 rounded-lg shadow-inner group hover:bg-white hover:text-sky-100 whitespace-nowrap" do %>
+            <%= render 'shared/button_content', text: t("defaults.ranking") %>
+          <% end %>
+        <% else %> <!-- ログイン前の表示 -->
+          <%= link_to areas_path, class: "relative px-4 py-2 overflow-hidden font-medium text-zinc-400 bg-sky-100 border border-sky-100 rounded-lg shadow-inner group hover:bg-white hover:text-sky-100 whitespace-nowrap" do %>
+            <%= render 'shared/button_content', text: t("defaults.index") %>
+          <% end %>
+          <%= link_to "#", class: "relative px-4 py-2 overflow-hidden font-medium text-zinc-400 bg-sky-100 border border-sky-100 rounded-lg shadow-inner group hover:bg-white hover:text-sky-100 whitespace-nowrap" do %>
+            <%= render 'shared/button_content', text: t("defaults.ranking") %>
+          <% end %>
+          <%= link_to login_path, class: "relative px-4 py-2 overflow-hidden font-medium text-zinc-400 bg-sky-100 border border-sky-100 rounded-lg shadow-inner group hover:bg-white hover:text-sky-100 whitespace-nowrap" do %>
+            <%= render 'shared/button_content', text: t("defaults.login") %>
+            <% end %>
+          <%= link_to new_user_path, class: "relative px-4 py-2 overflow-hidden font-medium text-zinc-400 bg-sky-100 border border-sky-100 rounded-lg shadow-inner group hover:bg-white hover:text-sky-100 whitespace-nowrap" do %>
+            <%= render 'shared/button_content', text: t("defaults.sign_up") %>
+          <% end %>
+        <% end %>
+      </nav>
+    
 
-      <%= render 'articles/search_field' %>
+      <div class="flex justify-center items-center">
+        <%= render 'articles/search_field' %>
+      </div>
   
       <!-- 右側のボタン群 -->
       <% if current_user %> <!-- ログイン後のみ表示 -->
@@ -40,15 +66,15 @@
               src="<%= current_user.avatar.present? ? current_user.avatar.url : asset_path('sample.jpg') %>" 
               alt="Profile" 
               class="w-11 h-11 rounded-full cursor-pointer object-cover"
-              style="margin-right: 6rem;"
               data-action="click->dropdown#toggle">
             <!-- メニュードロップダウン（最初は非表示） -->
-            <div class="absolute right-0 mt-2 w-56 bg-white border rounded-lg shadow-lg hidden" data-dropdown-target="menu">
-            <ul class="menu bg-stone-50 text-gray-400 w-56 rounded-lg">
-                <li><%= link_to "マイページ", profile_path , class: "block px-4 py-2 hover:bg-sky-100" %></li>
-                <li><%= link_to "お気に入り",  favorites_articles_path , class: "block px-4 py-2 hover:bg-sky-100" %></li>
-                <li><%= link_to "おすすめスポット", "#", class: "block px-4 py-2 hover:bg-sky-100" %></li>
-                <li><%= link_to "Logout", logout_path, data: { turbo_method: :delete }, class: "block px-4 py-2 hover:bg-sky-100" %></li>
+            <div class="absolute right-0 top-full mt-2 w-40 bg-white border rounded-lg shadow-lg hidden" data-dropdown-target="menu">
+            <!-- メニューの中身 -->
+              <ul class="menu bg-stone-50 text-gray-400 w-40 rounded-lg">
+                <li><%= link_to t("defaults.my_page"), profile_path , class: "block px-4 py-2 hover:bg-sky-100" %></li>
+                <li><%= link_to t("defaults.favorite"),  favorites_articles_path , class: "block px-4 py-2 hover:bg-sky-100" %></li>
+                <li><%= link_to t("defaults.recommend"), "#", class: "block px-4 py-2 hover:bg-sky-100" %></li>
+                <li><%= link_to t("defaults.logout"), logout_path, data: { turbo_method: :delete }, class: "block px-4 py-2 hover:bg-sky-100" %></li>
               </ul>
             </div>
           </div>
