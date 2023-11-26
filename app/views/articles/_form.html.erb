@@ -16,7 +16,7 @@
         <div class="w-full pr-4">
           <div class="mb-5">
             <%= f.label :city_id, "Area", class: "block text-sm font-medium text-gray-600", for: "city_select" %>
-            <%= f.collection_select(:city_id, @cities, :id, :name, { prompt: "エリアを選択してください" }, 
+            <%= f.collection_select(:city_id, @cities, :id, :name, { prompt: "エリアを選択してください" },
                                     { class: 'bg-purple-50 border border-purple-500 focus:border-purple-700 mt-1 p-2 w-full rounded-md', 
                                       id: "city_select", 
                                       data: { action: "change->address#updateAddress", address_target: "citySelect" } }) %>

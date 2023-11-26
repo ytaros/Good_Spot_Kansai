@@ -5,7 +5,7 @@
       <%= form_with model: @user, local: true, class: "space-y-4" do |f| %>
         <div class="form-group">
           <%= f.label :name, class: 'block text-sm font-medium text-gray-700' %>
-          <%= f.text_field :name, class: 'mt-1 p-2 w-full rounded-md border border-purple-500 shadow-sm' %>
+          <%= f.text_field :name,  autofocus: true , class: 'mt-1 p-2 w-full rounded-md border border-purple-500 shadow-sm' %>
         </div>
 
         <div class="flex space-x-4">
