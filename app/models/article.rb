@@ -16,6 +16,8 @@ class Article < ApplicationRecord
   validates :photos, presence: true
   validates :text, presence: true,  length: { maximum: 140 }
   
+  geocoded_by :address
+  after_validation :geocode, if: ->(obj){ obj.address.present? and obj.address_changed? }
   def tag_names
     tags.pluck(:name).join(',')
   end

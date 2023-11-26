@@ -7,7 +7,7 @@
       <%= form_with url: login_path, data: { turbo: "false" } do |f| %>
         <div class="mb-4">
           <%= f.label :email, User.human_attribute_name(:email), class: "block text-sm font-medium text-gray-600" %>
-          <%= f.text_field :email, class: 'mt-1 p-2 w-full border border-purple-500 rounded-md' %>
+          <%= f.text_field :email, autofocus: true, class: 'mt-1 p-2 w-full border border-purple-500 rounded-md' %>
         </div>
         <div class="mb-6">
           <%= f.label :password, User.human_attribute_name(:password), class: "block text-sm font-medium text-gray-600" %>

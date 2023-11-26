@@ -15,14 +15,14 @@
   </head>
 
   <body>
-  <% unless request.path == root_path %>
-    <%= render 'shared/header' %>
-  <% end %>
-  <div class="main-content mt-15 md:mt-20 lg:mt-12">
-    <%= render 'shared/flash_message' %>
-    <%= yield %>
-  </div>
-  <% unless request.path == root_path %>
-    <%= render 'shared/footer' %>
-  <% end %>
+    <% unless request.path == root_path %>
+      <%= render 'shared/header' %>
+    <% end %>
+    <div class="main-content min-h-screen grow mt-12 md:pt-3">
+      <%= render 'shared/flash_message' %>
+      <%= yield %>
+    </div>
+      <% unless request.path == root_path %>
+        <%= render 'shared/footer' %>
+      <% end %>
 </body>

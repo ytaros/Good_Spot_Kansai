@@ -84,6 +84,15 @@
             </div>
           </div>
       </div>
+      <div id="map" style="height: 400px; width: 100%;"></div>
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+            initMap(<%= @article.lat %>, <%= @article.lng %>);
+          });
+        </script>
+
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap">
+        </script>
     </div>
   </div>
 </div>
