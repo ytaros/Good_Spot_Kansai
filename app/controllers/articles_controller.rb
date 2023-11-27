@@ -25,20 +25,26 @@ class ArticlesController < ApplicationController
   end
   
   def create
-    @article = @city.articles.new(article_params.merge(user_id: current_user.id))
+    @city = City.find_by(id: params[:article][:city_id])
+  
+    @article = if @city
+                @city.articles.new(article_params.merge(user_id: current_user.id))
+              else
+                Article.new(article_params)
+              end
     tags = params[:article][:tag_names].split(",").map(&:strip)
-    
+  
     if @article.save
       flash[:success] = t('.create')
       redirect_to area_articles_path(@article.area_id)
     else
-      @categories = Category.all
-      @cities = City.where(area_id: params[:article][:area_id])
+      load_supporting_data
       flash.now[:error] = @article.errors.full_messages.join(', ')
       render :new, status: :unprocessable_entity
     end
   end
   
+
   def update
     if params[:article][:photos].blank? || params[:article][:photos].all?(&:blank?)
       params[:article].delete(:photos)
@@ -49,9 +55,7 @@ class ArticlesController < ApplicationController
       flash[:success] = I18n.t("defaults.message.updated", item: "記事")
       redirect_to area_articles_path(@article.area_id)
     else
-      @area = @article.area
-      @cities = @area.cities
-      @categories = Category.all
+      load_supporting_data
       @tags = @article.tags.pluck(:name).join(',')
       flash.now[:error] = @article.errors.full_messages.join(', ')
       render 'edit', status: :unprocessable_entity
@@ -122,5 +126,11 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:title, :text, :address, :category_id, :city_id, :area_id, {photos: []}, :tag_names)
+  end
+
+
+  def load_supporting_data
+    @categories = Category.all
+    @cities = City.where(area_id: params[:article][:area_id])
   end
 end
