@@ -18,6 +18,7 @@ gem "bootsnap", require: false
 gem 'rails-i18n'
 gem 'sorcery'
 gem 'carrierwave'
+gem 'config'
 gem 'mini_magick'
 gem 'font-awesome-rails'
 gem 'aws-sdk-s3', require: false
@@ -26,11 +27,12 @@ gem 'dotenv-rails'
 gem 'fog-aws'
 gem 'geocoder'
 
+
 group :development, :test do
   gem "sqlite3", "~> 1.4"
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'pry-rails'
-
+  gem 'letter_opener_web'
 end
 
 group :development do

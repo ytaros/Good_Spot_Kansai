@@ -12,6 +12,8 @@ ja:
     my_page: "◾️ MY PAGE"
     recommend: "◾️ RECOMMEND"
     favorite: "◾️ FAVORITE"
+    send: "Send"
+    update: "Update"
     message:
       require_login: "ログインしてください"
       created: "%{item}を作成しました"
@@ -59,3 +61,13 @@ ja:
       title: "Profile"
     edit:
       title: "Setting"
+  password_resets:
+    new:
+      title: "Password Reset？"
+    create:
+      sent_email: "メールを送信しました"
+    edit:
+      title: "New Password Setting"
+    update:
+      success_password_change: "パスワードを変更しました"
+      fail_password_change: "パスワードが変更できませんでした"
