@@ -12,7 +12,6 @@ class Article < ApplicationRecord
   validates :address, presence: true
   validates :text, presence: true
   validate :has_tags
-  validates :category_id, presence: true
   validates :photos, presence: true
   validates :text, presence: true,  length: { maximum: 140 }
   
