@@ -1,2 +1,0 @@
-class PasswordResetMailer < ApplicationMailer
-end

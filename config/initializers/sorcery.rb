@@ -4,7 +4,7 @@
 # Available submodules are: :user_activation, :http_basic_auth, :remember_me,
 # :reset_password, :session_timeout, :brute_force_protection, :activity_logging,
 # :magic_login, :external
-#Rails.application.config.sorcery.submodules = [:remember_me, :reset_password]
+Rails.application.config.sorcery.submodules = [:reset_password]
 #config.reset_password_mailer = PasswordResetMailer
 
 # Here you can configure each submodule's features.
@@ -407,15 +407,15 @@ Rails.application.config.sorcery.configure do |config|
 
     # Reset password email method on your mailer class.
     # Default: `:reset_password_email`
-    #
-    # user.reset_password_email_method_name =
+    
+    user.reset_password_email_method_name = :reset_password_email
 
     # When true, sorcery will not automatically
     # send the password reset details email, and allow you to
     # manually handle how and when the email is sent
     # Default: `false`
     #
-    # user.reset_password_mailer_disabled =
+    user.reset_password_mailer = UserMailer
 
     # How many seconds before the reset request expires. nil for never expires.
     # Default: `nil`

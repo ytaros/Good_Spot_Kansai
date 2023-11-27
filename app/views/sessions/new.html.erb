@@ -7,16 +7,16 @@
       <%= form_with url: login_path, data: { turbo: "false" } do |f| %>
         <div class="mb-4">
           <%= f.label :email, User.human_attribute_name(:email), class: "block text-sm font-medium text-gray-600" %>
-          <%= f.text_field :email, autofocus: true, class: 'mt-1 p-2 w-full border border-purple-500 rounded-md' %>
+          <%= f.text_field :email, autocomplete: 'email', autofocus: true, class: 'mt-1 p-2 w-full border border-purple-500 rounded-md' %>
         </div>
         <div class="mb-6">
           <%= f.label :password, User.human_attribute_name(:password), class: "block text-sm font-medium text-gray-600" %>
-          <%= f.password_field :password, class: 'mt-1 p-2 w-full border border-purple-500 rounded-md' %>
+          <%= f.password_field :password, autocomplete: 'current-password', class: 'mt-1 p-2 w-full border border-purple-500 rounded-md' %>
         </div>
         <div class="flex flex-col items-center justify-between mb-4">
           <%= f.submit t('defaults.login'), class: 'bg-purple-300 hover:bg-purple-400 text-white font-medium py-2 px-4 rounded mb-2' %>
           <div class="text-sm">
-            <%= link_to t('.password_forget'), "#", class: 'text-purple-300 hover:underline' %>
+            <%= link_to t('.password_forget'), new_password_reset_path, class: 'text-purple-300 hover:underline' %>
           </div>
         </div>
       <% end %>
