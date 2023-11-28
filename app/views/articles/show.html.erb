@@ -3,7 +3,7 @@
     <div class="grid gap-8 md:grid-cols-2 lg:gap-12">
 
       <!-- 画像表示部分 -->
-<div data-controller="photo-preview">
+<div data-controller="photo-preview" class="mt-28">
   <div class="overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-auto md:w-auto">
     <div data-target="photo-preview.slides photo-preview.previewContainer" class="flex">
         <% @article.photos.each do |photo| %>
@@ -22,7 +22,7 @@
 
       <!-- 記事の詳細情報表示部分 -->
       <div class="text-gray-600 body-font overflow-hidden">
-        <div class="container px-5 py-24 mx-auto">
+        <div class="container px-5 mx-auto">
             <div class="w-full lg:w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
               <h2 class="text-sm title-font text-gray-500 tracking-widest"><%= @article.city.name %></h2>
               <h1 class="text-gray-900 text-3xl title-font font-medium mb-4"><%= @article.title %></h1>
@@ -34,6 +34,7 @@
                 <span class="text-gray-500">Address</span>
                 <span class="ml-auto text-gray-900"><%= @article.address %></span>
               </div>
+              <div id="map" style="height: 300px; width: 100%;"></div>
               <div class="flex justify-between border-t border-b border-gray-200 py-2">
                 <span class="text-gray-500">Category</span>
                   <div class="flex">
@@ -52,7 +53,7 @@
                   <% end %>
               </div>
               </div>
-              <div class="flex">
+              <div class="flex flex-wrap md:flex-nowrap">
                 <div class="h-10 w-10 shrink-0 overflow-hidden rounded-full bg-gray-100">
                   <img src="<%= @article.user.avatar.url %>" loading="lazy" alt="Photo by <%= @article.user.name %>" class="h-full w-full object-cover object-center" />
                 </div>
@@ -84,13 +85,61 @@
             </div>
           </div>
       </div>
-      <div id="map" style="height: 400px; width: 100%;"></div>
-        <script>
-          document.addEventListener("DOMContentLoaded", function() {
-            initMap(<%= @article.lat %>, <%= @article.lng %>);
-          });
-          <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>">
-          </script>
+    </div>
+    <div class="flex justify-center items-center">
+        <%= link_to 'BACK', :back, class: 'border-2 border-violet-200 bg-white text-zinc-500 hover:bg-violet-200 hover:text-white px-4 py-2 rounded-lg' %>
     </div>
   </div>
 </div>
+    <!-- Google Maps API -->
+  <script type="text/javascript">
+    function initMap() {
+      var lat = <%= @article.latitude %>;
+      var lng = <%= @article.longitude %>;
+      var location = { lat: lat, lng: lng };
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 15,
+        center: location
+      });
+    
+      var marker = new google.maps.Marker({
+        position: location,
+        map: map
+      });
+    
+      var service = new google.maps.places.PlacesService(map);
+    
+      marker.addListener('click', function() {
+        service.nearbySearch({
+          location: location,
+          radius: 50,
+        }, function(results, status) {
+          if (status === google.maps.places.PlacesServiceStatus.OK && results.length > 0) {
+            var placeId = results[0].place_id;
+    
+            service.getDetails({
+              placeId: placeId
+            }, function(place, status) {
+              if (status === google.maps.places.PlacesServiceStatus.OK) {
+                var infowindow = new google.maps.InfoWindow({
+                  content: '<div><strong>' + place.name + '</strong><br>' +
+                          'Rating: ' + place.rating + '</div>'
+                });
+                infowindow.open(map, marker);
+              }
+            });
+          }
+        });
+      });
+    }
+    
+    function loadGoogleMapsAPI() {
+      var apiKey = "<%= ENV['GOOGLE_MAP_API_KEY_PRODUCT'] %>";
+      var script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initMap`;
+      document.body.appendChild(script);
+    }
+    
+    document.addEventListener("turbo:load", loadGoogleMapsAPI);
+  </script>

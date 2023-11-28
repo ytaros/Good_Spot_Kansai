@@ -43,6 +43,9 @@ class AvatarUploader < CarrierWave::Uploader::Base
     %w(jpg jpeg gif png webp)
   end
 
+  def filename
+    super.chomp(File.extname(super)) + '.webp' if original_filename.present?
+  end
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   # def filename
