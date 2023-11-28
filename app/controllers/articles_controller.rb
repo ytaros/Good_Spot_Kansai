@@ -62,7 +62,9 @@ class ArticlesController < ApplicationController
     end
   end
   
-  def show; end
+  def show
+    @area_id = @article.area.id
+  end
   
   def edit; end
   

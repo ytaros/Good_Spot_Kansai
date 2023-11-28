@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_26_123624) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_28_084926) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -65,8 +65,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_26_123624) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "area_id"
-    t.float "lat"
-    t.float "lng"
+    t.float "latitude"
+    t.float "longitude"
     t.index ["area_id"], name: "index_articles_on_area_id"
     t.index ["category_id"], name: "index_articles_on_category_id"
     t.index ["city_id"], name: "index_articles_on_city_id"
