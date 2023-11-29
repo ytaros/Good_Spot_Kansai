@@ -91,55 +91,14 @@
     </div>
   </div>
 </div>
-    <!-- Google Maps API -->
-  <script type="text/javascript">
-    function initMap() {
-      var lat = <%= @article.latitude %>;
-      var lng = <%= @article.longitude %>;
-      var location = { lat: lat, lng: lng };
-      var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 15,
-        center: location
+<script type="text/javascript">
+  document.addEventListener("turbo:load", function() {
+    const apiKey = "<%= ENV['GOOGLE_MAP_API_KEY_PRODUCT'] %>";
+    
+    import("google_maps")
+      .then(({ initMap, loadGoogleMapsAPI }) => {
+        window.initMap = () => initMap(<%= @article.latitude %>, <%= @article.longitude %>);
+        loadGoogleMapsAPI(apiKey);
       });
-    
-      var marker = new google.maps.Marker({
-        position: location,
-        map: map
-      });
-    
-      var service = new google.maps.places.PlacesService(map);
-    
-      marker.addListener('click', function() {
-        service.nearbySearch({
-          location: location,
-          radius: 50,
-        }, function(results, status) {
-          if (status === google.maps.places.PlacesServiceStatus.OK && results.length > 0) {
-            var placeId = results[0].place_id;
-    
-            service.getDetails({
-              placeId: placeId
-            }, function(place, status) {
-              if (status === google.maps.places.PlacesServiceStatus.OK) {
-                var infowindow = new google.maps.InfoWindow({
-                  content: '<div><strong>' + place.name + '</strong><br>' +
-                          'Rating: ' + place.rating + '</div>'
-                });
-                infowindow.open(map, marker);
-              }
-            });
-          }
-        });
-      });
-    }
-    
-    function loadGoogleMapsAPI() {
-      var apiKey = "<%= ENV['GOOGLE_MAP_API_KEY_PRODUCT'] %>";
-      var script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initMap`;
-      document.body.appendChild(script);
-    }
-    
-    document.addEventListener("turbo:load", loadGoogleMapsAPI);
-  </script>
+  });
+</script>
