@@ -26,6 +26,7 @@ gem 'ransack'
 gem 'dotenv-rails'
 gem 'fog-aws'
 gem 'geocoder'
+gem 'kaminari'
 
 
 group :development, :test do
