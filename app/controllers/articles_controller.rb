@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
   before_action :set_article, only: %i[edit show]
 
   def index
-    @articles = @area.articles.includes(:user, :category, :tags, :favorites, :photos_attachments, :photos_blobs).order(created_at: :desc).page(params[:page]).per(2)
+    @articles = @area.articles.includes(:user, :category, :tags, :favorites, :photos_attachments, :photos_blobs).order(created_at: :desc).page(params[:page]).per(12)
   end
 
   def user_articles
