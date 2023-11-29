@@ -12,5 +12,7 @@
       <%= render 'article', article: article, area_id: @area.id %>
     <% end %>
     </div>
+  <div class="mt-20 text-center">
+    <%= paginate @articles %>
   </div>
 </div>
