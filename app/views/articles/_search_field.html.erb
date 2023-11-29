@@ -1,14 +1,12 @@
 <div class="hidden sm:flex sm:flex-1 justify-center">
 <%= search_form_for @q, url: search_articles_url, method: :get, html: { class: 'flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2'}  do |f| %>
+  <div class="relative" role="combobox">
+  <%= f.select :category_name_cont, @categories.map { |c| [c.name, c.name] }, { include_blank: 'Category Select' }, class: 'form-select block w-full border-b-2 border-indigo-200 text-sm px-4 py-1 bg-white/30 backdrop-blur-md hover:bg-white hover:bg-opacity-50 focus:border-indigo-300 focus:ring-1 focus:ring-gray-300 focus:outline-none transition duration-300 text-gray-500' %>
+  </div> 
   <div data-controller="autocomplete" data-autocomplete-url-value="<%= autocomplete_articles_path(type: 'area_or_city') %>" class="relative" role="combobox">
     <%= f.search_field :area_name_or_city_name_cont, placeholder: "Area", data: { autocomplete_target: 'input' }, class: 'flex-1 text-sm px-2 py-1 bg-transparent border-0 border-b-2 border-indigo-200 hover:bg-white hover:bg-opacity-50 focus:border-indigo-300 focus:ring-1 focus:ring-gray-300 focus:outline-none transition duration-300' %>
     <%= f.hidden_field :area_id, data: { autocomplete_target: 'hidden' } %>
     <%= f.hidden_field :city_id, data: { autocomplete_target: 'hidden' } %>
-    <ul data-autocomplete-target="results" class="autocomplete-results absolute z-10 w-full bg-white border mt-1 max-h-60 overflow-y-auto rounded-md shadow-lg"></ul>
-  </div>      
-  <div data-controller="autocomplete" data-autocomplete-url-value="<%= autocomplete_articles_path(type: 'category') %>" class="relative" role="combobox">
-    <%= f.search_field :category_name_cont, placeholder: "Food or View?", data: { autocomplete_target: 'input' }, class: 'flex-1 text-sm px-2 py-1 bg-transparent border-0 border-b-2 border-indigo-200 hover:bg-white hover:bg-opacity-50 focus:border-indigo-300 focus:ring-1 focus:ring-gray-300 focus:outline-none transition duration-300' %>
-    <%= f.hidden_field :category_id, data: { autocomplete_target: 'hidden' } %>
     <ul data-autocomplete-target="results" class="autocomplete-results absolute z-10 w-full bg-white border mt-1 max-h-60 overflow-y-auto rounded-md shadow-lg"></ul>
   </div>      
   <div data-controller="autocomplete" data-autocomplete-url-value="<%= autocomplete_articles_path(type: 'tag') %>" class="relative" role="combobox">

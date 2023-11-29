@@ -15,3 +15,9 @@ svg, path {
     opacity: 0.6;
   }
 }
+
+@layer components {
+  .custom-select {
+    @apply appearance-none bg-white/30 backdrop-blur-md;
+  }
+}
