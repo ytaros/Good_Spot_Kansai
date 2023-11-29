@@ -6,7 +6,7 @@
       <%= image_tag 'logo.png', class: "h-10", size: "40x40" %>
     <% end %>
       <!-- ハンバーガーメニュー（小画面でのみ表示） -->
-      <div class="relative group md:flex lg:hidden items-center justify-start" data-controller="dropdown">
+      <div class="fixed top-0 left-20 mt-4 mr-4 md:hidden" data-controller="dropdown">
         <button class="hamburger" data-action="click->dropdown#toggle">
         <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#a482f2}</style><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
         </button>

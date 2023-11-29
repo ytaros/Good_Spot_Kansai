@@ -19,6 +19,7 @@ class ApplicationController < ActionController::Base
 
   def set_search
     @q = Article.ransack(params[:q])
+    @categories = Category.all
   end
 
   def record_not_found
@@ -29,5 +30,4 @@ class ApplicationController < ActionController::Base
       raise
     end
   end
-
 end

@@ -82,24 +82,19 @@ class ArticlesController < ApplicationController
 
   def autocomplete
     term = params[:q]
-    results = []
-  
     case params[:type]
-      when "area_or_city"
-        areas = Area.order(:name).where("name LIKE ?", "%#{term}%").limit(5)
-        cities = City.order(:name).where("name LIKE ?", "%#{term}%").limit(5)
-        render partial: 'autocomplete/area_and_city', locals: { areas: areas, cities: cities }
-      when "category"
-        categories = Category.order(:name).where("name LIKE ?", "%#{term}%").limit(5)
-        render partial: 'autocomplete/categories', locals: { categories: categories }
-      when "tag"
-        tags = Tag.order(:name).where("name LIKE ?", "%#{term}%").limit(5)
-        render partial: 'autocomplete/tags', locals: { tags: tags }
+    when "area_or_city"
+      areas = Area.order(:name).where("name LIKE ?", "%#{term}%").limit(5)
+      cities = City.order(:name).where("name LIKE ?", "%#{term}%").limit(5)
+      render partial: 'autocomplete/area_and_city', locals: { areas: areas, cities: cities }
+    when "tag"
+      tags = Tag.order(:name).where("name LIKE ?", "%#{term}%").limit(5)
+      render partial: 'autocomplete/tags', locals: { tags: tags }
     else
       render json: { error: 'Invalid type' }
     end
   end
-
+  
   def favorites
     @favorite_articles = current_user.favorited_articles.includes(:user, :category, :tags, photos_attachments: :blob).order(created_at: :desc)
   end
