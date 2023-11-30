@@ -11,6 +11,10 @@ export default class extends Controller {
       "bg-indigo-300 text-white py-2 px-4 rounded-lg shadow-md text-sm";
 
     document.body.appendChild(this.tooltip);
+    window.addEventListener("pageshow", this.resetElements.bind(this));
+    this.pathTargets.forEach((path) => {
+      path.addEventListener("click", this.resetOnClick.bind(this));
+    });
   }
 
   handleMouseOver(event) {
@@ -30,6 +34,19 @@ export default class extends Controller {
     const pathElement = event.currentTarget;
     pathElement.setAttribute("style", "fill: none");
 
+    this.tooltip.style.display = "none";
+  }
+
+  resetElements() {
+    this.pathTargets.forEach((pathElement) => {
+      pathElement.setAttribute("style", "fill: none");
+    });
+    this.tooltip.style.display = "none";
+  }
+  resetOnClick(event) {
+    // クリックされた要素の色とツールチップをリセット
+    const pathElement = event.currentTarget;
+    pathElement.setAttribute("style", "fill: none");
     this.tooltip.style.display = "none";
   }
 }

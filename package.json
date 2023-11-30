@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.4.2",
+    "cropperjs": "^1.6.1",
     "daisyui": "^3.9.1",
     "stimulus": "^3.2.2"
   }
