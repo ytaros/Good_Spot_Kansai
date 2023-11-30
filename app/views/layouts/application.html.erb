@@ -15,13 +15,11 @@
     <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.12/dist/cropper.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs@1.5.12/dist/cropper.min.css">
   </head>
-  </head>
-
   <body>
     <% unless request.path == root_path %>
       <%= render 'shared/header' %>
     <% end %>
-    <div class="main-content min-h-screen grow mt-12 md:pt-3">
+    <div class="main-content min-h-screen grow mt-10 md:pt-3">
       <%= render 'shared/flash_message' %>
       <%= yield %>
     </div>

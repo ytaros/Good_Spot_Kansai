@@ -125,6 +125,9 @@ class ArticlesController < ApplicationController
     params.require(:article).permit(:title, :text, :address, :category_id, :city_id, :area_id, {photos: []}, :tag_names)
   end
 
+  def process_cropped_image(data_url)
+  end  
+
 
   def load_supporting_data
     @categories = Category.all

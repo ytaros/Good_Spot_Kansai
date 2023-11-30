@@ -125,13 +125,6 @@ export default class extends Controller {
     reader.readAsDataURL(file);
   }
 
-  updateCroppedPreview(croppedDataUrl) {
-    const img = document.createElement("img");
-    img.src = croppedDataUrl;
-    img.classList.add("w-full", "h-full", "cropped-preview");
-    this.previewContainerTarget.appendChild(img);
-  }
-
   connect() {
     if (!this.previewContainerTarget.dataset.photos) {
       return;
