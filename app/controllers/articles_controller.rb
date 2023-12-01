@@ -98,6 +98,18 @@ class ArticlesController < ApplicationController
   def favorites
     @favorite_articles = current_user.favorited_articles.includes(:user, :category, :tags, photos_attachments: :blob).order(created_at: :desc)
   end
+
+  def recommend
+    latitude = params[:latitude] || 34.702485
+    longitude = params[:longitude] || 135.495951
+
+    @articles = Article.near([latitude, longitude], 30)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @articles }
+    end
+  end
   
 
   private

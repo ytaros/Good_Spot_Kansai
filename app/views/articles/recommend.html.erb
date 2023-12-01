@@ -1,0 +1,22 @@
+<div class="bg-white py-6 sm:py-8 lg:py-12 h-screen">
+  <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+    <!-- この部分を固定 -->
+    <div class="text-center sticky top-0 z-10">
+      <h2 class="text-2xl font-bold text-gray-800 font-hannari mb-4 lg:text-3xl"><span class="font-hannari">近くで行ける、めっちゃええとこ。</h2>
+      <!-- マップコンテナ -->
+      <div id="map" style="height: 500px;"></div>
+    </div>
+
+    <!-- 記事コンテナ -->
+    <div id="articles-container" class="grid gap-x-4 gap-y-6 sm:grid-cols-2 md:gap-x-6 lg:grid-cols-3 xl:grid-cols-4 overflow-y-auto px-4 md:px-6 lg:px-8 xl:px-10" style="max-height: 80vh;">
+      <!-- ここにJavaScriptで動的に記事が追加されます -->
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  document.addEventListener('turbo:load', function() {
+    const apiKey = "<%= ENV['GOOGLE_MAP_API_KEY'] %>";
+    window.setupRecommendMap(apiKey);
+  });
+</script>

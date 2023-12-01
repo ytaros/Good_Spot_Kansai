@@ -9,3 +9,4 @@ pin "@fortawesome/fontawesome-free/css/all", to: "node_modules/@fortawesome/font
 pin "@fortawesome/fontawesome-free/js/all", to: "node_modules/@fortawesome/fontawesome-free/js/all.js"
 pin "stimulus-autocomplete", to: "https://ga.jspm.io/npm:stimulus-autocomplete@3.1.0/src/autocomplete.js"
 pin "google_maps", to: "google_maps.js"
+pin "recommend_maps", to: "recommend_maps.js"

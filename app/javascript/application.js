@@ -1,6 +1,7 @@
 import "@hotwired/turbo-rails";
 import { Application } from "@hotwired/stimulus";
 import "google_maps";
+import "recommend_maps";
 
 import DropdownController from "controllers/dropdown_controller";
 import AvatarPreviewController from "controllers/avatar_preview_controller";
