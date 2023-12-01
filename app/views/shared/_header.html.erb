@@ -77,7 +77,7 @@
                 <ul class="menu bg-stone-50 text-gray-400 w-40 rounded-lg">
                   <li><%= link_to t("defaults.my_page"), profile_path , class: "block px-4 py-2 hover:bg-sky-100" %></li>
                   <li><%= link_to t("defaults.favorite"),  favorites_articles_path , class: "block px-4 py-2 hover:bg-sky-100" %></li>
-                  <li><%= link_to t("defaults.recommend"), "#", class: "block px-4 py-2 hover:bg-sky-100" %></li>
+                  <li><%= link_to t("defaults.recommend"), recommend_articles_path, class: "block px-4 py-2 hover:bg-sky-100" %></li>
                   <li><%= link_to t("defaults.logout"), logout_path, data: { turbo_method: :delete }, class: "block px-4 py-2 hover:bg-sky-100" %></li>
                 </ul>
               </div>
