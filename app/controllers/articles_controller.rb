@@ -6,39 +6,27 @@ class ArticlesController < ApplicationController
   before_action :set_article, only: %i[edit show]
 
   def index
-    @articles = @area.articles.includes(:user, :category, :tags, :favorites, :photos_attachments, :photos_blobs).order(created_at: :desc).page(params[:page]).per(12)
+    @articles = Article.recent_in_area(@area, params[:page])
   end
 
   def user_articles
-    @articles = current_user.articles.includes(:category, :tags, :favorites).order(created_at: :desc)
-
-    respond_to do |format|
-      format.json { render json: @articles }
-    end
+    @articles = current_user.articles.recent
   end
   
   def new
-    @cities = @area.cities
-    @categories = Category.all
     @article = Article.new
-    @tags = ""
-  end
-  
+    @supporting_data = Article.related_data(@area)
+    @cities = @supporting_data[:cities]
+  end 
+
   def create
-    @city = City.find_by(id: params[:article][:city_id])
-  
-    @article = if @city
-                @city.articles.new(article_params.merge(user_id: current_user.id))
-              else
-                Article.new(article_params)
-              end
-    tags = params[:article][:tag_names].split(",").map(&:strip)
-  
+    @article = current_user.articles.build(article_params)
     if @article.save
       flash[:success] = t('.create')
       redirect_to area_articles_path(@article.area_id)
     else
       load_supporting_data
+      @supporting_data = @article.related_data # 引数なしで呼び出し
       flash.now[:error] = @article.errors.full_messages.join(', ')
       render :new, status: :unprocessable_entity
     end
@@ -49,25 +37,23 @@ class ArticlesController < ApplicationController
     if params[:article][:photos].blank? || params[:article][:photos].all?(&:blank?)
       params[:article].delete(:photos)
     end
-  
+
     if @article.update(article_params)
-      @article.tag_names = params[:article][:tag_names]
       flash[:success] = I18n.t("defaults.message.updated", item: "記事")
       redirect_to area_articles_path(@article.area_id)
     else
-      load_supporting_data
-      @tags = @article.tags.pluck(:name).join(',')
+      @supporting_data = @article.related_data(@article.area)
       flash.now[:error] = @article.errors.full_messages.join(', ')
       render 'edit', status: :unprocessable_entity
     end
   end
+
   
   def show
     @area_id = @article.area.id
   end
   
   def edit; end
-  
   
   def destroy
     @area = @article.area
@@ -100,17 +86,16 @@ class ArticlesController < ApplicationController
   end
 
   def recommend
-    latitude = params[:latitude] || 34.702485
-    longitude = params[:longitude] || 135.495951
-
-    @articles = Article.near([latitude, longitude], 30)
-
+    latitude = params[:latitude].to_f || 34.702485
+    longitude = params[:longitude].to_f || 135.495951
+  
+    @articles = Article.near([latitude, longitude], 30).includes(:category, :city, photos_attachments: :blob)
+  
     respond_to do |format|
       format.html
       format.json { render json: @articles }
     end
   end
-  
 
   private
   
@@ -135,14 +120,6 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:title, :text, :address, :category_id, :city_id, :area_id, {photos: []}, :tag_names)
-  end
+  end 
 
-  def process_cropped_image(data_url)
-  end  
-
-
-  def load_supporting_data
-    @categories = Category.all
-    @cities = City.where(area_id: params[:article][:area_id])
-  end
 end

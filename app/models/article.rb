@@ -17,6 +17,10 @@ class Article < ApplicationRecord
   
   geocoded_by :address
   after_validation :geocode, if: ->(obj){ obj.address.present? and obj.address_changed? }
+
+  scope :recent, -> { order(created_at: :desc) }
+  scope :recent_in_area, ->(area, page) { where(area: area).recent.page(page).per(12) }
+
   def tag_names
     tags.pluck(:name).join(',')
   end
@@ -27,6 +31,10 @@ class Article < ApplicationRecord
 
   def has_tags
     errors.add(:tag_names, "を入力してください") if tags.blank?
+  end
+
+  def assign_tags(tag_names)
+    self.tags = tag_names.split(",").map(&:strip).map { |name| Tag.find_or_create_by(name: name) }
   end
 
   def related_data
@@ -58,5 +66,18 @@ class Article < ApplicationRecord
   def self.ransackable_associations(auth_object = nil)
     %w[area city tags category]
   end
-    
+
+  def self.related_data(area)
+    {
+      area: area,
+      cities: area.cities, 
+      categories: Category.all,
+      tags: Tag.all
+    }
+  end
+
+  def load_supporting_data
+    @categories = Category.all
+    @cities = City.where(area_id: params[:article][:area_id])
+  end
 end
