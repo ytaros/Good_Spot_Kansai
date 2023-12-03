@@ -7,7 +7,7 @@
       <div class="overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-auto md:w-auto">
         <div data-target="photo-slider.slides" class="flex">
         <% @article.photos.each do |photo| %>
-          <%= image_tag photo, class: "object-contain w-[500px] h-[500px]" %>
+          <%= image_tag photo, class: object-fit: contain w-[500px] h-[500px]" %>
         <% end %>
         </div>
       </div>
@@ -93,7 +93,7 @@
 </div>
 <script type="text/javascript">
   document.addEventListener("turbo:load", function() {
-    const apiKey = "<%= ENV['GOOGLE_MAP_API_KEY_PRODUCT'] %>";
+    const apiKey = "<%= ENV['GOOGLE_MAP_API_KEY'] %>";
     
     import("google_maps")
       .then(({ initMap, loadGoogleMapsAPI }) => {
