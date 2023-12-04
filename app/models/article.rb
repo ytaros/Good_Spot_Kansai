@@ -13,6 +13,9 @@ class Article < ApplicationRecord
   validates :text, presence: true
   validate :has_tags
   validates :photos, presence: true
+  validates :photos, content_type: ['image/png', 'image/jpg', 'image/jpeg'],
+  size: { less_than: 10.megabytes },
+  limit: { min: 1, max: 5 }
   validates :text, presence: true,  length: { maximum: 140 }
   
   geocoded_by :address
@@ -74,10 +77,5 @@ class Article < ApplicationRecord
       categories: Category.all,
       tags: Tag.all
     }
-  end
-
-  def load_supporting_data
-    @categories = Category.all
-    @cities = City.where(area_id: params[:article][:area_id])
   end
 end

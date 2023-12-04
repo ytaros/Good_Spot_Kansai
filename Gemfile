@@ -27,6 +27,7 @@ gem 'dotenv-rails'
 gem 'fog-aws'
 gem 'geocoder'
 gem 'kaminari'
+gem 'active_storage_validations'
 
 
 group :development, :test do
