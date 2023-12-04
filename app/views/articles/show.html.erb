@@ -69,17 +69,22 @@
                       </li>
                       <li>
                         <%= link_to article_path(@article), data: {turbo_method: 'delete', turbo_confirm: t('defaults.message.delete_confirm') , tip: "Delete"}, class: "tooltip" do %>
-                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
+                          <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
                         <% end %>
                       </li>
                       <% else %>
                       <% favorite = current_user.favorites.find_by(article_id: @article.id) %>
                       <li data-controller="favorite" data-article-id-value="<%= @article.id %>" data-favorite-id-value="<%= favorite&.id %>">
-                      <%= link_to '#', class: 'tooltip', data: { action: "click->favorite#toggleFavorite", favorite_target: "tooltip", tip: favorite ? "Cancellation!" : "Favorite!"} do %>
+                        <%= link_to '#', class: 'tooltip', data: { action: "click->favorite#toggleFavorite", favorite_target: "tooltip", tip: favorite ? "Cancellation!" : "Favorite!"} do %>
                           <svg class="heart fill-current <%= 'text-red-500' if favorite %>" data-favorite-target="heart" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"/></svg>
                         <% end %>
                       </li>
                       <% end %>
+                      <li>
+                        <%= link_to "https://twitter.com/share?text=めっちゃええとこ見つけた！&url=#{request.url}", title: 'Twitter', target: '_blank' do %>
+                          <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm297.1 84L257.3 234.6 379.4 396H283.8L209 298.1 123.3 396H75.8l111-126.9L69.7 116h98l67.7 89.5L313.6 116h47.5zM323.3 367.6L153.4 142.9H125.1L296.9 367.6h26.3z"/></svg>
+                        <% end %>
+                      </li>
                     </ul>
                   <% end %>
               </div>
