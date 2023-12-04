@@ -1,24 +1,25 @@
-<div class="bg-white py-6 sm:py-8 lg:py-12 ">
+<div class="bg-white py-6 sm:py-8 lg:py-12">
   <div class="mx-auto max-w-screen-xl px-4 md:px-8">
     <div class="grid gap-8 md:grid-cols-2 lg:gap-12">
 
       <!-- 画像表示部分 -->
-      <div data-controller="photo-slider" class="mt-24">
-      <div class="overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-auto md:w-auto">
-        <div data-target="photo-slider.slides" class="flex">
-        <% @article.photos.each do |photo| %>
-          <%= image_tag photo, class: object-fit: contain w-[500px] h-[500px]" %>
+      <div class="mt-4 sm:mt-12 md:mt-24">
+        <div class="overflow-hidden rounded-lg bg-gray-100 shadow-lg mx-auto w-full sm:max-w-xs md:max-w-sm lg:max-w-md xl:max-w-lg">
+          <div class="container-mx-auto">
+            <% @article.photos.each do |photo| %>
+              <div class="slide">
+                <%= image_tag photo, class: "max-w-full h-auto object-contain" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <% if @article.photos.count > 1 %>
+          <div class="mt-4 flex justify-between">
+            <button id="prevArrow" class="join-item btn btn-outline">prev</button>
+            <button id="nextArrow" class="join-item btn btn-outline">next</button>
+          </div>
         <% end %>
-        </div>
       </div>
-    
-      <% if @article.photos.count > 1 %>
-        <div class="mt-4 flex justify-between">
-          <button data-action="click->photo-slider#previousSlide" class="join-item btn btn-outline">prev</button>
-          <button data-action="click->photo-slider#nextSlide" class="join-item btn btn-outline">next</button>
-        </div>
-      <% end %>
-    </div>
 
       <!-- 記事の詳細情報表示部分 -->
       <div class="text-gray-600 body-font overflow-hidden">
@@ -91,14 +92,16 @@
     </div>
   </div>
 </div>
+
 <script type="text/javascript">
-  document.addEventListener("turbo:load", function() {
-    const apiKey = "<%= ENV['GOOGLE_MAP_API_KEY'] %>";
-    
+document.addEventListener("turbo:load", function() {
+  const apiKey = "<%= ENV['GOOGLE_MAP_API_KEY'] %>";
+  if (document.getElementById("map")) {
     import("google_maps")
       .then(({ initMap, loadGoogleMapsAPI }) => {
         window.initMap = () => initMap(<%= @article.latitude %>, <%= @article.longitude %>);
         loadGoogleMapsAPI(apiKey);
       });
-  });
+  }
+});
 </script>

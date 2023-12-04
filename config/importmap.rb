@@ -10,3 +10,5 @@ pin "@fortawesome/fontawesome-free/js/all", to: "node_modules/@fortawesome/fonta
 pin "stimulus-autocomplete", to: "https://ga.jspm.io/npm:stimulus-autocomplete@3.1.0/src/autocomplete.js"
 pin "google_maps", to: "google_maps.js"
 pin "recommend_maps", to: "recommend_maps.js"
+pin "jquery", to: "https://ga.jspm.io/npm:jquery@3.6.3/dist/jquery.js"
+pin "slick", to: "slick.js"
