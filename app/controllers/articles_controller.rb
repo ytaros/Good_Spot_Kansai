@@ -1,9 +1,6 @@
 class ArticlesController < ApplicationController
+  include SupportingData
   skip_before_action :require_login, only: %i[index show search autocomplete]
-  before_action :set_area, only: %i[index new create]
-  before_action :set_city, only: [:create]
-  before_action :article_find, only: %i[edit update show destroy]
-  before_action :set_article, only: %i[edit show]
 
   def index
     @articles = Article.recent_in_area(@area, params[:page])
@@ -99,27 +96,7 @@ class ArticlesController < ApplicationController
 
   private
   
-  def set_area
-    @area = Area.find_by(id: params[:area_id])
-  end
-
-  def set_city
-    @city = City.find_by(id: params[:article][:city_id])
-  end
-
-  def article_find
-    @article = Article.find_by(id: params[:id])
-  end
-
-  def set_article
-    @area = @article.area
-    @cities = @area.cities
-    @categories = Category.all
-    @tags = @article.tags.pluck(:name).join(',').presence || ""
-  end
-
   def article_params
     params.require(:article).permit(:title, :text, :address, :category_id, :city_id, :area_id, {photos: []}, :tag_names)
   end 
-
 end
