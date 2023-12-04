@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= javascript_importmap_tags %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
     <%= stylesheet_link_tag "https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap", media: "all", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "https://fonts.googleapis.com/earlyaccess/hannari.css", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap", media: "all" %>
     <%= favicon_link_tag('favicon.ico') %>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs@1.5.12/dist/cropper.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   </head>
   <body>
     <% unless request.path == root_path %>

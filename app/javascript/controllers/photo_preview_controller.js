@@ -84,7 +84,7 @@ export default class extends Controller {
   }
   loadExistingPhotos() {
     const photoUrls = this.previewContainerTarget.dataset.photos.split(",");
-    if (photoUrls.length === 0) return; // 追加: photoUrlsが空の場合は処理を終了
+    if (photoUrls.length === 0) return;
 
     photoUrls.forEach((url) => {
       const img = document.createElement("img");
