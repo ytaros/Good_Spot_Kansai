@@ -30,9 +30,9 @@
       </span>
     </div> 
     <div class="w-2/3 flex flex-wrap">
-      <span class="inline-block rounded-full bg-indigo-200 text-indigo-500 px-2 py-1 text-sm mr-2">
-        <%= article.tag.name %>
-      </span>
+    <%= link_to search_articles_path(q: { tag_id_eq: article.tag.id }), class: "inline-block rounded-full bg-indigo-200 text-indigo-500 px-2 py-1 text-sm mr-2" do %>
+      <%= article.tag.name %>
+    <% end %>
     </div>
   </div>
 
