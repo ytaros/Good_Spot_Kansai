@@ -47,9 +47,9 @@
               <div class="flex justify-between border-b border-gray-200 py-2">
                 <span class="text-gray-500">Tags</span>
                 <div class="flex">
-                  <span class="inline-block rounded-full bg-indigo-200 text-indigo-500 px-3 py-1 text-sm ml-2">  
-                      <%= @article.tag.name %>
-                  </span>
+                <%= link_to search_articles_path(q: { tag_id_eq: @article.tag.id }), class: "inline-block rounded-full bg-indigo-200 text-indigo-500 px-2 py-1 text-sm mr-2" do %>
+                  <%= @article.tag.name %>
+                <% end %>
                 </div>
               </div>
               <div class="flex flex-wrap md:flex-nowrap">

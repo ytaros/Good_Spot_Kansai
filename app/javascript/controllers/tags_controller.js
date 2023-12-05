@@ -4,6 +4,10 @@ import Rails from "@rails/ujs";
 export default class extends Controller {
   static targets = ["category", "tag"];
 
+  connect() {
+    console.log("wai");
+  }
+
   updateTags(event) {
     const category_id = event.target.value;
     const tagSelect = document.getElementById("tag_select");
