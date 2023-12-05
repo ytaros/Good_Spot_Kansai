@@ -110,4 +110,4 @@ X 共有機能:　お気に入りの投稿画像を他のユーザーと共有�
 
 ## ER 図
 
-[![Image from Gyazo](https://i.gyazo.com/a24ea4761b04ba7f5efa3c108124ff89.png)](https://gyazo.com/a24ea4761b04ba7f5efa3c108124ff89)
+[![Image from Gyazo](https://i.gyazo.com/7ffc9d380c476aad7e46149aa8e9f10b.png)](https://gyazo.com/7ffc9d380c476aad7e46149aa8e9f10b)
