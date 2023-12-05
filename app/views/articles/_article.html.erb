@@ -30,11 +30,9 @@
       </span>
     </div> 
     <div class="w-2/3 flex flex-wrap">
-      <% article.tag_names.split(',').each do |tag| %>
-        <span class="inline-block rounded-full bg-indigo-200 text-indigo-500 px-2 py-1 text-sm mr-2">
-          <%= tag.strip %>
-        </span>
-      <% end %>
+      <span class="inline-block rounded-full bg-indigo-200 text-indigo-500 px-2 py-1 text-sm mr-2">
+        <%= article.tag.name %>
+      </span>
     </div>
   </div>
 

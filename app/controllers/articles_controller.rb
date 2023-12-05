@@ -14,6 +14,7 @@ class ArticlesController < ApplicationController
     @article = Article.new
     @supporting_data = Article.related_data(@area)
     @cities = @supporting_data[:cities]
+    @tags = @supporting_data[:tags] 
   end 
 
   def create
@@ -23,7 +24,7 @@ class ArticlesController < ApplicationController
       redirect_to area_articles_path(@article.area_id)
     else
       load_supporting_data
-      @supporting_data = @article.related_data # 引数なしで呼び出し
+      @supporting_data = @article.related_data
       flash.now[:error] = @article.errors.full_messages.join(', ')
       render :new, status: :unprocessable_entity
     end
@@ -60,26 +61,23 @@ class ArticlesController < ApplicationController
   end
 
   def search
-    @articles = @q.result(distinct: true).includes(:user, :area, :city, :tags, :category, photos_attachments: :blob).order(created_at: :desc)
+    @articles = @q.result(distinct: true).includes(:user, :area, :city, :tag, :category, photos_attachments: :blob).order(created_at: :desc)
   end
 
   def autocomplete
     term = params[:q]
     case params[:type]
-    when "area_or_city"
-      areas = Area.order(:name).where("name LIKE ?", "%#{term}%").limit(5)
-      cities = City.order(:name).where("name LIKE ?", "%#{term}%").limit(5)
-      render partial: 'autocomplete/area_and_city', locals: { areas: areas, cities: cities }
-    when "tag"
-      tags = Tag.order(:name).where("name LIKE ?", "%#{term}%").limit(5)
-      render partial: 'autocomplete/tags', locals: { tags: tags }
-    else
-      render json: { error: 'Invalid type' }
+      when "area_or_city"
+        areas = Area.order(:name).where("name LIKE ?", "%#{term}%").limit(5)
+        cities = City.order(:name).where("name LIKE ?", "%#{term}%").limit(5)
+        render partial: 'autocomplete/area_and_city', locals: { areas: areas, cities: cities }
+      else
+        render json: { error: 'Invalid type' }
     end
   end
   
   def favorites
-    @favorite_articles = current_user.favorited_articles.includes(:user, :category, :tags, photos_attachments: :blob).order(created_at: :desc)
+    @favorite_articles = current_user.favorited_articles.includes(:user, :category, :tag, photos_attachments: :blob).order(created_at: :desc)
   end
 
   def recommend
@@ -97,6 +95,6 @@ class ArticlesController < ApplicationController
   private
   
   def article_params
-    params.require(:article).permit(:title, :text, :address, :category_id, :city_id, :area_id, {photos: []}, :tag_names)
+    params.require(:article).permit(:title, :text, :address, :category_id, :city_id, :area_id, :tag_id, {photos: []})
   end 
 end

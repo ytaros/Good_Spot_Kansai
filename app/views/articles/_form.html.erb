@@ -38,13 +38,14 @@
           <div class="mb-5">
             <%= f.label :category_id, "Category", class: "block text-sm font-medium text-gray-600" %>
             <%= f.collection_select(:category_id, @categories, :id, :name, { prompt: "カテゴリを選択してください" }, 
-                                    { class: 'bg-purple-50 border border-purple-500 focus:border-purple-700 mt-1 p-2 w-full rounded-md' }) %>
+                                { class: 'bg-purple-50 border border-purple-500 focus:border-purple-700 mt-1 p-2 w-full rounded-md',
+                                  data: { controller: "tags", action: "change->tags#updateTags", tags_target: "category" } }) %>
           </div>
         </div>
 
         <!-- 右の画像プレビュー部分 -->
         <div class="w-full pl-4" style="min-height: 200px;" data-controller="photo-preview">
-          <div class="mb-2">
+          <div class="mb-5">
             <%= f.label :photos, "Photo", class: "block text-sm font-medium text-gray-600" %>
             <%= f.file_field :photos, 
                               multiple: true, 
@@ -56,22 +57,23 @@
               <div class="slides flex transition-transform" data-photo-preview-target="slides"></div>
               <button type="button" class="hidden absolute top-1/2 left-0 transform -translate-y-1/2 bg-pink-500 text-white p-2 rounded" data-action="click->photo-preview#previousSlide">≪</button>
               <button type="button" class="hidden absolute top-1/2 right-0 transform -translate-y-1/2 bg-pink-500 text-white p-2 rounded" data-action="click->photo-preview#nextSlide">≫</button>
-            </div>
-
-            <div class="mb-0">
-              <%= f.label :tag_names, "Tags", class: "block text-sm font-medium text-gray-600" %>
-              <%= f.text_field :tag_names, class: 'mt-0 p-2 w-full border border-purple-500 hover:border-purple-700 rounded-md', placeholder: 'タグを,で区切って入力' %>        
-            </div>
           </div>
+
+          <div class="-mt-2">
+          <%= f.label :tag_id, "Tags", class: "block text-sm font-medium text-gray-600" %>
+          <%= f.select :tag_id, [], {}, { id: 'tag_select', class: 'bg-purple-50 border border-purple-500 focus:border-purple-700 mt-1 p-2 w-full rounded-md', 
+          data: { category_tags_target: "tag" } } %>       
         </div>
-      </div> <!-- End of flex w-full -->
-      <div class="mb-5">
+      </div>
+    </div>
+  </div> <!-- End of flex w-full -->
+    <div class="mb-5">
       <%= f.label :text, "Content", class: "block text-sm font-medium text-gray-600" %>
-      <%= f.text_field :text, class: 'mt-1 p-2 w-full border border-purple-500 rounded-md' %>
+        <%= f.text_field :text, class: 'mt-1 p-2 w-full border border-purple-500 rounded-md' %>
       <div class="w-full flex justify-center mt-4">
         <%= f.submit t('defaults.create'), class: 'bg-purple-300 hover:bg-purple-400 text-white font-medium py-2 px-4 rounded mb-2' %>
       </div>
     <% end %>
-  </div>
+    </div>
   </div>
 </div>

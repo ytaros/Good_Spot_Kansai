@@ -30,26 +30,26 @@
       <!-- 左側のボタン群 -->
         <nav class="hidden lg:flex flex-1 items-center space-x-5">
           <% if current_user %> <!-- ログイン後の表示 -->
-            <%= link_to top_areas_path, class: "relative px-4 py-2 overflow-hidden font-medium text-zinc-400 bg-sky-100 border border-sky-100 rounded-lg shadow-inner group hover:bg-white hover:text-sky-100 whitespace-nowrap" do %>
+            <%= link_to top_areas_path, class: "relative px-3 py-2 overflow-hidden font-medium text-zinc-400 bg-sky-100 border border-sky-100 rounded-lg shadow-inner group hover:bg-white hover:text-sky-100 whitespace-nowrap" do %>
               <%= render 'shared/button_content', text: t("defaults.posts") %>
             <% end %>
-            <%= link_to areas_path, class: "relative px-4 py-2 overflow-hidden font-medium text-zinc-400 bg-sky-100 border border-sky-100 rounded-lg shadow-inner group hover:bg-white hover:text-sky-100 whitespace-nowrap" do %>
+            <%= link_to areas_path, class: "relative px-3 py-2 overflow-hidden font-medium text-zinc-400 bg-sky-100 border border-sky-100 rounded-lg shadow-inner group hover:bg-white hover:text-sky-100 whitespace-nowrap" do %>
               <%= render 'shared/button_content', text: t("defaults.index") %>
             <% end %>
-            <%= link_to "#", class: "relative px-4 py-2 overflow-hidden font-medium text-zinc-400 bg-sky-100 border border-sky-100 rounded-lg shadow-inner group hover:bg-white hover:text-sky-100 whitespace-nowrap" do %>
+            <%= link_to "#", class: "relative px-3 py-2 overflow-hidden font-medium text-zinc-400 bg-sky-100 border border-sky-100 rounded-lg shadow-inner group hover:bg-white hover:text-sky-100 whitespace-nowrap" do %>
               <%= render 'shared/button_content', text: t("defaults.ranking") %>
             <% end %>
           <% else %> <!-- ログイン前の表示 -->
-            <%= link_to areas_path, class: "relative px-4 py-2 overflow-hidden font-medium text-zinc-400 bg-sky-100 border border-sky-100 rounded-lg shadow-inner group hover:bg-white hover:text-sky-100 whitespace-nowrap" do %>
+            <%= link_to areas_path, class: "relative px-3 py-2 overflow-hidden font-medium text-zinc-400 bg-sky-100 border border-sky-100 rounded-lg shadow-inner group hover:bg-white hover:text-sky-100 whitespace-nowrap" do %>
               <%= render 'shared/button_content', text: t("defaults.index") %>
             <% end %>
-            <%= link_to "#", class: "relative px-4 py-2 overflow-hidden font-medium text-zinc-400 bg-sky-100 border border-sky-100 rounded-lg shadow-inner group hover:bg-white hover:text-sky-100 whitespace-nowrap" do %>
+            <%= link_to "#", class: "relative px-3 py-2 overflow-hidden font-medium text-zinc-400 bg-sky-100 border border-sky-100 rounded-lg shadow-inner group hover:bg-white hover:text-sky-100 whitespace-nowrap" do %>
               <%= render 'shared/button_content', text: t("defaults.ranking") %>
             <% end %>
-            <%= link_to login_path, class: "relative px-4 py-2 overflow-hidden font-medium text-zinc-400 bg-sky-100 border border-sky-100 rounded-lg shadow-inner group hover:bg-white hover:text-sky-100 whitespace-nowrap" do %>
+            <%= link_to login_path, class: "relative px-3 py-2 overflow-hidden font-medium text-zinc-400 bg-sky-100 border border-sky-100 rounded-lg shadow-inner group hover:bg-white hover:text-sky-100 whitespace-nowrap" do %>
               <%= render 'shared/button_content', text: t("defaults.login") %>
               <% end %>
-            <%= link_to new_user_path, class: "relative px-4 py-2 overflow-hidden font-medium text-zinc-400 bg-sky-100 border border-sky-100 rounded-lg shadow-inner group hover:bg-white hover:text-sky-100 whitespace-nowrap" do %>
+            <%= link_to new_user_path, class: "relative px-3 py-2 overflow-hidden font-medium text-zinc-400 bg-sky-100 border border-sky-100 rounded-lg shadow-inner group hover:bg-white hover:text-sky-100 whitespace-nowrap" do %>
               <%= render 'shared/button_content', text: t("defaults.sign_up") %>
             <% end %>
           <% end %>
