@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_28_084926) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_05_011723) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -45,16 +45,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_28_084926) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "article_tags", force: :cascade do |t|
-    t.integer "article_id", null: false
-    t.integer "tag_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["article_id", "tag_id"], name: "index_article_tags_on_article_id_and_tag_id", unique: true
-    t.index ["article_id"], name: "index_article_tags_on_article_id"
-    t.index ["tag_id"], name: "index_article_tags_on_tag_id"
-  end
-
   create_table "articles", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "title"
@@ -67,9 +57,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_28_084926) do
     t.integer "area_id"
     t.float "latitude"
     t.float "longitude"
+    t.integer "tag_id"
     t.index ["area_id"], name: "index_articles_on_area_id"
     t.index ["category_id"], name: "index_articles_on_category_id"
     t.index ["city_id"], name: "index_articles_on_city_id"
+    t.index ["tag_id"], name: "index_articles_on_tag_id"
     t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
@@ -77,6 +69,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_28_084926) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "category_tags", force: :cascade do |t|
+    t.integer "category_id", null: false
+    t.integer "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id", "tag_id"], name: "index_category_tags_on_category_id_and_tag_id", unique: true
+    t.index ["category_id"], name: "index_category_tags_on_category_id"
+    t.index ["tag_id"], name: "index_category_tags_on_tag_id"
   end
 
   create_table "cities", force: :cascade do |t|
@@ -134,12 +136,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_28_084926) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "article_tags", "articles"
-  add_foreign_key "article_tags", "tags"
   add_foreign_key "articles", "areas"
   add_foreign_key "articles", "categories"
   add_foreign_key "articles", "cities"
+  add_foreign_key "articles", "tags"
   add_foreign_key "articles", "users"
+  add_foreign_key "category_tags", "categories"
+  add_foreign_key "category_tags", "tags"
   add_foreign_key "cities", "areas"
   add_foreign_key "favorites", "articles"
   add_foreign_key "favorites", "users"

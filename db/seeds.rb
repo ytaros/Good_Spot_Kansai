@@ -23,5 +23,15 @@ areas.each do |area_data|
   end
 end
 
-Category.create(name: 'Food')
-Category.create(name: 'View')
+food = Category.find_or_create_by!(name: 'Food')
+view = Category.find_or_create_by!(name: 'View')
+
+['ディナー', 'ランチ', 'カフェ', 'バー', 'モーニング', '居酒屋'].each do |tag_name|
+  tag = Tag.find_or_create_by!(name: tag_name)
+  CategoryTag.find_or_create_by!(category: food, tag: tag)
+end
+
+['自然', '公園', '夜景', '街並', '文化・世界遺産', 'レジャー', 'アクティビティ', 'シーズン'].each do |tag_name|
+  tag = Tag.find_or_create_by!(name: tag_name)
+  CategoryTag.find_or_create_by!(category: view, tag: tag)
+end

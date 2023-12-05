@@ -26,7 +26,7 @@ module SupportingData
     @area = @article.area
     @cities = @area.cities
     @categories = Category.all
-    @tags = @article.tags.pluck(:name).join(',').presence || ""
+    @tag_name = @article.tag.name
   end
 
   def load_supporting_data
