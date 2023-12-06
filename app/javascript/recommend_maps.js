@@ -143,7 +143,7 @@ window.initMap = function (latitude, longitude, mapElementId = "map") {
     position: location,
     map: map,
     title: "現在地",
-    icon: { url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png" },
+    icon: { url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png" },
   });
 
   map.addListener("center_changed", () => {
