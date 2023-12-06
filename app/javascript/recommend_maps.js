@@ -29,7 +29,7 @@ function setupMapListeners(map) {
 
 function fetchAndDisplayArticles(map) {
   const currentLocation = map.getCenter();
-  const radius = 20000;
+  const radius = 30000;
 
   fetch(
     `/articles/recommend?latitude=${currentLocation.lat()}&longitude=${currentLocation.lng()}&radius=${radius}`,
