@@ -81,14 +81,22 @@ class ArticlesController < ApplicationController
   end
 
   def recommend
-    latitude = params[:latitude].to_f || 34.702485
-    longitude = params[:longitude].to_f || 135.495951
+    latitude = params[:latitude] ? params[:latitude].to_f : 34.702485
+    longitude = params[:longitude] ? params[:longitude].to_f : 135.495951
   
-    @articles = Article.near([latitude, longitude], 30).includes(:category, :city, photos_attachments: :blob)
+    @articles = Article.near([latitude, longitude], 30).includes(:tag, :city, :category, photos_attachments: :blob)
+  
+    articles_json = @articles.map do |article|
+      article.as_json(include: [:tag, :category, :city]).merge({
+        photos: article.photos.map { |photo|
+          rails_blob_path(photo, only_path: true)
+        }
+      })
+    end
   
     respond_to do |format|
       format.html
-      format.json { render json: @articles }
+      format.json { render json: articles_json }
     end
   end
 
