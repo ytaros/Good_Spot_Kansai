@@ -16,7 +16,7 @@ function initializeSlick() {
       prevArrow: $("#prevArrow"),
       nextArrow: $("#nextArrow"),
     })
-    .show(); // ここでスライダーを表示
+    .show();
 }
 
 document.removeEventListener("turbo:load", initializeSlick);

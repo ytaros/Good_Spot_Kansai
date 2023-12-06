@@ -1,4 +1,3 @@
-// Google Maps APIをロードするための関数
 window.loadGoogleMapsAPI = function (apiKey) {
   return new Promise((resolve, reject) => {
     window.initMapCallback = () => resolve();
@@ -9,31 +8,28 @@ window.loadGoogleMapsAPI = function (apiKey) {
   });
 };
 
-// マップをセットアップする関数
 window.setupRecommendMap = function (apiKey) {
   loadGoogleMapsAPI(apiKey).then(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) =>
           initMap(position.coords.latitude, position.coords.longitude),
-        () => initMap(34.702485, 135.495951) // デフォルトの位置（大阪駅）
+        () => initMap(34.702485, 135.495951)
       );
     } else {
-      initMap(34.702485, 135.495951); // デフォルトの位置（大阪駅）
+      initMap(34.702485, 135.495951);
     }
   });
 };
 
-// 地図の中心やズームが変わるたびに記事を更新
 function setupMapListeners(map) {
   map.addListener("center_changed", () => fetchAndDisplayArticles(map));
   map.addListener("zoom_changed", () => fetchAndDisplayArticles(map));
 }
 
-// 記事をフェッチして表示する関数（改良版）
 function fetchAndDisplayArticles(map) {
   const currentLocation = map.getCenter();
-  const radius = 20000; // 30km
+  const radius = 20000;
 
   fetch(
     `/articles/recommend?latitude=${currentLocation.lat()}&longitude=${currentLocation.lng()}&radius=${radius}`,
@@ -43,7 +39,6 @@ function fetchAndDisplayArticles(map) {
   )
     .then((response) => response.json())
     .then((articles) => {
-      // 現在地から30km以内の記事のみを表示
       const filteredArticles = articles.filter((article) => {
         const articleLocation = new google.maps.LatLng(
           article.latitude,
@@ -65,41 +60,33 @@ function fetchAndDisplayArticles(map) {
 
 function displayArticlesBelowMap(articles) {
   const articlesContainer = document.getElementById("articles-container");
-  articlesContainer.innerHTML = ""; // コンテナをクリア
+  articlesContainer.innerHTML = "";
 
   articles.forEach((article) => {
-    // 記事のHTML要素を生成
     const articleElement = document.createElement("div");
     articleElement.className =
       "flex flex-col items-center overflow-hidden rounded-lg border md:flex-row";
 
-    // 記事の画像コンテナ（存在する場合）
     const imageElement = document.createElement("div");
     imageElement.className =
       "group relative block h-48 w-full shrink-0 self-start overflow-hidden bg-gray-100 md:h-full md:w-32 lg:w-48";
 
-    // 記事の画像（存在する場合）
     if (article.photos && article.photos.length > 0) {
-      // リンク要素を作成し、画像をラップ
       const articleLink = document.createElement("a");
-      articleLink.href = `/articles/${article.id}`; // Railsのarticle_pathに相当するURL
+      articleLink.href = `/articles/${article.id}`;
 
       const img = document.createElement("img");
-      img.src = article.photos[0]; // 最初の写真のURL
+      img.src = article.photos[0];
       img.className =
         "absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110";
       img.alt = `Photo from ${article.title}`;
 
-      // 画像をリンク要素に追加
       articleLink.appendChild(img);
-      // リンク要素を画像コンテナに追加
       imageElement.appendChild(articleLink);
     }
 
-    // 画像コンテナを記事要素に追加
     articleElement.appendChild(imageElement);
 
-    // 記事の詳細要素
     const detailsElement = document.createElement("div");
     detailsElement.className = "flex flex-col gap-2 p-4 lg:p-6";
     detailsElement.innerHTML = `
@@ -115,10 +102,8 @@ function displayArticlesBelowMap(articles) {
       }</p>
     `;
 
-    // 詳細要素を記事要素に追加
     articleElement.appendChild(detailsElement);
 
-    // 完成した記事要素をarticlesContainerに追加
     articlesContainer.appendChild(articleElement);
   });
 }
@@ -131,21 +116,17 @@ window.initMap = function (latitude, longitude, mapElementId = "map") {
     east: 136.0,
   };
 
-  // ユーザーの位置が近畿地方内かどうかを判断
   if (
     latitude > kinkiRegionBounds.south &&
     latitude < kinkiRegionBounds.north &&
     longitude > kinkiRegionBounds.west &&
     longitude < kinkiRegionBounds.east
   ) {
-    // 近畿地方内の場合、ユーザーの位置を使用
     var location = { lat: latitude, lng: longitude };
   } else {
-    // 近畿地方外の場合、大阪駅の位置を使用
     var location = { lat: 34.702485, lng: 135.495951 };
   }
 
-  // 地図オプションの設定と地図の生成
   const mapOptions = {
     zoom: 12,
     center: location,
@@ -158,7 +139,6 @@ window.initMap = function (latitude, longitude, mapElementId = "map") {
     mapOptions
   );
 
-  // 現在地のマーカーを設定
   new google.maps.Marker({
     position: location,
     map: map,
@@ -166,31 +146,26 @@ window.initMap = function (latitude, longitude, mapElementId = "map") {
     icon: { url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png" },
   });
 
-  // 地図の中心が変わるたびに記事を更新
   map.addListener("center_changed", () => {
     fetchAndDisplayArticles(map);
   });
 
-  // 初期記事のフェッチ
   fetchAndDisplayArticles(map);
 };
 
-// マーカーを設置し、記事の情報を表示する関数
 function placeMarkers(map, articles) {
   const infowindow = new google.maps.InfoWindow();
   articles.forEach((article) => {
-    // latitude と longitude の値を取得
     const lat = article.latitude;
     const lng = article.longitude;
 
     if (!lat || !lng) {
       console.error("Invalid article location data:", article);
-      return; // 緯度または経度が無効な場合はスキップ
+      return;
     }
 
     const markerLocation = new google.maps.LatLng(lat, lng);
 
-    // 現在地から30km以内の記事のみにマーカーを設置
     if (
       google.maps.geometry.spherical.computeDistanceBetween(
         markerLocation,
@@ -202,7 +177,6 @@ function placeMarkers(map, articles) {
         map: map,
       });
 
-      // マーカーのクリックイベントを設定
       marker.addListener("click", () => {
         const contentString = `
           <div>
