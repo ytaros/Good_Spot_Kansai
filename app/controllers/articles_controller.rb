@@ -81,6 +81,8 @@ class ArticlesController < ApplicationController
   end
 
   def recommend
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+  
     latitude = params[:latitude] ? params[:latitude].to_f : 34.702485
     longitude = params[:longitude] ? params[:longitude].to_f : 135.495951
   
@@ -98,6 +100,7 @@ class ArticlesController < ApplicationController
       format.json { render json: articles_json }
     end
   end
+  
 
   private
   
