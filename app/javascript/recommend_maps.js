@@ -15,25 +15,59 @@ window.loadGoogleMapsAPI = function (apiKey) {
 
 window.setupRecommendMap = function (apiKey) {
   loadGoogleMapsAPI(apiKey).then(() => {
+    // 地図が読み込まれたら、現在位置を取得するかデフォルト位置を使用する
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        (position) =>
-          initMap(position.coords.latitude, position.coords.longitude),
-        () => initMap(34.702485, 135.495951)
+        (position) => {
+          const map = initMap(
+            position.coords.latitude,
+            position.coords.longitude
+          );
+          setupMapListeners(map); // リスナーを設定
+        },
+        () => {
+          const map = initMap(34.702485, 135.495951);
+          setupMapListeners(map); // リスナーを設定
+        }
       );
     } else {
-      initMap(34.702485, 135.495951);
+      const map = initMap(34.702485, 135.495951);
+      setupMapListeners(map); // リスナーを設定
     }
   });
 };
 
+// グローバルスコープにこれらの変数を追加します。
+let debounceTimer;
+let lastCenter = null;
+const minDistanceToUpdate = 10000; // 中心が最低1000メートル動いたら更新する
+
 function setupMapListeners(map) {
-  map.addListener("center_changed", () => fetchAndDisplayArticles(map));
-  map.addListener("zoom_changed", () => fetchAndDisplayArticles(map));
+  map.addListener("center_changed", () => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => fetchAndDisplayArticles(map), 10000);
+  });
+  map.addListener("zoom_changed", () => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => fetchAndDisplayArticles(map), 10000);
+  });
+}
+
+function shouldFetchArticles(newCenter) {
+  if (!lastCenter) return true;
+  const distanceMoved = google.maps.geometry.spherical.computeDistanceBetween(
+    newCenter,
+    lastCenter
+  );
+  return distanceMoved > minDistanceToUpdate;
 }
 
 function fetchAndDisplayArticles(map) {
   const currentLocation = map.getCenter();
+  if (!shouldFetchArticles(currentLocation)) return;
+
+  lastCenter = currentLocation; // 更新するたびに最後の位置を記録します。
+
   const radius = 30000;
 
   fetch(
