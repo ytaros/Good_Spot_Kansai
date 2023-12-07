@@ -42,7 +42,12 @@ function fetchAndDisplayArticles(map) {
       headers: { Accept: "application/json" },
     }
   )
-    .then((response) => response.json())
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
     .then((articles) => {
       const filteredArticles = articles.filter((article) => {
         const articleLocation = new google.maps.LatLng(
@@ -144,10 +149,7 @@ window.initMap = function (latitude, longitude, mapElementId = "map") {
     streetViewControl: false,
   };
 
-  const map = new google.maps.Map(
-    document.getElementById(mapElementId),
-    mapOptions
-  );
+  const map = new google.maps.Map(mapElement, mapOptions);
 
   new google.maps.Marker({
     position: location,
