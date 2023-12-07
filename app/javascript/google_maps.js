@@ -8,6 +8,8 @@ export function initMap(latitude, longitude) {
   var marker = new google.maps.Marker({
     position: location,
     map: map,
+    mapTypeControl: false,
+    streetViewControl: false,
   });
 
   var service = new google.maps.places.PlacesService(map);

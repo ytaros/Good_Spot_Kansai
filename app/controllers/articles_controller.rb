@@ -84,8 +84,7 @@ class ArticlesController < ApplicationController
     latitude = params[:latitude] ? params[:latitude].to_f : 34.702485
     longitude = params[:longitude] ? params[:longitude].to_f : 135.495951
   
-    @articles = Article.near([latitude, longitude], 30).includes(:tag, :city, :category, photos_attachments: :blob)
-  
+    @articles = Article.near([latitude, longitude], 30)
     articles_json = @articles.map do |article|
       article.as_json(include: [:tag, :category, :city]).merge({
         photos: article.photos.map { |photo|

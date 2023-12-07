@@ -1,5 +1,10 @@
 window.loadGoogleMapsAPI = function (apiKey) {
   return new Promise((resolve, reject) => {
+    if (window.google && window.google.maps) {
+      resolve();
+      return;
+    }
+
     window.initMapCallback = () => resolve();
     const script = document.createElement("script");
     script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=geometry&callback=initMapCallback`;
@@ -109,6 +114,11 @@ function displayArticlesBelowMap(articles) {
 }
 
 window.initMap = function (latitude, longitude, mapElementId = "map") {
+  const mapElement = document.getElementById(mapElementId);
+  if (!mapElement) {
+    console.error("Map element not found");
+    return;
+  }
   const kinkiRegionBounds = {
     north: 35.5,
     south: 34.0,
