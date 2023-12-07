@@ -13,10 +13,12 @@
   </div>
 </div>
 
-<script type="text/javascript" >
+<script type="text/javascript">
   document.addEventListener('turbo:load', function() {
     const apiKey = "<%= ENV['GOOGLE_MAP_API_KEY_PRODUCT'] %>";
-    window.setupRecommendMap(apiKey);
-    import("recommend_maps")
+    if (document.getElementById('map')) {
+      window.setupRecommendMap(apiKey);
+      import("recommend_maps");
+    }
   });
 </script>
