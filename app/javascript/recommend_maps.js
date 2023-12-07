@@ -15,7 +15,6 @@ window.loadGoogleMapsAPI = function (apiKey) {
 
 window.setupRecommendMap = function (apiKey) {
   loadGoogleMapsAPI(apiKey).then(() => {
-    // 地図が読み込まれたら、現在位置を取得するかデフォルト位置を使用する
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -23,24 +22,23 @@ window.setupRecommendMap = function (apiKey) {
             position.coords.latitude,
             position.coords.longitude
           );
-          setupMapListeners(map); // リスナーを設定
+          setupMapListeners(map);
         },
         () => {
           const map = initMap(34.702485, 135.495951);
-          setupMapListeners(map); // リスナーを設定
+          setupMapListeners(map);
         }
       );
     } else {
       const map = initMap(34.702485, 135.495951);
-      setupMapListeners(map); // リスナーを設定
+      setupMapListeners(map);
     }
   });
 };
 
-// グローバルスコープにこれらの変数を追加します。
 let debounceTimer;
 let lastCenter = null;
-const minDistanceToUpdate = 10000; // 中心が最低1000メートル動いたら更新する
+const minDistanceToUpdate = 10000;
 
 function setupMapListeners(map) {
   map.addListener("center_changed", () => {
@@ -66,7 +64,7 @@ function fetchAndDisplayArticles(map) {
   const currentLocation = map.getCenter();
   if (!shouldFetchArticles(currentLocation)) return;
 
-  lastCenter = currentLocation; // 更新するたびに最後の位置を記録します。
+  lastCenter = currentLocation;
 
   const radius = 30000;
 

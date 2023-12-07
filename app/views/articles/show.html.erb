@@ -35,7 +35,7 @@
                 <span class="text-gray-500">Address</span>
                 <span class="ml-auto text-gray-900"><%= @article.address %></span>
               </div>
-              <div id="map" style="height: 300px; width: 100%;"></div>
+              <div id="map2" style="height: 300px; width: 100%;"></div>
               <div class="flex justify-between border-t border-b border-gray-200 py-2">
                 <span class="text-gray-500">Category</span>
                   <div class="flex">
@@ -99,10 +99,10 @@
 <script type="text/javascript">
 document.addEventListener("turbo:load", function() {
   const apiKey = "<%= ENV['GOOGLE_MAP_API_KEY_PRODUCT'] %>";
-  if (document.getElementById("map")) {
+  if (document.getElementById("map2")) {
     import("google_maps")
-      .then(({ initMap, loadGoogleMapsAPI }) => {
-        window.initMap = () => initMap(<%= @article.latitude %>, <%= @article.longitude %>);
+      .then(({ initGoogleMap, loadGoogleMapsAPI }) => {
+        window.initGoogleMap = () => initGoogleMap(<%= @article.latitude %>, <%= @article.longitude %>);
         loadGoogleMapsAPI(apiKey);
       });
   }

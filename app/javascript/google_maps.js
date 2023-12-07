@@ -1,6 +1,6 @@
-export function initMap(latitude, longitude) {
+export function initGoogleMap(latitude, longitude) {
   var location = { lat: latitude, lng: longitude };
-  var map = new google.maps.Map(document.getElementById("map"), {
+  var map = new google.maps.Map(document.getElementById("map2"), {
     zoom: 15,
     center: location,
   });
@@ -55,6 +55,6 @@ export function initMap(latitude, longitude) {
 export function loadGoogleMapsAPI(apiKey) {
   var script = document.createElement("script");
   script.type = "text/javascript";
-  script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initMap`;
+  script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initGoogleMap`;
   document.body.appendChild(script);
 }
