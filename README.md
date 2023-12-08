@@ -1,8 +1,20 @@
-# [関西、めっちゃええとこ(仮)]
-
+# [関西、めっちゃええとこ。]
+[![Image from Gyazo](https://i.gyazo.com/0b876ea6b738b2e814363f160484046e.png)](https://gyazo.com/0b876ea6b738b2e814363f160484046e)
+<br>
+[![Ruby](https://img.shields.io/badge/Ruby-v3.1.4-CC342D?logo=Ruby&logoColor=CC342D)](https://www.ruby-lang.org/ja/news/2023/03/30/ruby-3-1-4-released)
+[![Rails](https://img.shields.io/badge/Rails-v7.0.8-CC0000?logo=Ruby-on-Rails&logoColor=CC0000)](https://rubyonrails.org/2023/3/13/Rails-7-0-4-3-and-6-1-7-3-have-been-released)
+![JavaScript](https://img.shields.io/badge/JavaScript-%23F7DF1E.svg?style=flat&logo=javascript&logoColor=black)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=flat&logo=tailwind-css&logoColor=white)
+![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=flat&logo=postgresql&logoColor=white)
+![RSpec](https://img.shields.io/badge/-RSpec-red?logo=ruby&logoColor=white&style=flat)
+![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=flat&logo=github&logoColor=white)
+![Render](https://img.shields.io/badge/render-%23430098.svg?style=flat&logo=render&logoColor=white)
 ## サービス概要
-
 『関西、めっちゃええとこ』は、関西に特化した『風景』や『食』を画像付きで投稿しあう情報交換アプリです。<br>
+
+### ▼ サービスURL
+https://www.goodspotkansai.com/
+
 
 ## 想定されるユーザー層<br>
 
@@ -103,6 +115,34 @@ X 共有機能:　お気に入りの投稿画像を他のユーザーと共有�
 ・ImageMagick<br>
 ・LINE 通知機能<br>
 
+## 使用するAPI
+* Geocoding API
+* Geolocation API
+* Maps JavaScript API
+* Places API (New)
+* LINE Developers API
+
+## 技術選定<br>
+* フロントエンド<br>
+  JavaScript<br>
+  Node v16.19.0<br>
+* CSSフレームワーク<br>
+  Tailwind css<br>
+* バックエンド<br>
+  Ruby on Rails 7.0.8<br>
+  Ruby 3.1.4<br>
+* RDS<br>
+  PostgreSQL<br>
+* 認証・認可<br>
+  Sorcery<br>
+* デプロイ<br>
+  Render<br>
+* バージョン管理<br>
+  GitHub<br>
+* テスティング<br>
+   RSpec<br>
+   Capybara<br>
+   rubocop
 ## 画面遷移図
 
 [画面遷移図](https://www.figma.com/file/0hVSIrNZLaWj0WxgWYw1XZ/KansaiArea?type=design&node-id=0-1&mode=design&t=7XKRz2ioLjAQyCDY-0)
