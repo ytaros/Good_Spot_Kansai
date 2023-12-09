@@ -28,6 +28,7 @@ gem 'fog-aws'
 gem 'geocoder'
 gem 'kaminari'
 gem 'active_storage_validations'
+gem 'meta-tags'
 
 
 group :development, :test do
