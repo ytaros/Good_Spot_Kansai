@@ -239,6 +239,8 @@ GEM
       net-smtp
     marcel (1.0.2)
     matrix (0.4.2)
+    meta-tags (2.19.0)
+      actionpack (>= 3.2.0, < 7.2)
     method_source (1.0.0)
     mime-types (3.5.1)
       mime-types-data (~> 3.2015)
@@ -414,6 +416,7 @@ DEPENDENCIES
   jbuilder
   kaminari
   letter_opener_web
+  meta-tags
   mini_magick
   pg (~> 1.5, >= 1.5.4)
   pry-rails
