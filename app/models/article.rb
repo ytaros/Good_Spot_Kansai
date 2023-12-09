@@ -4,7 +4,6 @@ class Article < ApplicationRecord
   belongs_to :city
   belongs_to :area
   belongs_to :tag
-  has_many :article_tags, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many_attached :photos, dependent: :destroy
   
