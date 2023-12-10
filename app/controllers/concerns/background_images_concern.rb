@@ -38,5 +38,4 @@ module BackgroundImagesConcern
       "image31.webp"
       ]
   end
-
 end

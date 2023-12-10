@@ -29,6 +29,7 @@ gem 'geocoder'
 gem 'kaminari'
 gem 'active_storage_validations'
 gem 'meta-tags'
+gem 'hotwire-rails'
 
 
 group :development, :test do
