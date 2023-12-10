@@ -1,0 +1,9 @@
+<% if page.current? %>
+  <li class="page current">
+    <%= link_to_if page.current?, page, url, {remote: remote, rel: page.rel, class: "block py-[9px] w-8 h-8 border rounded text-xs text-violet-300 font-bold text-center hover:bg-gray-200 focus:bg-gray-300", data: { turbo_frame: 'articles' } } %>
+  </li>
+<% else %>
+  <li class="page">
+    <%= link_to_unless page.current?, page, url, {remote: remote, rel: page.rel, class: "block py-[9px] w-8 h-8 bg-white border rounded text-xs text-violet-300 font-bold text-center hover:bg-gray-200 focus:bg-gray-300", data: { turbo_frame: 'articles' } } %>
+  </li>
+<% end %>

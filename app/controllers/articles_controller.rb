@@ -9,7 +9,7 @@ class ArticlesController < ApplicationController
   def user_articles
     @articles = current_user.articles.recent
   end
-  
+
   def new
     @article = Article.new
     @supporting_data = Article.related_data(@area)
@@ -29,7 +29,6 @@ class ArticlesController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
-  
 
   def update
     if params[:article][:photos].blank? || params[:article][:photos].all?(&:blank?)
@@ -46,13 +45,12 @@ class ArticlesController < ApplicationController
     end
   end
 
-  
   def show
     @area_id = @article.area.id
   end
-  
+
   def edit; end
-  
+
   def destroy
     @area = @article.area
     @article.destroy!
@@ -61,7 +59,10 @@ class ArticlesController < ApplicationController
   end
 
   def search
-    @articles = @q.result(distinct: true).includes(:user, :area, :city, :tag, :category, photos_attachments: :blob).order(created_at: :desc)
+    @articles = @q.result(distinct: true)
+                  .includes(:user, :area, :city, :tag, :category, photos_attachments: :blob)
+                  .recent
+                  .page(params[:page]).per(8)
   end
 
   def autocomplete
@@ -75,14 +76,14 @@ class ArticlesController < ApplicationController
         render json: { error: 'Invalid type' }
     end
   end
-  
+
   def favorites
     @favorite_articles = current_user.favorited_articles.includes(:user, :category, :tag, photos_attachments: :blob).order(created_at: :desc)
   end
 
   def recommend
     response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
-  
+
     latitude = params[:latitude] ? params[:latitude].to_f : 34.702485
     longitude = params[:longitude] ? params[:longitude].to_f : 135.495951
   
@@ -94,16 +95,16 @@ class ArticlesController < ApplicationController
         }
       })
     end
-  
+
     respond_to do |format|
       format.html
       format.json { render json: articles_json }
     end
   end
-  
+
 
   private
-  
+
   def article_params
     params.require(:article).permit(:title, :text, :address, :category_id, :city_id, :area_id, :tag_id, {photos: []})
   end 

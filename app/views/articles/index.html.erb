@@ -1,24 +1,30 @@
-<div class="bg-white py-6 sm:py-8 lg:py-12 h-screen">
-  <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
-    <!-- この部分を固定 -->
+<div class="bg-white py-6 sm:py-8 lg:py-12">
+  <div class="mx-auto max-w-screen-2xl px-4 md:px-8 relative"> 
+    <!-- 固定ヘッダー部分 -->
     <div class="text-center sticky top-0 z-10">
-      <h2 class="text-2xl font-bold text-gray-800 font-hannari mb-4 lg:text-3xl"><span class="font-hannari"><%= @area.name %></span>、めっちゃええとこ。</h2>
+      <h2 class="text-2xl font-bold text-gray-800 font-hannari mb-8 lg:text-3xl">
+        <span class="font-hannari"><%= @area.name %></span>、めっちゃええとこ。
+      </h2>
     </div>
-    <!-- この部分をスクロール可能に -->
-    <div class="grid gap-x-4 gap-y-6 sm:grid-cols-2 md:gap-x-6 lg:grid-cols-3 xl:grid-cols-4 overflow-y-auto" style="max-height: 80vh;">
-      <% if @articles.empty? %>
-        <div class="flex justify-center pt-36 h-screen">
-          <div class="text-center">
-            <p class="text-gray-600">まだ投稿はありません。</p>
+    <!-- 記事部分 -->
+    <%= turbo_frame_tag "articles" do %>
+      <div class="grid gap-x-4 gap-y-6 sm:grid-cols-2 md:gap-x-6 lg:grid-cols-3 xl:grid-cols-4 pb-16 overflow-y-auto">
+        <% if @articles.empty? %>
+          <div class="flex justify-center items-center h-full">
+            <div class="text-center">
+              <p class="text-gray-600">まだ投稿はありません。</p>
+            </div>
           </div>
-        </div>
-      <% else %>
-        <% @articles.each do |article| %>
-          <%= render 'article', article: article, area_id: @area.id %>
+        <% else %>
+          <% @articles.each do |article| %>
+            <%= render 'article', article: article, area_id: @area.id %>
+          <% end %>
         <% end %>
-      <div class="mt-20 text-center">
-        <%= paginate @articles %>
       </div>
-      <% end %>
-    </div>
+    <% end %>
+    <!-- ページネーション部分 -->
+    <div class="flex justify-center pt-10">
+    <%= paginate @articles, theme: 'article' %>
+  </div>
+  </div>
 </div>

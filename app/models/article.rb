@@ -6,7 +6,7 @@ class Article < ApplicationRecord
   belongs_to :tag
   has_many :favorites, dependent: :destroy
   has_many_attached :photos, dependent: :destroy
-  
+
   validates :title, presence: true, length: { maximum: 10 }
   validates :address, presence: true
   validates :text, presence: true
@@ -15,12 +15,12 @@ class Article < ApplicationRecord
   size: { less_than: 10.megabytes },
   limit: { min: 1, max: 5 }
   validates :text, presence: true,  length: { maximum: 140 }
-  
+
   geocoded_by :address
   after_validation :geocode, if: ->(obj){ obj.address.present? and obj.address_changed? }
 
   scope :recent, -> { order(created_at: :desc) }
-  scope :recent_in_area, ->(area, page) { where(area: area).recent.page(page).per(12) }
+  scope :recent_in_area, ->(area, page) { where(area: area).recent.page(page).per(8) }
 
   def tag_id=(id)
     self.tag = Tag.find(id)
@@ -44,7 +44,6 @@ class Article < ApplicationRecord
   def self.ransackable_attributes(auth_object = nil)
     ["address", "area_id", "category_id", "city_id", "tag_id", "created_at", "id", "text", "title", "updated_at", "user_id"]
   end
-
 
   def self.ransackable_associations(auth_object = nil)
     %w[area city tag category]
