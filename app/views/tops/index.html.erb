@@ -5,50 +5,58 @@
       お使いのブラウザはビデオタグをサポートしていません。
     </video>
   </div>
-  <i class="fa-solid fa-arrow-down fa-bounce fa-2xl" style="font-size: 400%; color: #412e1d;"></i>
-  <section class="overflow-hidden justify-center mt-0">
-    <div class="container px-5 py-16 mx-auto">
-      <div class="lg:w-4/5 mx-auto flex flex-wrap justify-center">
-        <div class="lg:w-1/2 w-full lg:pl-10 lg:py-8 mt-8 lg:mt-0 order-last lg:order-first flex flex-col justify-center">
-          <h2 class="text-sm tracking-widest"></h2>
-          <p class="text-sm">秘密にしておきたいけど、人に自慢したい景色！</p>
-          <p class="text-sm">この街に来るのなら、この店の料理は外せへん！</p>
-          <p class="text-sm">旅行で訪れたこの場所、めっちゃ素敵やったわ！</p>
-          <p class="leading-relaxed text-lg lg:text-2xl font-bold">そんな関西のめっちゃええとこを、</p>
-          <p class="leading-relaxed text-lg lg:text-2xl font-bold">みんなで共有しあうサービスです。</p>
+  <div data-controller="top" class="opacity-0">
+    <i class="fa-solid fa-arrow-down fa-bounce fa-2xl" style="font-size: 400%; color: #412e1d;"></i>
+      <section class="overflow-hidden justify-center mt-10">
+        <div class="container px-5 py-16 mx-auto">
+          <div class="lg:w-4/5 mx-auto flex flex-wrap justify-center">
+            <div class="lg:w-1/2 w-full lg:pl-10 lg:py-8 mt-8 lg:mt-0 order-last lg:order-first flex flex-col justify-center">
+              <h2 class="text-sm tracking-widest"></h2>
+              <p class="text-sm">秘密にしておきたいけど、人に自慢したい景色！</p>
+              <p class="text-sm">この街に来るのなら、この店の料理は外せへん！</p>
+              <p class="text-sm">旅行で訪れたこの場所、めっちゃ素敵やったわ！</p>
+              <p class="leading-relaxed text-lg lg:text-2xl font-bold">そんな関西のめっちゃええとこを、</p>
+              <p class="leading-relaxed text-lg lg:text-2xl font-bold">みんなで共有しあうサービスです。</p>
+            </div>
+            <%= image_tag 'top_image.webp', alt: "ecommerce", class: "lg:w-1/2 w-full lg:h-full object-cover object-center rounded order-first lg:order-last" %>
+          </div>
         </div>
-        <%= image_tag 'top_image.webp', alt: "ecommerce", class: "lg:w-1/2 w-full lg:h-full object-cover object-center rounded order-first lg:order-last" %>
-      </div>
-    </div>
-  </section>
-  <i class="fa-solid fa-arrow-down fa-bounce fa-2xl" style="font-size: 400%; color: #412e1d;"></i>
-  <section class="overflow-hidden justify-center">
-    <div class="container px-5 py-16 mx-auto">
-      <div class="lg:w-4/5 mx-auto flex flex-wrap justify-center">
-        <%= image_tag 'top_image2.webp', alt: "ecommerce", class: "lg:w-1/2 w-full lg:h-full object-cover object-center rounded" %>
-        <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 flex flex-col justify-center">
-          <p class="text-sm whitespace-nowrap">会員登録をして、今から行ける名スポットを見つけよう。</p>
-          <p class="text-sm whitespace-nowrap">関西エリア外の時は、大阪周辺から探してみて！</p>
-          <p class="leading-relaxed text-lg lg:text-2xl font-bold">あなたのまだ知らない名店や景勝地が</p>
-          <p class="leading-relaxed text-lg lg:text-2xl font-bold">ここにはあります。</p>
+      </section>
+  </div>
+  <div data-controller="top" class="opacity-0">
+    <i class="fa-solid fa-arrow-down fa-bounce fa-2xl" style="font-size: 400%; color: #412e1d;"></i>
+      <section class="overflow-hidden justify-center mt-10">
+        <div class="container px-5 py-16 mx-auto">
+          <div class="lg:w-4/5 mx-auto flex flex-wrap justify-center">
+            <%= image_tag 'top_image2.webp', alt: "ecommerce", class: "lg:w-1/2 w-full lg:h-full object-cover object-center rounded" %>
+            <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 flex flex-col justify-center">
+              <p class="text-sm whitespace-nowrap">会員登録をして、今から行ける名スポットを見つけよう。</p>
+              <p class="text-sm whitespace-nowrap">関西エリア外の時は、大阪周辺から探してみて！</p>
+              <p class="leading-relaxed text-lg lg:text-2xl font-bold">あなたのまだ知らない名店や景勝地が</p>
+              <p class="leading-relaxed text-lg lg:text-2xl font-bold">ここにはあります。</p>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </section>
-  <i class="fa-solid fa-arrow-down fa-bounce fa-2xl" style="font-size: 400%; color: #412e1d;"></i>
-  <section class="overflow-hidden">
-    <div class="container px-5 pt-16 pb-20 mx-auto">
-      <div class="lg:w-4/5 mx-auto flex flex-wrap">
-        <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 order-last lg:order-first flex flex-col justify-center">
-        <p class="text-sm">現地の人がおすすめするスポットにハズレなし！</p>
-        <p class="text-sm">関西に訪れた人のおすすめスポットも見つかる！</p>
-        <p class="text-sm">Google上の評価も合わせて確認できるよ。</p>
-          <p class="leading-relaxed text-lg lg:text-2xl font-bold">関西で旅行・外食・お出かけプランの</p>
-          <p class="leading-relaxed text-lg lg:text-2xl font-bold">参考にしてみてね。</p>
+      </section>
+  </div>
+  <div data-controller="top" class="opacity-0">
+    <i class="fa-solid fa-arrow-down fa-bounce fa-2xl" style="font-size: 400%; color: #412e1d;"></i>
+      <section class="overflow-hidden mt-10">
+        <div class="container px-5 pt-16 pb-20 mx-auto">
+          <div class="lg:w-4/5 mx-auto flex flex-wrap">
+            <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 order-last lg:order-first flex flex-col justify-center">
+            <p class="text-sm">現地の人がおすすめするスポットにハズレなし！</p>
+            <p class="text-sm">関西に訪れた人のおすすめスポットも見つかる！</p>
+            <p class="text-sm">Google上の評価も合わせて確認できるよ。</p>
+              <p class="leading-relaxed text-lg lg:text-2xl font-bold">関西で旅行・外食・お出かけプランの</p>
+              <p class="leading-relaxed text-lg lg:text-2xl font-bold">参考にしてみてね。</p>
+            </div>
+            <%= image_tag 'top_image3.webp', alt: "ecommerce", class: "lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded order-first lg:order-last" %>
+          </div>
         </div>
-        <%= image_tag 'top_image3.webp', alt: "ecommerce", class: "lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded order-first lg:order-last" %>
-      </div>
-    </div>
-  </section>
-  <h1 class="text-2xl lg:text-4xl pb-20 font-bold">関西で素敵なひと時を！</h1>
+      </section>
+  </div>
+  <div data-controller="top" class="opacity-0">
+    <h1 class="text-2xl lg:text-4xl pb-20 font-bold mt-10">関西で素敵なひと時を！</h1>
+  </div>
 </div>
