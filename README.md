@@ -19,10 +19,6 @@
 
 https://www.goodspotkansai.com/
 
-### ▼ サービス URL
-
-https://www.goodspotkansai.com/
-
 ## 想定されるユーザー層<br>
 
 関西在住ないし住われた経験がある方で、お勧めスポットを知っている人<br>
