@@ -7,6 +7,7 @@ import Rails from "@rails/ujs";
 Rails.start();
 
 import DropdownController from "controllers/dropdown_controller";
+import VideoController from "controllers/video_controller";
 import AvatarPreviewController from "controllers/avatar_preview_controller";
 import SvgController from "controllers/svg_controller";
 import BackgroundController from "controllers/background_controller";
@@ -21,6 +22,7 @@ import { Autocomplete } from "stimulus-autocomplete";
 const application = Application.start();
 
 application.register("dropdown", DropdownController);
+application.register("video", VideoController);
 application.register("avatar-preview", AvatarPreviewController);
 application.register("photo-preview", PhotoPreviewController);
 application.register("svg", SvgController);
