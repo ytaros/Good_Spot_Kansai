@@ -8,6 +8,7 @@ Rails.start();
 
 import DropdownController from "controllers/dropdown_controller";
 import VideoController from "controllers/video_controller";
+import TopController from "controllers/top_controller";
 import AvatarPreviewController from "controllers/avatar_preview_controller";
 import SvgController from "controllers/svg_controller";
 import BackgroundController from "controllers/background_controller";
@@ -23,6 +24,7 @@ const application = Application.start();
 
 application.register("dropdown", DropdownController);
 application.register("video", VideoController);
+application.register("top", TopController);
 application.register("avatar-preview", AvatarPreviewController);
 application.register("photo-preview", PhotoPreviewController);
 application.register("svg", SvgController);
