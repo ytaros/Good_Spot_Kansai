@@ -4,17 +4,17 @@
     <div class="text-center sticky z-10">
       <h2 class="text-2xl font-bold text-gray-800 font-hannari lg:text-3xl whitespace-nowrap">めっちゃええとこ見つけてや。</h2>
     </div>
-<div class="pt-0 md:pt-10 overflow-y-auto" style="max-height: 80vh;>
-<%= render partial: 'shared/kansai_area', 
-          locals: { 
-            link_for_shiga: area_articles_path(area_id: 1),
-            link_for_kyoto: area_articles_path(area_id: 2),
-            link_for_osaka: area_articles_path(area_id: 3),
-            link_for_hyogo: area_articles_path(area_id: 4), 
-            link_for_nara: area_articles_path(area_id: 5),
-            link_for_wakayama: area_articles_path(area_id: 6)
-          } 
-%>
-</div>
-</div>
+      <div class="pt-0 md:pt-10">
+        <%= render partial: 'shared/kansai_area', 
+                  locals: { 
+                    link_for_shiga: area_articles_path(area_id: 1),
+                    link_for_kyoto: area_articles_path(area_id: 2),
+                    link_for_osaka: area_articles_path(area_id: 3),
+                    link_for_hyogo: area_articles_path(area_id: 4), 
+                    link_for_nara: area_articles_path(area_id: 5),
+                    link_for_wakayama: area_articles_path(area_id: 6)
+                  } 
+        %>
+      </div>
+  </div>
 </div>
