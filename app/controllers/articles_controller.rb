@@ -78,6 +78,7 @@ class ArticlesController < ApplicationController
   def favorites
     @favorite_articles = current_user.favorited_articles.includes(:user, :category, :tag,
                                                                   photos_attachments: :blob).order(created_at: :desc)
+                                                                  .page(params[:page]).per(8)
   end
 
   def ranking
