@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_prefectures, only: %i[new create]
+  before_action :require_no_login, only: [:new, :create]
   skip_before_action :require_login, only: %i[new create]
+
 
   def new
     @user = User.new
@@ -27,5 +29,9 @@ class UsersController < ApplicationController
 
   def set_prefectures
     @prefectures = Prefecture.all
+  end
+
+  def require_no_login
+    redirect_to main_top_path if logged_in?
   end
 end
