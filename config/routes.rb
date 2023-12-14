@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       get 'autocomplete'
       get 'favorites'
       get 'recommend'
+      get 'ranking'
     end
     resources :favorites, only: %i[create destroy]
   end
