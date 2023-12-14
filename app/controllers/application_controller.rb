@@ -23,11 +23,9 @@ class ApplicationController < ActionController::Base
   end
 
   def record_not_found
-    if Rails.env.production?
-      flash[:warning] = t('defaults.message.not_page')
-      redirect_to main_top_path
-    else
-      raise
-    end
+    raise unless Rails.env.production?
+
+    flash[:warning] = t('defaults.message.not_page')
+    redirect_to main_top_path
   end
 end

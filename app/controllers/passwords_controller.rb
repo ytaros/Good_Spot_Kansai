@@ -21,6 +21,7 @@ class PasswordsController < ApplicationController
   def require_edit_permission
     @user = User.find(params[:user_id])
     return if @user == current_user
+
     redirect_to root_path, notice: t('message.no_authority')
   end
 

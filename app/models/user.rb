@@ -1,9 +1,9 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
   belongs_to :prefecture
-  has_many :articles,  dependent: :destroy
-  has_many :favorites,  dependent: :destroy
-  has_many :favorited_articles, through: :favorites, source: :article,  dependent: :destroy
+  has_many :articles, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_articles, through: :favorites, source: :article, dependent: :destroy
 
   attr_accessor :password, :password_confirmation
 
