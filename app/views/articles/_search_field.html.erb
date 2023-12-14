@@ -7,8 +7,8 @@
       <ul data-autocomplete-target="results" class="autocomplete-results absolute z-10 w-full bg-white border mt-1 max-h-60 overflow-y-auto rounded-md shadow-lg"></ul>
     </div>  
     <div class="relative flex space-x-3" role="combobox" data-controller="select">
-      <%= f.collection_select :category_id_eq, Category.all, :id, :name, { include_blank: 'Category Select' }, { class: 'form-select block w-[150px] border-b-2 border-indigo-200 text-sm px-8 py-1 bg-white/30 backdrop-blur-md hover:bg-white hover:bg-opacity-50 focus:border-indigo-300 focus:ring-1 focus:ring-gray-300 focus:outline-none transition duration-300 text-gray-500', data: { select_target: "category", action: "change->select#updateTags" } } %>
-      <%= f.collection_select :tag_id_eq, Tag.all, :id, :name, { include_blank: 'Tag Select' }, { class: 'form-select block w-[150px] border-b-2 border-indigo-200 text-sm px-6 py-1 bg-white/30 backdrop-blur-md hover:bg-white hover:bg-opacity-50 focus:border-indigo-300 focus:ring-1 focus:ring-gray-300 focus:outline-none transition duration-300 text-gray-500', data: { select_target: "tag" } } %>
+      <%= f.collection_select :category_id_eq, Category.all, :id, :name, { include_blank: 'Category Select' }, { class: 'form-select block w-[180px] border-b-2 border-indigo-200 text-sm px-6 py-1 bg-white/30 backdrop-blur-md hover:bg-white hover:bg-opacity-50 focus:border-indigo-300 focus:ring-1 focus:ring-gray-300 focus:outline-none transition duration-300 text-gray-500', data: { select_target: "category", action: "change->select#updateTags" } } %>
+      <%= f.collection_select :tag_id_eq, Tag.all, :id, :name, { include_blank: 'Tag Select' }, { class: 'form-select block w-[180px] border-b-2 border-indigo-200 text-sm px-6 py-1 bg-white/30 backdrop-blur-md hover:bg-white hover:bg-opacity-50 focus:border-indigo-300 focus:ring-1 focus:ring-gray-300 focus:outline-none transition duration-300 text-gray-500', data: { select_target: "tag" } } %>
     </div>
   
 
