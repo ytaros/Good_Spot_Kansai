@@ -23,7 +23,7 @@ class ProfilesController < ApplicationController
       reset_session
       redirect_to root_path, status: :see_other
     else
-      flash[:error] =  I18n.t("defaults.message.not_deleted", item: "User")
+      flash[:error] = I18n.t('defaults.message.not_deleted', item: 'User')
       redirect_to profile_path
     end
   end
@@ -32,7 +32,7 @@ class ProfilesController < ApplicationController
 
   def set_user
     @user = current_user
-  end  
+  end
 
   def set_prefectures
     @prefectures = Prefecture.all

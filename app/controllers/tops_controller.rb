@@ -3,12 +3,12 @@ class TopsController < ApplicationController
   skip_before_action :set_search, only: %i[top]
   include BackgroundImagesConcern
   before_action :set_background_images, only: [:top]
-  
-  def top;end
-  
-  def index;end
 
-  def privacy_policy;end
+  def top; end
 
-  def terms_of_service;end
+  def index; end
+
+  def privacy_policy; end
+
+  def terms_of_service; end
 end
