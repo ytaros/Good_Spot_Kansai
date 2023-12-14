@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
 
 	def create
 		@user = login(params[:email], params[:password])
+
 		if @user
 			redirect_to main_top_path, success:  t('.success')
 		else

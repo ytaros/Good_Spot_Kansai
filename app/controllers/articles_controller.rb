@@ -81,6 +81,13 @@ class ArticlesController < ApplicationController
     @favorite_articles = current_user.favorited_articles.includes(:user, :category, :tag, photos_attachments: :blob).order(created_at: :desc)
   end
 
+  def ranking
+    @articles = Article.joins(:favorites).select('articles.*, COUNT(favorites.id) as favorites_count')
+                                          .group('articles.id')
+                                          .order('favorites_count DESC')
+                                          .page(params[:page]).per(10)
+  end
+
   def recommend
     response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
 
