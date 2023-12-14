@@ -26,15 +26,15 @@
     <div class="grid gap-x-4 gap-y-6 sm:grid-cols-2 md:gap-x-6 lg:grid-cols-3 xl:grid-cols-4 px-4 md:px-6 lg:px-8 xl:px-10 pb-20">
       <% @articles.each do |article| %>
         <div class="flex flex-col items-center rounded-lg border md:flex-row min-h-[250px]">
-          <%= link_to(article, class: "group relative block h-48 w-full shrink-0 self-start overflow-hidden bg-gray-100 md:h-full md:w-32 lg:w-48") do %>
+          <%= link_to(article, data: { turbo_frame: "_top" } , class: "group relative block h-48 w-full shrink-0 self-start overflow-hidden bg-gray-100 md:h-full md:w-32 lg:w-48") do %>
             <% if article.photos.attached? %>
-              <%= image_tag(article.photos.first, class: 'absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110', alt: "Photo from #{article.title}") %>
+              <%= image_tag(article.photos.first, class: 'absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110', alt: "Photo from #{article.title}")%>
             <% end %>
           <% end %>
           <div class="flex flex-col gap-2 p-4 lg:p-6">
             <span class="block text-sm text-gray-400"><%= article.created_at.strftime("%Y-%m-%d") %></span>
             <h2 class="text-md font-bold text-gray-800">
-              <%= link_to article.title, article, class: "transition duration-100 hover:text-indigo-500 active:text-indigo-600" %>
+              <%= link_to article.title, article, class: "transition duration-100 hover:text-indigo-500 active:text-indigo-600",  data: { turbo_frame: "_top" }  %>
             </h2>
             <p class="text-gray-500"><%= article.category.name %></p>
             <p class="text-sm text-gray-400"><%= article.city.name %></p>
@@ -44,7 +44,7 @@
     </div>
   <% end %>
   <!-- ページネーション部分 -->
-  <div class="container mx-auto flex flex-col items-center mb-8 ">
+  <div class="container mx-auto flex flex-col items-center pb-8 ">
     <%= paginate @articles, theme: 'article' %>
   </div>
 </div>
