@@ -72,6 +72,8 @@ Rails.application.configure do
   config.action_mailer.perform_caching = true
   config.action_mailer.delivery_method = :letter_opener_web
   config.action_mailer.default_url_options ={ host: "localhost", port: 3000 }
+  config.active_storage.variant_processor = :mini_magick
+
   LetterOpenerWeb.configure do |config|
     config.letters_location = Rails.root.join('your', 'new', 'path')
   end
