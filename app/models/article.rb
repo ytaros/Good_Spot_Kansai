@@ -12,7 +12,7 @@ class Article < ApplicationRecord
   validates :text, presence: true
   validates :photos, presence: true
   validates :photos, content_type: ['image/png', 'image/jpg', 'image/jpeg'],
-                     size: { less_than: 10.megabytes },
+                     size: { less_than: 20.megabytes },
                      limit: { min: 1, max: 5 }
   validates :text, presence: true, length: { maximum: 140 }
 

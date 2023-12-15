@@ -5,6 +5,8 @@
       <% each_page do |page| -%>
         <% if page.display_tag? -%>
           <%= page_tag page %>
+        <% elsif !page.was_truncated? -%>
+          <%= gap_tag %>
         <% end -%>
       <% end -%>
     </ul>
