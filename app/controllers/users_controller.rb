@@ -5,7 +5,6 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    @prefectures = Prefecture.all
   end
 
   def create

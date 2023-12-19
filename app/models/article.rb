@@ -26,22 +26,12 @@ class Article < ApplicationRecord
     self.tag = Tag.find(id)
   end
 
-  def related_data
-    {
-      area:,
-      cities: area.cities,
-      categories: Category.all,
-      tags: Tag.all
-    }
-  end
-
   def favorited?(user)
     favorites.where(user_id: user.id).exists?
   end
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[address area_id category_id city_id tag_id created_at id text title updated_at
-       user_id]
+    %w[address area_id category_id city_id tag_id user_id]
   end
 
   def self.ransackable_associations(_auth_object = nil)
@@ -50,7 +40,7 @@ class Article < ApplicationRecord
 
   def self.related_data(area)
     {
-      area:,
+      area: area,
       cities: area.cities,
       categories: Category.all,
       tags: Tag.all

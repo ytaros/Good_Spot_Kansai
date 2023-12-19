@@ -15,16 +15,4 @@ class User < ApplicationRecord
   validates :reset_password_token, uniqueness: true, allow_nil: true
 
   mount_uploader :avatar, AvatarUploader
-
-  def favorite(article)
-    favorite_articles << article
-  end
-
-  def unfavorite(article)
-    favorite_articles.destroy(article)
-  end
-
-  def favorite?(article)
-    favorite_articles.include?(article)
-  end
 end

@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     @user = login(params[:email], params[:password])
 
     if @user
-      redirect_to main_top_path, success: t('.success')
+      redirect_to main_top_path
     else
       flash.now[:error] = t('.fail')
       render 'new', status: :unprocessable_entity
