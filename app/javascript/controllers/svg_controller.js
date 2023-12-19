@@ -44,7 +44,6 @@ export default class extends Controller {
     this.tooltip.style.display = "none";
   }
   resetOnClick(event) {
-    // クリックされた要素の色とツールチップをリセット
     const pathElement = event.currentTarget;
     pathElement.setAttribute("style", "fill: none");
     this.tooltip.style.display = "none";

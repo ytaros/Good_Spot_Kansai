@@ -30,6 +30,7 @@ module SupportingData
   end
 
   def load_supporting_data
+    @area = @article.area
     @categories = Category.all
     @cities = City.where(area_id: params[:article][:area_id])
   end

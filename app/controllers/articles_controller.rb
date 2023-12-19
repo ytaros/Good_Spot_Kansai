@@ -6,10 +6,6 @@ class ArticlesController < ApplicationController
     @articles = Article.recent_in_area(@area, params[:page])
   end
 
-  def user_articles
-    @articles = current_user.articles.recent
-  end
-
   def new
     @article = Article.new
     @supporting_data = Article.related_data(@area)
@@ -24,7 +20,6 @@ class ArticlesController < ApplicationController
       redirect_to area_articles_path(@article.area_id)
     else
       load_supporting_data
-      @supporting_data = @article.related_data
       flash.now[:error] = @article.errors.full_messages.join(', ')
       render :new, status: :unprocessable_entity
     end
@@ -37,7 +32,7 @@ class ArticlesController < ApplicationController
       flash[:success] = I18n.t('defaults.message.updated', item: '記事')
       redirect_to area_articles_path(@article.area_id)
     else
-      @supporting_data = @article.related_data(@article.area)
+      load_supporting_data
       flash.now[:error] = @article.errors.full_messages.join(', ')
       render 'edit', status: :unprocessable_entity
     end
