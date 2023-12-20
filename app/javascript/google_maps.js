@@ -1,18 +1,18 @@
 export function initGoogleMap(latitude, longitude) {
-  var location = { lat: latitude, lng: longitude };
-  var map = new google.maps.Map(document.getElementById("map2"), {
+  const location = { lat: latitude, lng: longitude };
+  const map = new google.maps.Map(document.getElementById("map2"), {
     zoom: 15,
     center: location,
   });
 
-  var marker = new google.maps.Marker({
+  const marker = new google.maps.Marker({
     position: location,
     map: map,
     mapTypeControl: false,
     streetViewControl: false,
   });
 
-  var service = new google.maps.places.PlacesService(map);
+  const service = new google.maps.places.PlacesService(map);
 
   marker.addListener("click", function () {
     service.nearbySearch(
@@ -25,7 +25,7 @@ export function initGoogleMap(latitude, longitude) {
           status === google.maps.places.PlacesServiceStatus.OK &&
           results.length > 0
         ) {
-          var placeId = results[0].place_id;
+          const placeId = results[0].place_id;
 
           service.getDetails(
             {
@@ -33,7 +33,7 @@ export function initGoogleMap(latitude, longitude) {
             },
             function (place, status) {
               if (status === google.maps.places.PlacesServiceStatus.OK) {
-                var infowindow = new google.maps.InfoWindow({
+                const infowindow = new google.maps.InfoWindow({
                   content:
                     "<div><strong>" +
                     place.name +
@@ -53,7 +53,7 @@ export function initGoogleMap(latitude, longitude) {
 }
 
 export function loadGoogleMapsAPI(apiKey) {
-  var script = document.createElement("script");
+  const script = document.createElement("script");
   script.type = "text/javascript";
   script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initGoogleMap`;
   document.body.appendChild(script);
