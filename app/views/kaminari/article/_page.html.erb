@@ -1,9 +1,14 @@
+<%# Link showing page number
+  - available local variables
+    page:          a page object for "this" page
+    url:           url to this page
+    current_page:  a page object for the currently displayed page
+    total_pages:   total number of pages
+    per_page:      number of items to fetch per page
+    remote:        data-remote
+-%>
 <% if page.current? %>
-  <li class="page current">
-    <%= link_to_if page.current?, page, url, {remote: remote, rel: page.rel, class: "block py-[9px] w-8 h-8 border rounded text-xs text-violet-300 font-bold text-center hover:bg-gray-200 focus:bg-gray-300", data: { turbo_frame: 'articles' } } %>
-  </li>
+  <%= link_to page, url, remote: remote, rel: page.rel,class: "block py-[8px] w-8 h-8 bg-white border text-xs text-console font-bold text-center rounded-r-[3px] hover:bg-gray-400 focus:bg-gray-400 cursor-default", data: { turbo_frame: 'articles' }, disabled: true %>
 <% else %>
-  <li class="page">
-    <%= link_to_unless page.current?, page, url, {remote: remote, rel: page.rel, class: "block py-[9px] w-8 h-8 bg-white border rounded text-xs text-violet-300 font-bold text-center hover:bg-gray-200 focus:bg-gray-300", data: { turbo_frame: 'articles' } } %>
-  </li>
+  <%= link_to page, url, remote: remote, rel: page.rel, class: "block py-[8px] w-8 h-8 bg-white border text-xs text-console font-bold text-center rounded-r-[3px] hover:bg-gray-400 focus:bg-gray-400", data: { turbo_frame: 'articles' } %>
 <% end %>
