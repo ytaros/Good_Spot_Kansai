@@ -12,10 +12,10 @@
           <%= render 'article', article: article %>
         <% end %>
       </div>
-    <% end %>
     <!-- ページネーション部分 -->
     <div class="flex justify-center pt-10">
       <%= paginate @favorite_articles, theme: 'article' %>
     </div>
+    <% end %>
   </div>
 </div>
