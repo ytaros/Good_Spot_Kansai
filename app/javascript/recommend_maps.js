@@ -45,10 +45,6 @@ function setupMapListeners(map) {
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => fetchAndDisplayArticles(map), 5000);
   });
-  map.addListener("zoom_changed", () => {
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => fetchAndDisplayArticles(map), 5000);
-  });
 }
 
 function shouldFetchArticles(newCenter) {
