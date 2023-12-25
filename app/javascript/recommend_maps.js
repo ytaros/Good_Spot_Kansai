@@ -38,16 +38,16 @@ window.setupRecommendMap = function (apiKey) {
 
 let debounceTimer;
 let lastCenter = null;
-const minDistanceToUpdate = 10000;
+const minDistanceToUpdate = 5000;
 
 function setupMapListeners(map) {
   map.addListener("center_changed", () => {
     clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => fetchAndDisplayArticles(map), 10000);
+    debounceTimer = setTimeout(() => fetchAndDisplayArticles(map), 5000);
   });
   map.addListener("zoom_changed", () => {
     clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => fetchAndDisplayArticles(map), 10000);
+    debounceTimer = setTimeout(() => fetchAndDisplayArticles(map), 5000);
   });
 }
 
@@ -66,7 +66,7 @@ function fetchAndDisplayArticles(map) {
 
   lastCenter = currentLocation;
 
-  const radius = 30000;
+  const radius = 10000;
 
   fetch(
     `/articles/recommend?latitude=${currentLocation.lat()}&longitude=${currentLocation.lng()}&radius=${radius}`,
@@ -214,7 +214,7 @@ function placeMarkers(map, articles) {
       google.maps.geometry.spherical.computeDistanceBetween(
         markerLocation,
         map.getCenter()
-      ) <= 30000
+      ) <= 10000
     ) {
       const marker = new google.maps.Marker({
         position: markerLocation,
