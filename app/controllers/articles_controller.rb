@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
   skip_before_action :require_login, only: %i[index show search autocomplete ranking]
 
   def index
-    @articles = Article.recent_in_area(@area, params[:page])
+    @articles = Article.recent_in_area(@area, params[:page]).includes(:user, :category, :city, :area, :tag, :favorites, photos_attachments: :blob)
   end
 
   def new
