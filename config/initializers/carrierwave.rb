@@ -11,8 +11,8 @@ CarrierWave.configure do |config|
     config.storage :fog
     config.cache_storage = :fog
     config.fog_provider = 'fog/aws'
-    config.fog_directory  = 'goodspotskansai'
-    config.asset_host = "https://s3.ap-northeast-1.amazonaws.com/goodspotskansai"
+    config.fog_directory  = 'good-spot'
+    config.asset_host = "https://s3.ap-northeast-3.amazonaws.com/good-spot"
     config.fog_public = true
     config.fog_credentials = {
       provider: 'AWS',
