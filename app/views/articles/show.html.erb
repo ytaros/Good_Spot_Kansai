@@ -98,7 +98,7 @@
 
 <script type="text/javascript">
 document.addEventListener("turbo:load", function() {
-  const apiKey = "<%= ENV['GOOGLE_MAP_API_KEY_PRODUCT'] %>";
+  const apiKey = "<%= ENV['GOOGLE_MAP_API_KEY'] %>";
   if (document.getElementById("map2")) {
     import("google_maps")
       .then(({ initGoogleMap, loadGoogleMapsAPI }) => {
